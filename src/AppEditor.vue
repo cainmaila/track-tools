@@ -1,17 +1,10 @@
 <template>
-  <div>
-    <h1>Track Tools</h1>
-    <ol>
-      <li>
-        <a href="./editor.html">Editor Tool</a>
-      </li>
-    </ol>
-  </div>
+  <div>Editor</div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: 'AppEditor',
 }
 </script>
 

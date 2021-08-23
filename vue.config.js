@@ -36,4 +36,14 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias.set('~at2@', resolve('story-book'))
   },
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      template: 'public/index.html',
+    },
+    editor: {
+      entry: 'src/main-editor.js',
+      template: 'public/index.html',
+    },
+  },
 }
