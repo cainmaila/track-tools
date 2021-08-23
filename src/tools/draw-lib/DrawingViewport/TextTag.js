@@ -19,6 +19,7 @@ class TextTag extends PIXI.Container {
   }
   createText(txt, style) {
     this._txt = new PIXI.Text(txt, style)
+    this._txt.resolution = window.devicePixelRatio
     this.addChild(this._txt)
   }
   createBg(bg) {
@@ -30,7 +31,7 @@ class TextTag extends PIXI.Container {
       0,
       this._txt.width + _padding * 2,
       this._txt.height + _padding * 2,
-      10
+      10,
     )
     _bg.endFill()
     _bg.x = 0

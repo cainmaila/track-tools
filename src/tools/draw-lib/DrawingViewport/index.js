@@ -12,7 +12,6 @@ class DrawingViewport extends Viewport {
     this._setting = {
       bg: null, // bg 底圖url
       aeraSetting: null, //區塊設定
-      devicePixelRatio: window.devicePixelRatio,
     }
     this.setSetting(setting)
     this._state = ''
@@ -123,12 +122,11 @@ class DrawingViewport extends Viewport {
     }
   }
   zoomTofit() {
-    const devicePixelRatio = this._setting.devicePixelRatio
     this._bg
       ? this.fit(false, this._bg.width, this._bg.height)
       : this.fit(false, this.width, this.height)
-    this.x = (this._app.view.clientWidth / devicePixelRatio - this.width) >> 1
-    this.y = (this._app.view.clientHeight / devicePixelRatio - this.height) >> 1
+    this.x = (this._app.view.clientWidth - this.width) >> 1
+    this.y = (this._app.view.clientHeight - this.height) >> 1
   }
   getDrawingMeta() {
     const _map = { items: [] }

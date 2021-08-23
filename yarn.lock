@@ -851,6 +851,164 @@
   version "1.1.3"
   resolved "https://registry.nlark.com/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
 
+"@pixi/accessibility@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/accessibility/-/accessibility-6.1.2.tgz#c6845bcfc3ce274bc2ae04bd2ecd02cfa54954fd"
+
+"@pixi/app@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/app/-/app-6.1.2.tgz#00fd5720f918e48d2cce9ea690ebeed146204497"
+
+"@pixi/compressed-textures@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/compressed-textures/-/compressed-textures-6.1.2.tgz#efc2de485cc495f22fd97b9b5963de298aa4cb8f"
+
+"@pixi/constants@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/constants/-/constants-6.1.2.tgz#efc12bfcb75aec18c4920d2c0b2fa513d34cc777"
+
+"@pixi/core@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/core/-/core-6.1.2.tgz#81b151654f5c072feb59052325edaab39329ab96"
+
+"@pixi/display@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/display/-/display-6.1.2.tgz#4fc7d407723d3c496f069e3f5de7de83ca712cfe"
+
+"@pixi/extract@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/extract/-/extract-6.1.2.tgz#bd625bb09f95dc536cdaa5abec238934d9cf9c7a"
+
+"@pixi/filter-alpha@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-alpha/-/filter-alpha-6.1.2.tgz#4f57bb9a536f3be167211a61941353bfcaaa0cb7"
+
+"@pixi/filter-blur@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-blur/-/filter-blur-6.1.2.tgz#8962fb48596ebab54bc3a7c1179ad7b256581e4c"
+
+"@pixi/filter-color-matrix@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-color-matrix/-/filter-color-matrix-6.1.2.tgz#fa0685536524b2da437aa65abca1eaa5ef20ff5d"
+
+"@pixi/filter-displacement@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-displacement/-/filter-displacement-6.1.2.tgz#549dfaede27e15674a12533ef12fef9292f5c93a"
+
+"@pixi/filter-fxaa@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-fxaa/-/filter-fxaa-6.1.2.tgz#ec077b632967bbc00ee1dc481eeba6640b55294b"
+
+"@pixi/filter-noise@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-noise/-/filter-noise-6.1.2.tgz#fc4a409ffd153929540767c4676c169f07d7f7b7"
+
+"@pixi/graphics-extras@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/graphics-extras/-/graphics-extras-6.1.2.tgz#90694a58b5495aaf79063b61de879a256104f871"
+
+"@pixi/graphics@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/graphics/-/graphics-6.1.2.tgz#f065b5fe06ae6bd8db036630f607c9f9422254a8"
+
+"@pixi/interaction@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/interaction/-/interaction-6.1.2.tgz#5c560b61dcb683f169386d58ec8267607a42baad"
+
+"@pixi/loaders@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/loaders/-/loaders-6.1.2.tgz#ac57deb487536f2b31a961a26b2e2d036f720c3b"
+
+"@pixi/math-extras@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/math-extras/-/math-extras-6.1.2.tgz#d934be78cc33a14176f8fbc4958d1e3b09d55416"
+
+"@pixi/math@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/math/-/math-6.1.2.tgz#1049ff0f3bb8061b82c10041b26e03db25d7d4cc"
+
+"@pixi/mesh-extras@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/mesh-extras/-/mesh-extras-6.1.2.tgz#c3a88a3d9fd325d839aded1443cf3199254e4bd3"
+
+"@pixi/mesh@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/mesh/-/mesh-6.1.2.tgz#61e24abda5706dfae417c4d0e3d8cdb16e8ca332"
+
+"@pixi/mixin-cache-as-bitmap@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/mixin-cache-as-bitmap/-/mixin-cache-as-bitmap-6.1.2.tgz#591191a9b1a9880b5ae6888c8c41bb31f361e711"
+
+"@pixi/mixin-get-child-by-name@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/mixin-get-child-by-name/-/mixin-get-child-by-name-6.1.2.tgz#f5d03c1a0361d259485b6964b3873b57141e3a43"
+
+"@pixi/mixin-get-global-position@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/mixin-get-global-position/-/mixin-get-global-position-6.1.2.tgz#9c9affdc7589f48fb51d9045e3fc5c0584b99d95"
+
+"@pixi/particle-container@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/particle-container/-/particle-container-6.1.2.tgz#92c8b1981ad6eae4ce5a8e6e6140c866624a2607"
+
+"@pixi/polyfill@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/polyfill/-/polyfill-6.1.2.tgz#a5f62a8a79b4e5368afc99dcff7ede1b338e152d"
+  dependencies:
+    object-assign "^4.1.1"
+    promise-polyfill "^8.2.0"
+
+"@pixi/prepare@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/prepare/-/prepare-6.1.2.tgz#c7e40a6043734011f26364a50846ef77a24434e1"
+
+"@pixi/runner@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/runner/-/runner-6.1.2.tgz#38e25a761ca9bab1d67e59449c7ae92656b1fa51"
+
+"@pixi/settings@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/settings/-/settings-6.1.2.tgz#8c2086995616190c5b4e8902a7077b1d10d41931"
+  dependencies:
+    ismobilejs "^1.1.0"
+
+"@pixi/sprite-animated@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/sprite-animated/-/sprite-animated-6.1.2.tgz#4995eb61c440ffb07ac430c8a70282020b08e0df"
+
+"@pixi/sprite-tiling@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/sprite-tiling/-/sprite-tiling-6.1.2.tgz#730732fb3dd2cfd66c55b5c3e9ca9651b75d877d"
+
+"@pixi/sprite@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/sprite/-/sprite-6.1.2.tgz#97ad5cd0821e1ee858d5cf2a23cde1a18a8646c3"
+
+"@pixi/spritesheet@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/spritesheet/-/spritesheet-6.1.2.tgz#62ad46ab04cf8967410feb6f64652363e16f80ff"
+
+"@pixi/text-bitmap@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/text-bitmap/-/text-bitmap-6.1.2.tgz#5053acde4b7a48acddc4d6a29ccbe783d80113e1"
+
+"@pixi/text@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/text/-/text-6.1.2.tgz#b8ffd698dc012c284e552f7839c68d1166ba5826"
+
+"@pixi/ticker@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/ticker/-/ticker-6.1.2.tgz#c74b221111b09070244cbea35330aaf208f93f52"
+
+"@pixi/utils@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@pixi/utils/-/utils-6.1.2.tgz#066b6ae03ed263f57891e8f8d63b1081c06dd9a1"
+  dependencies:
+    "@types/earcut" "^2.1.0"
+    earcut "^2.2.2"
+    eventemitter3 "^3.1.0"
+    url "^0.11.0"
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.8.0"
   resolved "https://registry.npm.taobao.org/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.8.0.tgz#84751d82a93019d5c92c0cf0e45ac59087cd2240"
@@ -883,6 +1041,10 @@
   resolved "https://registry.nlark.com/@types/connect/download/@types/connect-3.4.35.tgz#5fcf6ae445e4021d1fc2219a4873cc73a3bb2ad1"
   dependencies:
     "@types/node" "*"
+
+"@types/earcut@^2.1.0":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/earcut/-/earcut-2.1.1.tgz#573a0af609f17005c751f6f4ffec49cfe358ea51"
 
 "@types/estree@^0.0.48":
   version "0.0.48"
@@ -2969,6 +3131,10 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+earcut@^2.2.2:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/earcut/-/earcut-2.2.3.tgz#d44ced2ff5a18859568e327dd9c7d46b16f55cf4"
+
 easy-stack@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/easy-stack/download/easy-stack-1.0.1.tgz?cache=0&sync_timestamp=1605129533750&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feasy-stack%2Fdownload%2Feasy-stack-1.0.1.tgz#8afe4264626988cabb11f3c704ccd0c835411066"
@@ -3240,6 +3406,10 @@ etag@~1.8.1:
 event-pubsub@4.3.0:
   version "4.3.0"
   resolved "https://registry.npm.taobao.org/event-pubsub/download/event-pubsub-4.3.0.tgz#f68d816bc29f1ec02c539dc58c8dd40ce72cb36e"
+
+eventemitter3@^3.1.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -4456,6 +4626,10 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/isexe/download/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
+ismobilejs@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ismobilejs/-/ismobilejs-1.1.1.tgz#c56ca0ae8e52b24ca0f22ba5ef3215a2ddbbaa0e"
+
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.nlark.com/isobject/download/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
@@ -5472,6 +5646,10 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+penner@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/penner/-/penner-0.1.3.tgz#0b8b482d4e9b39af2f3d7c37592229b8acc29705"
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -5501,6 +5679,52 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.nlark.com/pinkie/download/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
+
+pixi-viewport@^4.32.0:
+  version "4.32.0"
+  resolved "https://registry.yarnpkg.com/pixi-viewport/-/pixi-viewport-4.32.0.tgz#f3b000105ec3a969b6821a282b6b1db65e00f045"
+  dependencies:
+    penner "^0.1.3"
+
+pixi.js@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-6.1.2.tgz#f66521eb324baeed714e21dd2fa751bf5a362e72"
+  dependencies:
+    "@pixi/accessibility" "6.1.2"
+    "@pixi/app" "6.1.2"
+    "@pixi/compressed-textures" "6.1.2"
+    "@pixi/constants" "6.1.2"
+    "@pixi/core" "6.1.2"
+    "@pixi/display" "6.1.2"
+    "@pixi/extract" "6.1.2"
+    "@pixi/filter-alpha" "6.1.2"
+    "@pixi/filter-blur" "6.1.2"
+    "@pixi/filter-color-matrix" "6.1.2"
+    "@pixi/filter-displacement" "6.1.2"
+    "@pixi/filter-fxaa" "6.1.2"
+    "@pixi/filter-noise" "6.1.2"
+    "@pixi/graphics" "6.1.2"
+    "@pixi/interaction" "6.1.2"
+    "@pixi/loaders" "6.1.2"
+    "@pixi/math" "6.1.2"
+    "@pixi/mesh" "6.1.2"
+    "@pixi/mesh-extras" "6.1.2"
+    "@pixi/mixin-cache-as-bitmap" "6.1.2"
+    "@pixi/mixin-get-child-by-name" "6.1.2"
+    "@pixi/mixin-get-global-position" "6.1.2"
+    "@pixi/particle-container" "6.1.2"
+    "@pixi/polyfill" "6.1.2"
+    "@pixi/prepare" "6.1.2"
+    "@pixi/runner" "6.1.2"
+    "@pixi/settings" "6.1.2"
+    "@pixi/sprite" "6.1.2"
+    "@pixi/sprite-animated" "6.1.2"
+    "@pixi/sprite-tiling" "6.1.2"
+    "@pixi/spritesheet" "6.1.2"
+    "@pixi/text" "6.1.2"
+    "@pixi/text-bitmap" "6.1.2"
+    "@pixi/ticker" "6.1.2"
+    "@pixi/utils" "6.1.2"
 
 pkg-dir@^1.0.0:
   version "1.0.0"
@@ -6213,6 +6437,10 @@ progress@^2.0.0:
 promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.nlark.com/promise-inflight/download/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
+
+promise-polyfill@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.2.0.tgz#367394726da7561457aba2133c9ceefbd6267da0"
 
 proxy-addr@~2.0.5:
   version "2.0.7"
