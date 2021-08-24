@@ -2,12 +2,8 @@
   <div id="FootUi">
     <div
       class="bn flex-center"
-      :class="{ acc: original.mode === 'sel' }"
-      @click="
-        () => {
-          original.mode = 'sel'
-        }
-      "
+      :class="{ acc: props.mode === 'sel' }"
+      @click="emitCommon('sel')"
     >
       選取
     </div>
@@ -20,31 +16,35 @@
     <div class="bn flex-center" @click="emitCommon('zoom', -0.1)">縮小</div>
     <div
       class="bn flex-center"
-      :class="{ acc: original.mode === 'mov' }"
+      :class="{ acc: props.mode === 'mov' }"
       @click="emitCommon('mov')"
     >
       移動
     </div>
-    <div class="bn flex-center">01</div>
-    <div class="bn flex-center">02</div>
+    <div
+      class="bn flex-center"
+      :class="{ disabled: original.step === 2, acc: props.mode === 'scope' }"
+      @click="emitCommon('scope')"
+    >
+      01
+    </div>
+    <div class="bn flex-center" :class="{ disabled: original.step === 1 }">
+      02
+    </div>
   </div>
 </template>
 <script>
-import { reactive, watch } from 'vue'
+import { reactive } from 'vue'
 export default {
   name: 'FootUi',
-  setup(_, content) {
-    const original = reactive({ mode: 'sel', step: 0 })
-    watch(
-      () => original.mode,
-      val => {
-        emitCommon(val)
-      },
-    )
+  props: ['mode'],
+  setup(props, content) {
+    const original = reactive({ step: 1 })
     const emitCommon = (common, data) => {
       content.emit('common', { common, data })
     }
     return {
+      props,
       original,
       emitCommon,
     }
@@ -70,6 +70,9 @@ export default {
   color: #fff;
   &.acc {
     color: #f0f;
+  }
+  &.disabled {
+    opacity: 0.3;
   }
 }
 </style>

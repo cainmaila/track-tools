@@ -4,6 +4,9 @@ import '@pixi/graphics-extras'
 import { Viewport } from 'pixi-viewport'
 import Area from './Area'
 
+/**
+ * 區與繪製工具
+ */
 class DrawingViewport extends Viewport {
   constructor(app, setting) {
     super({

@@ -1,12 +1,12 @@
 <template>
   <div id="EditorTool" class="hight_100">
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
-    <FootUi @common="onCommon" />
+    <FootUi @common="onCommon" :mode="original.mode" />
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, reactive } from 'vue'
 import { drawingViewportInit } from './viewPortHandler'
 import FootUi from '@/components/editor/FootUi'
 const APP_NAME = 'TrackEditorTool'
@@ -14,6 +14,10 @@ export default {
   name: 'AppEditor',
   components: { FootUi },
   setup() {
+    const original = reactive({
+      mode: 'sel',
+      setp: 0,
+    })
     const ViewRef = ref(null)
     const viewportRef = ref()
     sdkListener(ViewRef, viewportRef)
@@ -23,6 +27,7 @@ export default {
     const onCommon = ({ common, data }) => {
       switch (common) {
         case 'sel':
+          original.mode = 'sel'
           break
         case 'fit':
           viewportRef.value.zoomTofit()
@@ -31,10 +36,18 @@ export default {
           viewportRef.value.zoom(data)
           break
         case 'mov':
+          original.mode = 'mov'
+          break
+        case 'scope':
+          original.mode = 'scope'
+          viewportRef.value.drawMode = true
+          viewportRef.value.on('add-area', a => {
+            console.log('a', a)
+          })
           break
       }
     }
-    return { ViewRef, onCommon }
+    return { ViewRef, onCommon, original }
   },
 }
 
