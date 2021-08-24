@@ -4,7 +4,7 @@
 
 <script>
 import { onMounted, ref } from 'vue'
-import { createDrawingViewport } from './viewPortHandler'
+import { drawingViewportInit } from './viewPortHandler'
 const APP_NAME = 'TrackEditorTool'
 export default {
   name: 'AppEditor',
@@ -24,8 +24,7 @@ function sdkListener(View) {
     if (target === APP_NAME) {
       switch (message.type) {
         case 'setting':
-          createDrawingViewport(View.value)
-          console.log('#setting', message)
+          drawingViewportInit(View.value, message.data) //傳入設定，創建viewport
           break
         default:
           console.warn('未定的type', message)

@@ -2,22 +2,18 @@ import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 
 /* 初始化 pixi 並創建 DrawingViewport 物件 */
-function createDrawingViewport(view) {
+function drawingViewportInit(view, setting) {
   const app = new PIXI.Application({
     antialias: true,
     autoDensity: true,
     resolution: window.devicePixelRatio || 1,
-    backgroundColor: 0xffffff,
+    backgroundColor: setting.bgColor || 0xffffff,
   })
   resize()
   view.appendChild(app.view)
 
   const viewport = new DrawingViewport(app, {
-    bg: './img/bg.png',
-    aeraSetting: {
-      lineColor: 0xff00ff,
-      tagStyle: { fill: 0xffffff, bg: 0x000000 },
-    },
+    ...setting,
     devicePixelRatio: window.devicePixelRatio,
   })
 
@@ -31,4 +27,4 @@ function createDrawingViewport(view) {
   return { app, viewport }
 }
 
-export { createDrawingViewport }
+export { drawingViewportInit }
