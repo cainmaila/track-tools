@@ -48,6 +48,7 @@ export default {
           viewportRef.value.drawMode = true
           break
       }
+      viewportRef.value.selectEnable = original.mode != 'mov'
     }
     watchEffect(() => {
       viewportRef.value &&

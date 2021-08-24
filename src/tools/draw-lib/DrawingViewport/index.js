@@ -24,6 +24,7 @@ class DrawingViewport extends Viewport {
     this._moveDistance = { x: 0, y: 0 }
     this._drawObj = null
     this._targetObj = null
+    this._selectEnable = true
     this._app = app
     app.stage.addChild(this)
     this._createOperationLayer()
@@ -101,6 +102,17 @@ class DrawingViewport extends Viewport {
     }
     this._pointermove = _new
     this.moveHander()
+  }
+  set selectEnable(val) {
+    //TODO:
+    if (!val) {
+      this.targetObj = null
+      this.drawMode = false
+    }
+    this._selectEnable = !!val
+  }
+  get selectEnable() {
+    return this._selectEnable
   }
   removeArea(_item) {
     if (typeof _item == 'string') {
