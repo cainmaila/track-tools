@@ -30,7 +30,7 @@
     </div>
     <div
       class="bn flex-center"
-      :class="{ disabled: props.step === 1 }"
+      :class="{ disabled: props.step === 1, acc: props.mode === 'area' }"
       @click="props.step === 2 && emitCommon('area')"
     >
       02

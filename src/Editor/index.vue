@@ -43,6 +43,10 @@ export default {
           original.mode = 'scope'
           viewportRef.value.drawMode = true
           break
+        case 'area':
+          original.mode = 'area'
+          viewportRef.value.drawMode = true
+          break
       }
     }
     watchEffect(() => {
@@ -51,6 +55,9 @@ export default {
           switch (original.mode) {
             case 'scope':
               scopeArea.value = area
+              break
+            case 'area':
+              original.mode = 'sel'
               break
           }
         })
