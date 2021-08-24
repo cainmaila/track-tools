@@ -3,48 +3,49 @@
 </template>
 
 <script>
-import * as PIXI from 'pixi.js'
 import { onMounted, ref } from 'vue'
+import { createDrawingViewport } from './viewPortHandler'
+const APP_NAME = 'TrackEditorTool'
 export default {
   name: 'AppEditor',
   setup() {
     const View = ref(null)
-    let viewport = null
+    sdkListener(View)
     onMounted(() => {
-      viewport = pixiInit(View.value)
+      postEvent('ready')
     })
-    return { View, viewport }
+    return { View }
   },
 }
 
-import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
-function pixiInit(view) {
-  const app = new PIXI.Application({
-    antialias: true,
-    autoDensity: true,
-    resolution: window.devicePixelRatio || 1,
-    backgroundColor: 0xffffff,
+function sdkListener(View) {
+  window.addEventListener('message', ({ data }) => {
+    const { target, message } = data || {}
+    if (target === APP_NAME) {
+      switch (message.type) {
+        case 'setting':
+          createDrawingViewport(View.value)
+          console.log('#setting', message)
+          break
+        default:
+          console.warn('未定的type', message)
+      }
+    }
   })
-  resize()
-  view.appendChild(app.view)
+}
 
-  const viewport = new DrawingViewport(app, {
-    bg: './img/bg.png',
-    aeraSetting: {
-      lineColor: 0xff00ff,
-      tagStyle: { fill: 0xffffff, bg: 0x000000 },
+function postEvent(type, data) {
+  _postMessage({ type, data })
+}
+
+function _postMessage(message) {
+  window.postMessage(
+    {
+      app: APP_NAME,
+      message,
     },
-    devicePixelRatio: window.devicePixelRatio,
-  })
-
-  window.onresize = () => {
-    resize()
-    viewport.resize()
-  }
-  function resize() {
-    app.renderer.resize(view.clientWidth, view.clientHeight)
-  }
-  return app
+    '*',
+  )
 }
 </script>
 

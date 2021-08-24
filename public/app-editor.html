@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor DEMO</title>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      id="Editor"
+      src="./editor.html"
+      frameborder="0"
+      width="100%"
+      height="100%"
+    ></iframe>
+    <script>
+      var EditorSetting = {
+        bg: './img/bg.png',
+        aeraSetting: {
+          lineColor: 0xff00ff,
+          tagStyle: { fill: 0xffffff, bg: 0x000000 },
+        },
+      }
+      var Editor = document.getElementById('Editor')
+
+      function onReady() {
+        //Editor tool onRready!
+        postToEditor('setting', EditorSetting)
+      }
+
+      Editor.contentWindow.addEventListener('message', function(e) {
+        var data = e.data
+        if (data && data.app === 'TrackEditorTool') {
+          switch (data.message && data.message.type) {
+            case 'ready':
+              onReady()
+              break
+          }
+        }
+      })
+      function postToEditor(type, data) {
+        Editor.contentWindow.postMessage(
+          {
+            target: 'TrackEditorTool',
+            message: {
+              type,
+              data,
+            },
+          },
+          '*',
+        )
+      }
+    </script>
+  </body>
+</html>

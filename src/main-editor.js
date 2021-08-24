@@ -1,5 +1,5 @@
 import '~at2@/foundations/at2-global.postcss'
 import { createApp } from 'vue'
-import App from './Editor'
+import Editor from './Editor'
 
-createApp(App).mount('#app')
+createApp(Editor).mount('#app')
