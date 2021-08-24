@@ -23,29 +23,30 @@
     </div>
     <div
       class="bn flex-center"
-      :class="{ disabled: original.step === 2, acc: props.mode === 'scope' }"
-      @click="emitCommon('scope')"
+      :class="{ disabled: props.step === 2, acc: props.mode === 'scope' }"
+      @click="props.step === 1 && emitCommon('scope')"
     >
       01
     </div>
-    <div class="bn flex-center" :class="{ disabled: original.step === 1 }">
+    <div
+      class="bn flex-center"
+      :class="{ disabled: props.step === 1 }"
+      @click="props.step === 2 && emitCommon('area')"
+    >
       02
     </div>
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
 export default {
   name: 'FootUi',
-  props: ['mode'],
+  props: ['mode', 'step'],
   setup(props, content) {
-    const original = reactive({ step: 1 })
     const emitCommon = (common, data) => {
       content.emit('common', { common, data })
     }
     return {
       props,
-      original,
       emitCommon,
     }
   },

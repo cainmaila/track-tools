@@ -1,12 +1,12 @@
 <template>
   <div id="EditorTool" class="hight_100">
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
-    <FootUi @common="onCommon" :mode="original.mode" />
+    <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
   </div>
 </template>
 
 <script>
-import { onMounted, ref, reactive } from 'vue'
+import { onMounted, ref, reactive, watchEffect } from 'vue'
 import { drawingViewportInit } from './viewPortHandler'
 import FootUi from '@/components/editor/FootUi'
 const APP_NAME = 'TrackEditorTool'
@@ -16,10 +16,11 @@ export default {
   setup() {
     const original = reactive({
       mode: 'sel',
-      setp: 0,
+      step: 1,
     })
     const ViewRef = ref(null)
     const viewportRef = ref()
+    const scopeArea = ref(null)
     sdkListener(ViewRef, viewportRef)
     onMounted(() => {
       postEvent('ready')
@@ -41,12 +42,26 @@ export default {
         case 'scope':
           original.mode = 'scope'
           viewportRef.value.drawMode = true
-          viewportRef.value.on('add-area', a => {
-            console.log('a', a)
-          })
           break
       }
     }
+    watchEffect(() => {
+      viewportRef.value &&
+        viewportRef.value.on('add-area', area => {
+          switch (original.mode) {
+            case 'scope':
+              scopeArea.value = area
+              break
+          }
+        })
+    })
+    watchEffect(() => {
+      if (scopeArea.value) {
+        scopeArea.value.editEnable = false
+        original.step = 2
+        original.mode = 'sel'
+      }
+    })
     return { ViewRef, onCommon, original }
   },
 }
