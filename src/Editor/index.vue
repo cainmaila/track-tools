@@ -1,30 +1,52 @@
 <template>
-  <div id="Stage" ref="View"></div>
+  <div id="EditorTool" class="hight_100">
+    <div id="Stage" class="hight_100" ref="ViewRef"></div>
+    <FootUi @common="onCommon" />
+  </div>
 </template>
 
 <script>
 import { onMounted, ref } from 'vue'
 import { drawingViewportInit } from './viewPortHandler'
+import FootUi from '@/components/editor/FootUi'
 const APP_NAME = 'TrackEditorTool'
 export default {
   name: 'AppEditor',
+  components: { FootUi },
   setup() {
-    const View = ref(null)
-    sdkListener(View)
+    const ViewRef = ref(null)
+    const viewportRef = ref()
+    sdkListener(ViewRef, viewportRef)
     onMounted(() => {
       postEvent('ready')
     })
-    return { View }
+    const onCommon = ({ common, data }) => {
+      switch (common) {
+        case 'sel':
+          break
+        case 'fit':
+          viewportRef.value.zoomTofit()
+          break
+        case 'zoom':
+          viewportRef.value.zoom(data)
+          break
+        case 'mov':
+          break
+      }
+    }
+    return { ViewRef, onCommon }
   },
 }
 
-function sdkListener(View) {
+function sdkListener(ViewRef, viewportRef) {
   window.addEventListener('message', ({ data }) => {
     const { target, message } = data || {}
+    let initOb
     if (target === APP_NAME) {
       switch (message.type) {
         case 'setting':
-          drawingViewportInit(View.value, message.data) //傳入設定，創建viewport
+          initOb = drawingViewportInit(ViewRef.value, message.data) //傳入設定，創建viewport
+          viewportRef.value = initOb.viewport
           break
         default:
           console.warn('未定的type', message)
@@ -55,7 +77,12 @@ function _postMessage(message) {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
-#Stage {
+.hight_100 {
   height: 100%;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

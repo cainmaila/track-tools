@@ -7,7 +7,7 @@ function drawingViewportInit(view, setting) {
     antialias: true,
     autoDensity: true,
     resolution: window.devicePixelRatio || 1,
-    backgroundColor: setting.bgColor === undefined ? 0xffffff : setting.bgColo,
+    backgroundColor: setting.bgColor === undefined ? 0xffffff : setting.bgColor,
   })
   resize()
   view.appendChild(app.view)

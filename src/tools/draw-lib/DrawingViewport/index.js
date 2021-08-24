@@ -121,6 +121,9 @@ class DrawingViewport extends Viewport {
       _item.destroy()
     }
   }
+  zoom(sc) {
+    this.scaled += sc
+  }
   zoomTofit() {
     this._bg
       ? this.fit(false, this._bg.width, this._bg.height)

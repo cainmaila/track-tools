@@ -104,7 +104,7 @@ class Area {
       this._rectangle.x,
       this._rectangle.y,
       this._dx,
-      this._dy
+      this._dy,
     )
   }
   create() {
