@@ -104,15 +104,26 @@ class DrawingViewport extends Viewport {
     this.moveHander()
   }
   set selectEnable(val) {
-    //TODO:
+    if (this._selectEnable === val) return
     if (!val) {
       this.targetObj = null
       this.drawMode = false
     }
+    this.getAllAreas().forEach(_area => {
+      _area.setStageLock(val)
+    })
     this._selectEnable = !!val
   }
   get selectEnable() {
     return this._selectEnable
+  }
+  getAllAreas() {
+    const _areaArr = []
+    this.children.forEach(item => {
+      const _type = item.name.split('|')
+      _type[0] === 'Area' && _areaArr.push(item.areaOb)
+    })
+    return _areaArr
   }
   removeArea(_item) {
     if (typeof _item == 'string') {

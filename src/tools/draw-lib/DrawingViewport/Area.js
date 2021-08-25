@@ -17,6 +17,8 @@ class Area {
     this._inPoint = inPoint
     this._outPoint = inPoint
     this._isEdit = false
+    this._editEnable = true //是否可以編輯狀態
+    this._stageLock = false //場景鎖定暫時不能編輯
     this.create()
     this._setting.tag &&
       this.createTextTag(this._setting.tag, this._setting.tagStyle)
@@ -67,11 +69,19 @@ class Area {
   }
   //是否能夠編輯
   set editEnable(val) {
-    this._rectangle.interactive = !!val
-    val || (this.isEdit = false)
+    this._editEnable = val
+    this._chkInteractive()
   }
   get editEnable() {
-    return this._rectangle.interactive
+    return this._editEnable
+  }
+  setStageLock(val) {
+    this._stageLock = val
+    this._chkInteractive()
+  }
+  _chkInteractive() {
+    this._rectangle.interactive = this._editEnable && this._stageLock
+    this._rectangle.interactive || (this.isEdit = false)
   }
   set lineColor(_color) {
     this._setting.lineColor = _color

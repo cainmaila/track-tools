@@ -5,6 +5,9 @@
       <li>
         <a href="./editor.html">Editor Tool</a>
       </li>
+      <li>
+        <a href=".app-editor.html">Editor Tool DEMO</a>
+      </li>
     </ol>
   </div>
 </template>
