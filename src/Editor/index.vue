@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { onMounted, ref, reactive, watchEffect } from 'vue'
+import { onMounted, ref, reactive, watch } from 'vue'
 import { drawingViewportInit } from './viewPortHandler'
 import FootUi from '@/components/editor/FootUi'
 const APP_NAME = 'TrackEditorTool'
@@ -50,7 +50,7 @@ export default {
       }
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
-    watchEffect(() => {
+    watch(viewportRef, () => {
       viewportRef.value &&
         viewportRef.value.on('add-area', area => {
           switch (original.mode) {
@@ -63,13 +63,15 @@ export default {
           }
         })
     })
-    watchEffect(() => {
+    watch(scopeArea, () => {
       if (scopeArea.value) {
         scopeArea.value.editEnable = false
+        scopeArea.value.alpha = 0
         original.step = 2
         original.mode = 'sel'
       }
     })
+
     return { ViewRef, onCommon, original }
   },
 }
