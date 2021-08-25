@@ -7,9 +7,9 @@
 
 <script>
 import { onMounted, ref, reactive, watch } from 'vue'
-import { drawingViewportInit } from './viewPortHandler'
+import { createViewPort } from './viewPortHandler'
+import { postEvent, APP_NAME } from './sdkMessageHandler'
 import FootUi from '@/components/editor/FootUi'
-const APP_NAME = 'TrackEditorTool'
 export default {
   name: 'AppEditor',
   components: { FootUi },
@@ -21,7 +21,7 @@ export default {
     const ViewRef = ref(null)
     const viewportRef = ref()
     const scopeArea = ref(null)
-    sdkListener(ViewRef, viewportRef)
+    createViewPort(ViewRef, viewportRef, APP_NAME)
     onMounted(() => {
       postEvent('ready')
     })
@@ -74,37 +74,6 @@ export default {
 
     return { ViewRef, onCommon, original }
   },
-}
-
-function sdkListener(ViewRef, viewportRef) {
-  window.addEventListener('message', ({ data }) => {
-    const { target, message } = data || {}
-    let initOb
-    if (target === APP_NAME) {
-      switch (message.type) {
-        case 'setting':
-          initOb = drawingViewportInit(ViewRef.value, message.data) //傳入設定，創建viewport
-          viewportRef.value = initOb.viewport
-          break
-        default:
-          console.warn('未定的type', message)
-      }
-    }
-  })
-}
-
-function postEvent(type, data) {
-  _postMessage({ type, data })
-}
-
-function _postMessage(message) {
-  window.postMessage(
-    {
-      app: APP_NAME,
-      message,
-    },
-    '*',
-  )
 }
 </script>
 

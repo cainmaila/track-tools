@@ -1,8 +1,25 @@
 import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 
+function createViewPort(ViewRef, viewportRef, APP_NAME) {
+  window.addEventListener('message', ({ data }) => {
+    const { target, message } = data || {}
+    let initOb
+    if (target === APP_NAME) {
+      switch (message.type) {
+        case 'setting':
+          initOb = _drawingViewportInit(ViewRef.value, message.data) //傳入設定，創建viewport
+          viewportRef.value = initOb.viewport
+          break
+        default:
+          console.warn('未定的type', message)
+      }
+    }
+  })
+}
+
 /* 初始化 pixi 並創建 DrawingViewport 物件 */
-function drawingViewportInit(view, setting) {
+function _drawingViewportInit(view, setting) {
   const app = new PIXI.Application({
     antialias: true,
     autoDensity: true,
@@ -27,4 +44,4 @@ function drawingViewportInit(view, setting) {
   return { app, viewport }
 }
 
-export { drawingViewportInit }
+export { createViewPort }
