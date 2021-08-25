@@ -19,7 +19,7 @@ const devServer = process.env.BUILD
     }
 
 module.exports = {
-  publicPath: '/',
+  publicPath: './',
   // productionSourceMap: false /* 不需要生产环境的 source map */,
   devServer,
   configureWebpack: {
