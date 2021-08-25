@@ -69,6 +69,7 @@ class DrawingViewport extends Viewport {
     this._targetObj = val
     val && this.addChild(val.rectangle) //移到最上層
     this._targetObj && (this._targetObj.isEdit = true)
+    this.emit('select', val)
   }
   get targetObj() {
     return this._targetObj

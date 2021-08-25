@@ -2,6 +2,11 @@
   <div id="EditorTool" class="hight_100">
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
+    <div id="LayerMod">
+      <div v-for="area in areasRef" :key="area.name">
+        {{ area.name }} {{ area.isEdit }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -9,6 +14,7 @@
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
+import { areaLayerHandler } from './areaLayerHandler'
 import FootUi from '@/components/editor/FootUi'
 export default {
   name: 'AppEditor',
@@ -19,6 +25,7 @@ export default {
       step: 1,
     })
     const scopeArea = ref(null)
+    const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
     onMounted(() => {
       postEvent('ready')
@@ -49,6 +56,7 @@ export default {
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
     watch(viewportRef, () => {
+      areaLayerHandler(viewportRef.value, areasRef)
       viewportRef.value &&
         viewportRef.value.on('add-area', area => {
           switch (original.mode) {
@@ -57,6 +65,7 @@ export default {
               break
             case 'area':
               original.mode = 'sel'
+              area.tag = area.name
               break
           }
         })
@@ -69,8 +78,7 @@ export default {
         original.mode = 'sel'
       }
     })
-
-    return { ViewRef, onCommon, original }
+    return { ViewRef, onCommon, original, areasRef }
   },
 }
 </script>
@@ -81,6 +89,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+}
+#LayerMod {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 200px;
+  min-height: 30px;
+  background: #000;
+  color: #fff;
 }
 .hight_100 {
   height: 100%;
