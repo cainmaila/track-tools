@@ -18,10 +18,8 @@ export default {
       mode: 'sel',
       step: 1,
     })
-    const ViewRef = ref(null)
-    const viewportRef = ref()
     const scopeArea = ref(null)
-    createViewPort(ViewRef, viewportRef, APP_NAME)
+    const { ViewRef, viewportRef } = createViewPort(APP_NAME)
     onMounted(() => {
       postEvent('ready')
     })

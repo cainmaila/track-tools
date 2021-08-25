@@ -1,7 +1,9 @@
 import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
-
-function createViewPort(ViewRef, viewportRef, APP_NAME) {
+import { ref } from 'vue'
+function createViewPort(APP_NAME) {
+  const ViewRef = ref(null)
+  const viewportRef = ref()
   window.addEventListener('message', ({ data }) => {
     const { target, message } = data || {}
     let initOb
@@ -16,6 +18,10 @@ function createViewPort(ViewRef, viewportRef, APP_NAME) {
       }
     }
   })
+  return {
+    ViewRef,
+    viewportRef,
+  }
 }
 
 /* 初始化 pixi 並創建 DrawingViewport 物件 */
