@@ -1,6 +1,17 @@
 import * as PIXI from 'pixi.js'
 import TextTag from './TextTag'
+
+/**
+ * 區域選取物件
+ */
 class Area {
+  /**
+   * 區域選取物件
+   * @param {object} inPoint - 開始點
+   * @param {number} inPoint.x
+   * @param {number} inPoint.y
+   * @param {object} setting - 設定
+   */
   constructor(inPoint, setting) {
     const _defSetting = {
       hasLine: true /* 線顯示*/,
@@ -13,10 +24,9 @@ class Area {
       tagStyle: null, //tag Style
     }
     this._setting = { ..._defSetting, ...(setting || {}) }
-    this._rectangle = null
-    this._inPoint = inPoint
-    this._outPoint = inPoint
-    this._isEdit = false
+    this._rectangle = null //綁定的Rectangle pixi物件
+    this._inPoint = inPoint //進入點(左上)
+    this._isEdit = false //編輯中，影響九宮編輯顯示
     this._editEnable = true //是否可以編輯狀態
     this._stageLock = false //場景鎖定暫時不能編輯
     this.create()
@@ -24,19 +34,36 @@ class Area {
       this.createTextTag(this._setting.tag, this._setting.tagStyle)
     this.draw(inPoint)
   }
+  /**
+   * 顯示名稱tag
+   * @memberof Area
+   */
   set tag(_text) {
     this.createTextTag(_text, this._setting.tagStyle)
     this.draw()
   }
+  /**
+   * 物件名
+   * @memberof Area
+   */
   set name(val) {
     this._rectangle.name = val
   }
   get name() {
     return this._rectangle.name
   }
+  /**
+   * 實際操作的 PIXI.
+   * @readonly
+   * @memberof Area
+   */
   get rectangle() {
     return this._rectangle
   }
+  /**
+   * viewport中位置
+   * @memberof Area
+   */
   set x(_x) {
     this._inPoint.x = _x
     this._outPoint.x = _x + this._dx
@@ -45,6 +72,10 @@ class Area {
   get x() {
     return this._rectangle.x
   }
+  /**
+   * viewport中位置
+   * @memberof Area
+   */
   set y(_y) {
     this._inPoint.y = _y
     this._outPoint.y = _y + this._dy
@@ -53,6 +84,10 @@ class Area {
   get y() {
     return this._rectangle.y
   }
+  /**
+   * 編輯中，九宮格編輯顯示
+   * @memberof Area
+   */
   set isEdit(_f) {
     this._isEdit = !!_f
     this._p1.visible = _f
@@ -67,7 +102,10 @@ class Area {
   get isEdit() {
     return this._isEdit
   }
-  //是否能夠編輯
+  /**
+   * 是否能夠選取編輯
+   * @memberof Area
+   */
   set editEnable(val) {
     this._editEnable = val
     this._chkInteractive()
@@ -75,6 +113,11 @@ class Area {
   get editEnable() {
     return this._editEnable
   }
+  /**
+   * DrawingViewport鎖定，不建議直接使用，要鎖定請使用editEnable
+   * @param {*} val
+   * @memberof Area
+   */
   setStageLock(val) {
     this._stageLock = val
     this._chkInteractive()
@@ -83,6 +126,10 @@ class Area {
     this._rectangle.interactive = this._editEnable && this._stageLock
     this._rectangle.interactive || (this.isEdit = false)
   }
+  /**
+   * 區域線條顏色
+   * @memberof Area
+   */
   set lineColor(_color) {
     this._setting.lineColor = _color
     this.draw()
@@ -90,6 +137,10 @@ class Area {
   get lineColor() {
     return this._setting.lineColor
   }
+  /**
+   * 區塊顏色
+   * @memberof Area
+   */
   set fillColor(_color) {
     this._setting.fillColor = _color
     this.draw()
@@ -97,6 +148,10 @@ class Area {
   get fillColor() {
     return this._setting.fillColor
   }
+  /**
+   * 區塊透明度
+   * @memberof Area
+   */
   set alpha(val) {
     this._setting.alpha = val
     this.draw()
@@ -104,11 +159,20 @@ class Area {
   get alpha() {
     return this._setting.alpha
   }
+  /**
+   * 區塊設定值
+   * @readonly
+   * @memberof Area
+   */
   get setting() {
     return this._setting
   }
 
-  /* 圈選區域 */
+  /**
+   * 取得圈選區域
+   * @return {PIXI.Rectangle} Rectangle
+   * @memberof Area
+   */
   getRectangleBounds() {
     return new PIXI.Rectangle(
       this._rectangle.x,
