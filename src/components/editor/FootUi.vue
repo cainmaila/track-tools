@@ -2,7 +2,7 @@
   <div id="FootUi">
     <div
       class="bn flex-center"
-      :class="{ acc: props.mode === 'sel' }"
+      :class="{ acc: mode === 'sel' }"
       @click="emitCommon('sel')"
     >
       選取
@@ -16,22 +16,22 @@
     <div class="bn flex-center" @click="emitCommon('zoom', -0.1)">縮小</div>
     <div
       class="bn flex-center"
-      :class="{ acc: props.mode === 'mov' }"
+      :class="{ acc: mode === 'mov' }"
       @click="emitCommon('mov')"
     >
       移動
     </div>
     <div
       class="bn flex-center"
-      :class="{ disabled: props.step === 2, acc: props.mode === 'scope' }"
-      @click="props.step === 1 && emitCommon('scope')"
+      :class="{ disabled: step === 2, acc: mode === 'scope' }"
+      @click="step === 1 && emitCommon('scope')"
     >
       01
     </div>
     <div
       class="bn flex-center"
-      :class="{ disabled: props.step === 1, acc: props.mode === 'area' }"
-      @click="props.step === 2 && emitCommon('area')"
+      :class="{ disabled: step === 1, acc: mode === 'area' }"
+      @click="step === 2 && emitCommon('area')"
     >
       02
     </div>
@@ -41,12 +41,11 @@
 export default {
   name: 'FootUi',
   props: ['mode', 'step'],
-  setup(props, content) {
+  setup(_, content) {
     const emitCommon = (common, data) => {
       content.emit('common', { common, data })
     }
     return {
-      props,
       emitCommon,
     }
   },
