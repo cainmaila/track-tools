@@ -57,6 +57,7 @@ export default {
           data.editEnable = !data.editEnable
           break
         case 'select-area':
+          original.mode = 'sel'
           viewportRef.value.selectItem(data)
           break
       }
