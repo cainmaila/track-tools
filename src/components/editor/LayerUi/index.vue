@@ -1,15 +1,28 @@
 <template>
   <div id="LayerUi">
-    <div v-for="area in areas" :key="area.name">
-      {{ area.name }} {{ area.isEdit }}
-    </div>
+    <AreaLayerUi
+      v-for="area in areas"
+      :key="area.name"
+      :area="area"
+      @del="onDel"
+      @lock="onLock"
+    />
   </div>
 </template>
 <script>
+import AreaLayerUi from './AreaLayerUi'
 export default {
   name: 'LayerUi',
+  components: { AreaLayerUi },
   props: ['areas'],
-  steup() {},
+  methods: {
+    onDel(area) {
+      this.$emit('common', { common: 'del', data: area })
+    },
+    onLock(area) {
+      this.$emit('common', { common: 'lock', data: area })
+    },
+  },
 }
 </script>
 <style lang="postcss" scoped>
@@ -17,7 +30,7 @@ export default {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 200px;
+  width: 250px;
   min-height: 30px;
   background: #000;
   color: #fff;

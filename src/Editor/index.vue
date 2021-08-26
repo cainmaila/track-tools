@@ -2,7 +2,7 @@
   <div id="EditorTool" class="hight_100">
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
-    <LayerUi :areas="areasRef" />
+    <LayerUi :areas="areasRef" @common="onCommon" />
   </div>
 </template>
 
@@ -28,6 +28,8 @@ export default {
       postEvent('ready')
     })
     const onCommon = ({ common, data }) => {
+      console.log('#onCommon', common, data)
+
       switch (common) {
         case 'sel':
           original.mode = 'sel'
@@ -48,6 +50,9 @@ export default {
         case 'area':
           original.mode = 'area'
           viewportRef.value.drawMode = true
+          break
+        case 'del':
+          viewportRef.value.removeArea(data)
           break
       }
       viewportRef.value.selectEnable = original.mode != 'mov'
@@ -94,5 +99,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 </style>

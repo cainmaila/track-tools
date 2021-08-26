@@ -8,6 +8,10 @@ function areaLayerHandler(viewport, areasRef) {
   viewport.on('select', () => {
     generateAreasArr()
   })
+  viewport.on('remove-area', areaName => {
+    areaMap.delete(areaName)
+    generateAreasArr()
+  })
 
   function generateAreasArr() {
     areasRef.value = Array.from(areaMap, item => {
