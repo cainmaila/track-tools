@@ -1,6 +1,6 @@
 <template>
   <div class="area-layer-ui flex" :class="{ acc: isEdit }">
-    {{ area.name }}
+    <div @click="$emit('select', area)">{{ area.name }}</div>
     <At2IconBtn
       icon="unMoved"
       width="20"

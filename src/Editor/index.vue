@@ -56,6 +56,9 @@ export default {
         case 'lock':
           data.editEnable = !data.editEnable
           break
+        case 'select-area':
+          viewportRef.value.selectItem(data)
+          break
       }
       viewportRef.value.selectEnable = original.mode != 'mov'
     }

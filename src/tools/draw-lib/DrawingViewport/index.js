@@ -64,6 +64,14 @@ class DrawingViewport extends Viewport {
   setSetting(_setting) {
     this._setting = { ...this._setting, ..._setting }
   }
+  selectItem(_item) {
+    if (typeof _item == 'string') {
+      _item = this.getChildByName(_item)
+    }
+    if (_item?.editEnable) {
+      this.targetObj = _item
+    }
+  }
   set targetObj(val) {
     this._targetObj && (this._targetObj.isEdit = false)
     this._targetObj = val

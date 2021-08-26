@@ -7,6 +7,7 @@
       :isEdit="area.isEdit"
       @del="onDel"
       @lock="onLock"
+      @select="onSelect"
     />
   </div>
 </template>
@@ -22,6 +23,9 @@ export default {
     },
     onLock(area) {
       this.$emit('common', { common: 'lock', data: area })
+    },
+    onSelect(area) {
+      this.$emit('common', { common: 'select-area', data: area })
     },
   },
 }
