@@ -123,7 +123,7 @@ class Area {
     this._chkInteractive()
   }
   _chkInteractive() {
-    this._rectangle.interactive = this._editEnable && this._stageLock
+    this._rectangle.interactive = this._editEnable && !this._stageLock
     this._rectangle.interactive || (this.isEdit = false)
   }
   /**

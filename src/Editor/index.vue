@@ -28,8 +28,7 @@ export default {
       postEvent('ready')
     })
     const onCommon = ({ common, data }) => {
-      console.log('#onCommon', common, data)
-
+      // console.log('#onCommon', common, data)
       switch (common) {
         case 'sel':
           original.mode = 'sel'
@@ -53,6 +52,9 @@ export default {
           break
         case 'del':
           viewportRef.value.removeArea(data)
+          break
+        case 'lock':
+          data.editEnable = !data.editEnable
           break
       }
       viewportRef.value.selectEnable = original.mode != 'mov'
