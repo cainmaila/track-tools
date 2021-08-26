@@ -284,9 +284,16 @@ class DrawingViewport extends Viewport {
   }
   stateFSM(val, old) {
     if (val !== old) {
+      switch (old) {
+        case 'drawMode':
+          this.emit('drawMode', false)
+          break
+      }
       switch (val) {
         case 'drawMode':
+          this.targetObj = null
           this._operationLayer.visible = true
+          this.emit('drawMode', true)
           break
         case 'draw':
           this.drawArea()
