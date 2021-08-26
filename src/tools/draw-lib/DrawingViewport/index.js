@@ -119,7 +119,7 @@ class DrawingViewport extends Viewport {
       this.drawMode = false
     }
     this.getAllAreas().forEach(_area => {
-      _area.setStageLock(val)
+      _area.setStageLock(!val)
     })
     this._selectEnable = !!val
   }
