@@ -1,5 +1,5 @@
 <template>
-  <div class="area-layer-ui flex">
+  <div class="area-layer-ui flex" :class="{ acc: isEdit }">
     {{ area.name }}
     <At2IconBtn
       icon="unMoved"
@@ -22,7 +22,7 @@ import At2IconBtn from '~at2@/components/At2IconBtn'
 export default {
   name: 'AreaLayerUi',
   components: { At2IconBtn },
-  props: ['area'],
+  props: ['area', 'isEdit'],
 }
 </script>
 <style lang="postcss" scoped>
@@ -31,5 +31,9 @@ export default {
   height: 30px;
   padding: 0 5px;
   box-sizing: border-box;
+  color: #fff;
+  &.acc {
+    color: #f00;
+  }
 }
 </style>

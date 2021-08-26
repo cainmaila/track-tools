@@ -4,6 +4,7 @@
       v-for="area in areas"
       :key="area.name"
       :area="area"
+      :isEdit="area.isEdit"
       @del="onDel"
       @lock="onLock"
     />
