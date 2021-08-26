@@ -5,7 +5,7 @@
       icon="unMoved"
       width="20"
       height="20"
-      color="#fff"
+      :color="canSelect ? `#888` : `#fff`"
       @on-click="$emit('lock', area)"
     />
     <At2IconBtn
@@ -22,7 +22,7 @@ import At2IconBtn from '~at2@/components/At2IconBtn'
 export default {
   name: 'AreaLayerUi',
   components: { At2IconBtn },
-  props: ['area', 'isEdit'],
+  props: ['area', 'isEdit', 'canSelect'],
 }
 </script>
 <style lang="postcss" scoped>

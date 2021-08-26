@@ -5,6 +5,7 @@
       :key="area.name"
       :area="area"
       :isEdit="area.isEdit"
+      :canSelect="area.editEnable"
       @del="onDel"
       @lock="onLock"
       @select="onSelect"
