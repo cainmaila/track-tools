@@ -233,7 +233,10 @@ class Area {
     this._rectangle.clear()
     this._setting.hasLine &&
       this._rectangle.lineStyle(1, this._setting.lineColor, 1, 0.5, true)
-    this._rectangle.beginFill(this._setting.fillColor, this._setting.alpha)
+    this._rectangle.beginFill(
+      this._setting.fillColor,
+      this._setting.alpha || 0.000001, //如果是0就不能選
+    )
     this._rectangle.drawRect(0, 0, w, h)
     this._rectangle.x = x
     this._rectangle.y = y

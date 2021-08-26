@@ -14,6 +14,7 @@
       height="20"
       color="#fff"
       @on-click="$emit('del', area)"
+      v-if="!area.isRoot"
     />
   </div>
 </template>

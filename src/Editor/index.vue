@@ -81,6 +81,7 @@ export default {
       if (scopeArea.value) {
         scopeArea.value.editEnable = false
         scopeArea.value.alpha = 0
+        scopeArea.value.isRoot = true
         original.step = 2
         original.mode = 'sel'
       }
