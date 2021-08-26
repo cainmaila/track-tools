@@ -2,11 +2,7 @@
   <div id="EditorTool" class="hight_100">
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
-    <div id="LayerMod">
-      <div v-for="area in areasRef" :key="area.name">
-        {{ area.name }} {{ area.isEdit }}
-      </div>
-    </div>
+    <LayerUi :areas="areasRef" />
   </div>
 </template>
 
@@ -16,9 +12,10 @@ import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
 import FootUi from '@/components/editor/FootUi'
+import LayerUi from '@/components/editor/LayerUi'
 export default {
   name: 'AppEditor',
-  components: { FootUi },
+  components: { FootUi, LayerUi },
   setup() {
     const original = reactive({
       mode: 'sel',
@@ -89,15 +86,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
-}
-#LayerMod {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 200px;
-  min-height: 30px;
-  background: #000;
-  color: #fff;
 }
 .hight_100 {
   height: 100%;
