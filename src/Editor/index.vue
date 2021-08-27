@@ -3,6 +3,7 @@
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
     <LayerUi :areas="areasRef" @common="onCommon" />
+    <DetailUi />
   </div>
 </template>
 
@@ -13,9 +14,10 @@ import { postEvent, APP_NAME } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
+import DetailUi from '@/components/editor/DetailUi'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi },
+  components: { FootUi, LayerUi, DetailUi },
   setup() {
     const original = reactive({
       mode: 'sel',

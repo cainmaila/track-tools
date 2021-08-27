@@ -3,7 +3,7 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-
+const json = require('./package.json')
 const devServer = process.env.BUILD
   ? {}
   : {
@@ -44,10 +44,16 @@ module.exports = {
     editor: {
       entry: 'src/main-editor.js',
       template: 'public/index.html',
+      title: 'Track Editor' + ' v' + json.version,
     },
-    iospoc: {
-      entry: 'src/main-player-poc.js',
+    player: {
+      entry: 'src/main-track-player.js',
       template: 'public/index.html',
+      title: 'Track Player' + ' v' + json.version,
     },
+    // iospoc: {
+    //   entry: 'src/main-player-poc.js',
+    //   template: 'public/index.html',
+    // },
   },
 }
