@@ -45,5 +45,9 @@ module.exports = {
       entry: 'src/main-editor.js',
       template: 'public/index.html',
     },
+    iospoc: {
+      entry: 'src/main-player-poc.js',
+      template: 'public/index.html',
+    },
   },
 }

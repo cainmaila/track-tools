@@ -15,7 +15,6 @@ class DrawPathViewport extends Viewport {
     this._app = app
     this._setting = {
       floors: [],
-      devicePixelRatio: window.devicePixelRatio,
       ...setting,
     }
     app.stage.addChild(this)
@@ -67,21 +66,19 @@ class DrawPathViewport extends Viewport {
     })
   }
   zoomTofit() {
-    const devicePixelRatio = this._setting.devicePixelRatio
     this.fit(false, this._floorObj.floorMc.width, this._floorObj.floorMc.height)
-    this.x = (this._app.view.clientWidth / devicePixelRatio - this.width) >> 1
-    this.y = (this._app.view.clientHeight / devicePixelRatio - this.height) >> 1
+    this.x = (this._app.view.clientWidth - this.width) >> 1
+    this.y = (this._app.view.clientHeight - this.height) >> 1
   }
   lockCenter() {
     if (!this._nowPo) return //必須要有點
-    const devicePixelRatio_md = this._setting.devicePixelRatio * 2
     this.scaled = 1
     const _po = this.toLocal(
-      this._floorObj.lineLayer.toGlobal(this._nowPoMc.position)
+      this._floorObj.lineLayer.toGlobal(this._nowPoMc.position),
     )
     this.setTransform(
-      -_po.x + this._app.view.clientWidth / devicePixelRatio_md,
-      -_po.y + this._app.view.clientHeight / devicePixelRatio_md
+      -_po.x + this._app.view.clientWidth / 2,
+      -_po.y + this._app.view.clientHeight / 2,
     )
   }
   //================================================================

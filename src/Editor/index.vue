@@ -91,24 +91,4 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-}
-.hight_100 {
-  height: 100%;
-}
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.flex {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-</style>
+<style></style>
