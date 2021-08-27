@@ -202,8 +202,8 @@ class Area {
   //create textTag
   createTextTag(_txt, style = {}) {
     this._tag && this._tag.destroy({})
-    this._tag = new TextTag(_txt, 5, style)
-    this._rectangle.addChild(this._tag)
+    this._tag = _txt ? new TextTag(_txt, 5, style) : null
+    this._tag && this._rectangle.addChild(this._tag)
   }
   draw(outPoint, inPoint) {
     inPoint && (this._inPoint = inPoint)
