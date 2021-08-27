@@ -5,6 +5,7 @@
 import * as PIXI from 'pixi.js'
 import { onMounted, ref } from 'vue'
 import DrawPathViewport from '@/tools/draw-lib/DrawPathViewport'
+import { setIosPushPoHandler } from './iosHandler'
 export default {
   name: 'PlayerPOC',
   setup() {
@@ -26,13 +27,18 @@ export default {
             id: 'floor',
             img: './img/MaFloorPlan.png',
             offset: { x: 0, y: 0 },
-            scale: 10,
+            scale:
+              new URLSearchParams(window.location.search)?.get('scale') * 1,
           },
         ],
       })
       viewportRef.value.on('resources-ready', () => {
         viewportRef.value.floor = 'floor'
+        setIosPushPoHandler(xy => {
+          viewportRef.value.pushPoint({ x: xy[0] * 1, y: xy[1] * 1 })
+        })
       })
+
       resize()
     })
 
