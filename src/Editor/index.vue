@@ -3,7 +3,7 @@
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
     <LayerUi :areas="areasRef" @common="onCommon" />
-    <DetailUi />
+    <DetailUi v-model:tag="scopeAreaData.tag" />
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
     const original = reactive({
       mode: 'sel',
       step: 1,
+    })
+    const scopeAreaData = reactive({
+      tag: '',
     })
     const scopeArea = ref(null)
     const areasRef = ref([])
@@ -84,11 +87,15 @@ export default {
       if (scopeArea.value) {
         scopeArea.value.alpha = 0
         scopeArea.value.isRoot = true
+        scopeArea.value.tag = scopeAreaData.tag
         original.step = 2
         original.mode = 'sel'
       }
     })
-    return { ViewRef, onCommon, original, areasRef }
+    watch(scopeAreaData, val => {
+      scopeArea.value.tag = val.tag
+    })
+    return { ViewRef, onCommon, original, areasRef, scopeAreaData }
   },
 }
 </script>

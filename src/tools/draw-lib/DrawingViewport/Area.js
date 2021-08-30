@@ -201,7 +201,7 @@ class Area {
   }
   //create textTag
   createTextTag(_txt, style = {}) {
-    this._tag && this._tag.destroy({})
+    // this._tag && this._tag.destroy() //TODO:銷毀抱錯，且流程需優化
     this._tag = _txt ? new TextTag(_txt, 5, style) : null
     this._tag && this._rectangle.addChild(this._tag)
   }

@@ -37,7 +37,7 @@ function _drawingViewportInit(view, setting) {
 
   const viewport = new DrawingViewport(app, {
     ...setting,
-    devicePixelRatio: window.devicePixelRatio,
+    devicePixelRatio: window.devicePixelRatio || 1,
   })
 
   window.onresize = () => {
