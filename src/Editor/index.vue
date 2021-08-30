@@ -24,7 +24,7 @@ export default {
       step: 1,
     })
     const scopeAreaData = reactive({
-      tag: '',
+      tag: 'Scope Area',
     })
     const scopeArea = ref(null)
     const areasRef = ref([])
@@ -68,20 +68,21 @@ export default {
       }
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
+
     watch(viewportRef, () => {
       areaLayerHandler(viewportRef.value, areasRef)
-      viewportRef.value &&
-        viewportRef.value.on('add-area', area => {
-          switch (original.mode) {
-            case 'scope':
-              scopeArea.value = area
-              break
-            case 'area':
-              original.mode = 'sel'
-              area.tag = area.name
-              break
-          }
-        })
+
+      viewportRef.value.on('add-area', area => {
+        switch (original.mode) {
+          case 'scope':
+            scopeArea.value = area
+            break
+          case 'area':
+            original.mode = 'sel'
+            area.tag = area.name
+            break
+        }
+      })
     })
     watch(scopeArea, () => {
       if (scopeArea.value) {
