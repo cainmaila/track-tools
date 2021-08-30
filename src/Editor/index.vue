@@ -9,6 +9,7 @@
       v-model:color="scopeAreaData.color"
       :widthPx="scopeAreaData.widthPx"
       :heightPx="scopeAreaData.heightPx"
+      :selectArea="selectAreaRef"
       @scale="val => (scopeAreaData.scale = val)"
     />
   </div>
@@ -83,10 +84,6 @@ export default {
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
 
-    watch(selectAreaRef, val => {
-      console.log('555', val?.isRoot)
-    })
-
     watch(viewportRef, () => {
       areaLayerHandler(viewportRef.value, areasRef)
       viewportRef.value.on('add-area', area => {
@@ -133,7 +130,14 @@ export default {
       scopeAreaData.heightPx = _bound.height
     }
 
-    return { ViewRef, onCommon, original, areasRef, scopeAreaData }
+    return {
+      ViewRef,
+      onCommon,
+      original,
+      areasRef,
+      scopeAreaData,
+      selectAreaRef,
+    }
   },
 }
 </script>
