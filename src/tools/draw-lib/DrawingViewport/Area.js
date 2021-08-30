@@ -35,6 +35,7 @@ class Area {
     this._isEdit = false //編輯中，影響九宮編輯顯示
     this._editEnable = true //是否可以編輯狀態
     this._stageLock = false //場景鎖定暫時不能編輯
+    this._tagTxt = ''
     this.create()
     this._setting.tag &&
       this.createTextTag(this._setting.tag, this._setting.tagStyle)
@@ -45,8 +46,12 @@ class Area {
    * @memberof Area
    */
   set tag(_text) {
+    this._tagTxt = _text
     this.createTextTag(_text, this._setting.tagStyle)
     this.draw()
+  }
+  get tag() {
+    return this._tagTxt
   }
   /**
    * 物件名

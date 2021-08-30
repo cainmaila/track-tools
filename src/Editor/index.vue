@@ -94,7 +94,7 @@ export default {
             break
           case 'area':
             original.mode = 'sel'
-            area.tag = area.name
+            area.tag = 'Area'
             break
         }
         selectAreaRef.value = area
