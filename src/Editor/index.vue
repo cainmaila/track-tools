@@ -6,6 +6,7 @@
     <DetailUi
       v-model:tag="scopeAreaData.tag"
       v-model:realWidth="scopeAreaData.realWidth"
+      v-model:color="scopeAreaData.color"
       :widthPx="scopeAreaData.widthPx"
       :heightPx="scopeAreaData.heightPx"
       @scale="val => (scopeAreaData.scale = val)"
@@ -36,6 +37,7 @@ export default {
       realWidth: 10,
       realHeight: 10,
       scale: 0,
+      color: 0xff00ff,
     })
     const scopeArea = ref(null)
     const areasRef = ref([])
@@ -110,6 +112,10 @@ export default {
     })
     watch(scopeAreaData, val => {
       scopeArea.value.tag = val.tag
+      scopeArea.value.lineColor =
+        typeof val.color == 'string'
+          ? ('0x' + val.color.slice(1)) * 1
+          : val.color
     })
 
     function setScopeAreaData() {
