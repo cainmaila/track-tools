@@ -2,6 +2,12 @@ import * as PIXI from 'pixi.js'
 import TextTag from './TextTag'
 
 /**
+ * 事件 emit
+ * created
+ * edit-resize
+ */
+
+/**
  * 區域選取物件
  */
 class Area {

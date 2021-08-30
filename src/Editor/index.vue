@@ -39,6 +39,7 @@ export default {
       scale: 0,
       color: 0xff00ff,
     })
+    const selectAreaRef = ref(null)
     const scopeArea = ref(null)
     const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
@@ -82,12 +83,16 @@ export default {
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
 
+    watch(selectAreaRef, val => {
+      console.log('555', val?.isRoot)
+    })
+
     watch(viewportRef, () => {
       areaLayerHandler(viewportRef.value, areasRef)
-
       viewportRef.value.on('add-area', area => {
         switch (original.mode) {
           case 'scope':
+            area.isRoot = true
             scopeArea.value = area
             break
           case 'area':
@@ -95,12 +100,16 @@ export default {
             area.tag = area.name
             break
         }
+        selectAreaRef.value = area
+      })
+
+      viewportRef.value.on('select', area => {
+        selectAreaRef.value = area
       })
     })
     watch(scopeArea, () => {
       if (scopeArea.value) {
         scopeArea.value.alpha = 0
-        scopeArea.value.isRoot = true
         scopeArea.value.tag = scopeAreaData.tag
         original.step = 2
         original.mode = 'sel'

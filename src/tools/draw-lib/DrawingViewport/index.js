@@ -5,9 +5,19 @@ import { Viewport } from 'pixi-viewport'
 import Area from './Area'
 
 /**
- * 區與繪製工具
+ * 區與繪製工具 emit
+ * select
+ * add-area
+ * remove-area
+ * drawMode
  */
 class DrawingViewport extends Viewport {
+  /**
+   * Creates an instance of DrawingViewport.
+   * @param {Object} app - pixi app 實體
+   * @param {Object} setting - 設定
+   * @memberof DrawingViewport
+   */
   constructor(app, setting) {
     super({
       interaction: app.renderer.plugins.interaction, // the interaction module is important for wheel to work properly when renderer.view is placed or scaled
