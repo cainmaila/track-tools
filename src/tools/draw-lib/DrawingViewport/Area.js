@@ -198,6 +198,7 @@ class Area {
       this._rectangle.parent.emit('edit', { type, obj: this })
     })
     this._rectangle.areaOb = this //綁定 Area 抽象實體物件，由 _rectangle 實體反抓 Area 實體
+    this._rectangle.emit('created')
   }
   //create textTag
   createTextTag(_txt, style = {}) {
@@ -228,6 +229,7 @@ class Area {
       this._tag.x = this._dx >> 1
       this._tag.y = this._dy >> 1
     }
+    this._rectangle.emit('edit-resize')
   }
   drawBox(x, y, w, h) {
     this._rectangle.clear()

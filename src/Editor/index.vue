@@ -3,7 +3,13 @@
     <div id="Stage" class="hight_100" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
     <LayerUi :areas="areasRef" @common="onCommon" />
-    <DetailUi v-model:tag="scopeAreaData.tag" />
+    <DetailUi
+      v-model:tag="scopeAreaData.tag"
+      v-model:realWidth="scopeAreaData.realWidth"
+      :widthPx="scopeAreaData.widthPx"
+      :heightPx="scopeAreaData.heightPx"
+      @scale="val => (scopeAreaData.scale = val)"
+    />
   </div>
 </template>
 
@@ -25,6 +31,11 @@ export default {
     })
     const scopeAreaData = reactive({
       tag: 'Scope Area',
+      widthPx: 0,
+      heightPx: 0,
+      realWidth: 10,
+      realHeight: 10,
+      scale: 0,
     })
     const scopeArea = ref(null)
     const areasRef = ref([])
@@ -91,11 +102,22 @@ export default {
         scopeArea.value.tag = scopeAreaData.tag
         original.step = 2
         original.mode = 'sel'
+        setScopeAreaData()
+        scopeArea.value.rectangle.on('edit-resize', () => {
+          setScopeAreaData()
+        })
       }
     })
     watch(scopeAreaData, val => {
       scopeArea.value.tag = val.tag
     })
+
+    function setScopeAreaData() {
+      const _bound = scopeArea.value.getRectangleBounds()
+      scopeAreaData.widthPx = _bound.width
+      scopeAreaData.heightPx = _bound.height
+    }
+
     return { ViewRef, onCommon, original, areasRef, scopeAreaData }
   },
 }
