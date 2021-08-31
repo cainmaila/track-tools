@@ -4,7 +4,7 @@ function partAreaHandler(scopeAreaData) {
   const selectAreaRef = ref()
   const selectAreaData = reactive({
     tag: '',
-    realOffsetX: 0,
+    realOffsetX: 0, //根據全區域算出的實際位移點
     realOffsetY: 0,
     realWidth: 0,
     realHeight: 0,
