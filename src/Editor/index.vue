@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import { hexToNumber } from '@/tools/colorTools'
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
+import scopeAreaHandler from './scopeAreaHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
@@ -33,17 +33,8 @@ export default {
       mode: 'sel',
       step: 1,
     })
-    const scopeAreaData = reactive({
-      tag: 'Scope Area',
-      widthPx: 0,
-      heightPx: 0,
-      realWidth: 10,
-      realHeight: 10,
-      scale: 0,
-      color: 0xff00ff,
-    })
+    const { scopeAreaData, scopeArea } = scopeAreaHandler()
     const selectAreaRef = ref(null)
-    const scopeArea = ref(null)
     const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
     onMounted(() => {
@@ -107,29 +98,13 @@ export default {
         area?.isRoot && viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
       })
     })
+
     watch(scopeArea, () => {
       if (scopeArea.value) {
-        scopeArea.value.alpha = 0
-        scopeArea.value.tag = scopeAreaData.tag
         original.step = 2
         original.mode = 'sel'
-        setScopeAreaData()
-        scopeArea.value.rectangle.on('edit-resize', () => {
-          setScopeAreaData()
-        })
       }
     })
-    watch(scopeAreaData, val => {
-      scopeArea.value.tag = val.tag
-      scopeArea.value.lineColor =
-        typeof val.color == 'string' ? hexToNumber(val.color) : val.color
-    })
-
-    function setScopeAreaData() {
-      const _bound = scopeArea.value.getRectangleBounds()
-      scopeAreaData.widthPx = _bound.width
-      scopeAreaData.heightPx = _bound.height
-    }
 
     return {
       ViewRef,
