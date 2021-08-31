@@ -1,6 +1,6 @@
 <template>
   <div id="EditorTool" class="hight_100">
-    <div id="Stage" class="hight_100" ref="ViewRef"></div>
+    <div id="Stage" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
     <LayerUi :areas="areasRef" @common="onCommon" />
     <DetailUi
@@ -135,4 +135,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+#Stage {
+  width: 100%;
+  height: calc(100% - 55px);
+}
+</style>
