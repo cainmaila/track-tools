@@ -18,8 +18,8 @@
     <div>
       Color<At2Input
         type="color"
-        :value="color"
-        @input="val => $emit('update:color', val)"
+        :value="`#${color.toString(16)}`"
+        @input="val => $emit('update:color', ('0x' + val.slice(1)) * 1)"
       />
     </div>
   </div>
