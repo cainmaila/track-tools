@@ -15,6 +15,11 @@
         @input="val => $emit('update:selectAreaColor', val)"
       />
     </div>
+    <div>
+      位移 x:{{ selectRealOffsetX.toFixed(2) }} ,y:{{
+        selectRealOffsetY.toFixed(2)
+      }}
+    </div>
   </div>
 </template>
 <script>
@@ -24,7 +29,14 @@ export default {
   components: {
     At2Input,
   },
-  props: ['selectAreaColor', 'selectAreaTag', 'selectAreaW', 'selectAreaH'],
+  props: [
+    'selectAreaColor',
+    'selectAreaTag',
+    'selectAreaW',
+    'selectAreaH',
+    'selectRealOffsetX',
+    'selectRealOffsetY',
+  ],
   emits: ['update:selectAreaColor', 'update:selectAreaTag'],
   data() {
     return {

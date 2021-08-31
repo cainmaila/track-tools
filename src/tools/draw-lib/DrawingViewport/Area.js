@@ -5,6 +5,7 @@ import TextTag from './TextTag'
  * 事件 emit
  * created
  * edit-resize
+ * select-end
  */
 
 /**
@@ -203,6 +204,7 @@ class Area {
     })
     this._rectangle.on('pointerup', event => {
       event.stopPropagation()
+      this._rectangle.emit('select-end')
       this._rectangle.parent.emit('select-end', { event, obj: this })
     })
     this._rectangle.on('edit', ({ type }) => {

@@ -16,6 +16,8 @@
       :selectAreaW="selectAreaData.realWidth"
       :selectAreaH="selectAreaData.realHeight"
       v-model:unit="scopeAreaData.unit"
+      :selectRealOffsetX="selectAreaData.realOffsetX"
+      :selectRealOffsetY="selectAreaData.realOffsetY"
     />
   </div>
 </template>

@@ -6,6 +6,8 @@ function scopeAreaHandler() {
   const scopeAreaData = reactive({
     tag: 'Scope Area',
     unit: 'm',
+    offsetX: 0,
+    offsetY: 0,
     widthPx: 0,
     heightPx: 0,
     realWidth: 10,
@@ -17,6 +19,8 @@ function scopeAreaHandler() {
   //取得寬高
   const resizeScopeArea = () => {
     const _bound = scopeArea.value.getRectangleBounds()
+    scopeAreaData.offsetX = _bound.x
+    scopeAreaData.offsetY = _bound.y
     scopeAreaData.widthPx = _bound.width
     scopeAreaData.heightPx = _bound.height
   }
@@ -28,6 +32,7 @@ function scopeAreaHandler() {
       scopeArea.value.tag = scopeAreaData.tag
       resizeScopeArea()
       scopeArea.value.rectangle.on('edit-resize', resizeScopeArea)
+      scopeArea.value.rectangle.on('select-end', resizeScopeArea)
     }
   })
 

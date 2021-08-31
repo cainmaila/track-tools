@@ -4,6 +4,8 @@ function partAreaHandler(scopeAreaData) {
   const selectAreaRef = ref()
   const selectAreaData = reactive({
     tag: '',
+    realOffsetX: 0,
+    realOffsetY: 0,
     realWidth: 0,
     realHeight: 0,
     color: 0,
@@ -13,15 +15,21 @@ function partAreaHandler(scopeAreaData) {
       const _bound = selectAreaRef.value.getRectangleBounds()
       selectAreaData.realWidth = _bound.width / scopeAreaData.scale
       selectAreaData.realHeight = _bound.height / scopeAreaData.scale
+      selectAreaData.realOffsetX =
+        (_bound.x - scopeAreaData.offsetX) / scopeAreaData.scale
+      selectAreaData.realOffsetY =
+        (_bound.y - scopeAreaData.offsetY) / scopeAreaData.scale
     }
   }
   watch(selectAreaRef, (val, old) => {
     old && old.rectangle.off('edit-resize', setBounds)
+    old && old.rectangle.off('select-end', setBounds)
     if (val) {
       selectAreaData.tag = val.tag
       selectAreaData.color = numberToHex(val.lineColor)
       setBounds()
       val && val.rectangle.on('edit-resize', setBounds)
+      val && val.rectangle.on('select-end', setBounds)
     }
   })
   watch(
