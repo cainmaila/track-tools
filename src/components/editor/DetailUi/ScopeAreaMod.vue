@@ -26,25 +26,14 @@ import At2Input from '~at2@/components/At2Input'
 export default {
   name: 'ScopeAreaMod',
   components: { At2Input },
-  props: ['tag', 'widthPx', 'heightPx', 'realWidth', 'color'],
-  emits: ['update:tag', 'update:realWidth', 'scale', 'update:color'],
+  props: ['tag', 'widthPx', 'heightPx', 'realWidth', 'color', 'scale'],
+  emits: ['update:tag', 'update:realWidth', 'update:color'],
   data() {
     return {}
   },
   computed: {
-    scale() {
-      return (this.widthPx || 0) / this.realWidth
-    },
     colorToHex() {
       return numberToHex(this.color || 0)
-    },
-  },
-  watch: {
-    scale: {
-      immediate: true,
-      handler(val) {
-        this.$emit('scale', val)
-      },
     },
   },
   methods: {

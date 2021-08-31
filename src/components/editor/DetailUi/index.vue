@@ -1,6 +1,6 @@
 <template>
   <div id="DetailUi" v-if="mode > 0">
-    <ScopeAreaMod v-bind="$attrs" v-if="mode === 1" />
+    <ScopeAreaMod v-bind="$attrs" v-if="mode === 1" :scale="scale" />
     <PartAreaMod
       v-else-if="mode === 2"
       :selectArea="selectArea"
