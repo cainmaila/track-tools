@@ -7,14 +7,15 @@
     <div>
       長<At2Input
         type="number"
+        max="99999999999999"
         :value="realWidth"
         @input="val => $emit('update:realWidth', val)"
       />
     </div>
     <div>寬:{{ (heightPx / scale).toFixed(2) }}</div>
     <div>比例尺:{{ scale.toFixed(2) }}</div>
-    <div>樓層高<At2Input type="number" value="100" /></div>
-    <div>方位角<At2Input type="number" min="0" max="360" value="0" /></div>
+    <div>樓層高<At2Input type="number" value="0" max="99999999999999" /></div>
+    <div>方位角<At2Input type="number" max="360" value="0" /></div>
     <div>
       Color<At2Input type="color" :value="colorToHex" @input="emitColor" />
     </div>
