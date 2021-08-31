@@ -103,6 +103,7 @@ export default {
 
       viewportRef.value.on('select', area => {
         selectAreaRef.value = area
+        area?.isRoot && viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
       })
     })
     watch(scopeArea, () => {
