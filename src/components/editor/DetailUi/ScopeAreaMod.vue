@@ -5,6 +5,12 @@
       區域名稱<At2Input :value="tag" @input="val => $emit('update:tag', val)" />
     </div>
     <div>
+      <select :value="unit" @input="e => $emit('update:unit', e.target.value)">
+        <option value="m">m</option>
+        <option value="cm">cm</option>
+      </select>
+    </div>
+    <div>
       長<At2Input
         type="number"
         max="99999999999999"
@@ -27,11 +33,8 @@ import At2Input from '~at2@/components/At2Input'
 export default {
   name: 'ScopeAreaMod',
   components: { At2Input },
-  props: ['tag', 'widthPx', 'heightPx', 'realWidth', 'color', 'scale'],
-  emits: ['update:tag', 'update:realWidth', 'update:color'],
-  data() {
-    return {}
-  },
+  props: ['tag', 'widthPx', 'heightPx', 'realWidth', 'color', 'scale', 'unit'],
+  emits: ['update:tag', 'update:realWidth', 'update:color', 'update:unit'],
   computed: {
     colorToHex() {
       return numberToHex(this.color || 0)

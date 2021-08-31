@@ -5,6 +5,7 @@ function scopeAreaHandler() {
   const scopeArea = ref(null)
   const scopeAreaData = reactive({
     tag: 'Scope Area',
+    unit: 'm',
     widthPx: 0,
     heightPx: 0,
     realWidth: 10,

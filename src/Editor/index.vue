@@ -15,6 +15,7 @@
       v-model:selectAreaColor="selectAreaData.color"
       :selectAreaW="selectAreaData.realWidth"
       :selectAreaH="selectAreaData.realHeight"
+      v-model:unit="scopeAreaData.unit"
     />
   </div>
 </template>
