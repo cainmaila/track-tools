@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { hexToNumber } from '@/tools/colorTools'
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
@@ -121,9 +122,7 @@ export default {
     watch(scopeAreaData, val => {
       scopeArea.value.tag = val.tag
       scopeArea.value.lineColor =
-        typeof val.color == 'string'
-          ? ('0x' + val.color.slice(1)) * 1
-          : val.color
+        typeof val.color == 'string' ? hexToNumber(val.color) : val.color
     })
 
     function setScopeAreaData() {

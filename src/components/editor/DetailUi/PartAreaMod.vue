@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import { hexToNumber, numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
 export default {
   name: 'ScopeAreaMod',
@@ -33,7 +34,7 @@ export default {
       handler(val, old) {
         old && old.rectangle.off('edit-resize', this.setBounds)
         this.tag = val.tag
-        this.color = `#${val.lineColor.toString(16)}`
+        this.color = numberToHex(val.lineColor)
         this.setBounds()
         val && val.rectangle.on('edit-resize', this.setBounds)
       },
@@ -43,10 +44,11 @@ export default {
       this.selectArea.tag = val
     },
     color(val) {
+      const _colorNum = hexToNumber(val)
       // eslint-disable-next-line vue/no-mutating-props
-      this.selectArea.lineColor = `0x${val.slice(1)}` * 1
+      this.selectArea.lineColor = _colorNum
       // eslint-disable-next-line vue/no-mutating-props
-      this.selectArea.fillColor = `0x${val.slice(1)}` * 1
+      this.selectArea.fillColor = _colorNum
     },
   },
   methods: {

@@ -16,15 +16,12 @@
     <div>樓層高<At2Input type="number" value="100" /></div>
     <div>方位角<At2Input type="number" min="0" max="360" value="0" /></div>
     <div>
-      Color<At2Input
-        type="color"
-        :value="`#${color.toString(16)}`"
-        @input="val => $emit('update:color', ('0x' + val.slice(1)) * 1)"
-      />
+      Color<At2Input type="color" :value="colorToHex" @input="emitColor" />
     </div>
   </div>
 </template>
 <script>
+import { hexToNumber, numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
 export default {
   name: 'ScopeAreaMod',
@@ -38,6 +35,9 @@ export default {
     scale() {
       return (this.widthPx || 0) / this.realWidth
     },
+    colorToHex() {
+      return numberToHex(this.color || 0)
+    },
   },
   watch: {
     scale: {
@@ -45,6 +45,11 @@ export default {
       handler(val) {
         this.$emit('scale', val)
       },
+    },
+  },
+  methods: {
+    emitColor(_hex) {
+      this.$emit('update:color', hexToNumber(_hex))
     },
   },
 }
