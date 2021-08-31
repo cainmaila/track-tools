@@ -40,8 +40,11 @@ export default {
     },
   },
   watch: {
-    scale(val) {
-      this.$emit('scale', val)
+    scale: {
+      immediate: true,
+      handler(val) {
+        this.$emit('scale', val)
+      },
     },
   },
 }

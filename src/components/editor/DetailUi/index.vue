@@ -1,7 +1,11 @@
 <template>
   <div id="DetailUi" v-if="mode > 0">
     <ScopeAreaMod v-bind="$attrs" v-if="mode === 1" />
-    <PartAreaMod v-else-if="mode === 2" :selectArea="selectArea" />
+    <PartAreaMod
+      v-else-if="mode === 2"
+      :selectArea="selectArea"
+      :scale="scale"
+    />
   </div>
 </template>
 <script>
@@ -10,7 +14,7 @@ import PartAreaMod from './PartAreaMod'
 export default {
   name: 'DetailUi',
   components: { ScopeAreaMod, PartAreaMod },
-  props: ['selectArea'],
+  props: ['selectArea', 'scale'],
   data() {
     return {}
   },

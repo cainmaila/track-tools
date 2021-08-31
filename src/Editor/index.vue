@@ -11,6 +11,7 @@
       :heightPx="scopeAreaData.heightPx"
       :selectArea="selectAreaRef"
       @scale="val => (scopeAreaData.scale = val)"
+      :scale="scopeAreaData.scale"
     />
   </div>
 </template>
