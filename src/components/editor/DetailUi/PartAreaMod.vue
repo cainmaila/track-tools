@@ -15,6 +15,7 @@
         @input="val => $emit('update:selectAreaColor', val)"
       />
     </div>
+    <div>隔板高<At2Input type="number" value="0" max="99999999999999" /></div>
     <div>
       位移 x:{{ selectRealOffsetX.toFixed(2) }} ,y:{{
         selectRealOffsetY.toFixed(2)
