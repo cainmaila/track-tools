@@ -32,7 +32,7 @@ export default {
       mode: 'sel',
       step: 1,
     })
-    const { scopeAreaData, scopeArea } = scopeAreaHandler()
+    const { scopeAreaData, scopeArea } = scopeAreaHandler() //處理 總區域 的變化
     const selectAreaRef = ref(null)
     const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
