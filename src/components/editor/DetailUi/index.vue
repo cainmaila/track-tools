@@ -1,11 +1,7 @@
 <template>
-  <div id="DetailUi" v-if="mode > 0">
-    <ScopeAreaMod v-bind="$attrs" v-if="mode === 1" :scale="scale" />
-    <PartAreaMod
-      v-else-if="mode === 2"
-      :selectArea="selectArea"
-      :scale="scale"
-    />
+  <div id="DetailUi" v-if="type > 0">
+    <ScopeAreaMod v-bind="$attrs" v-if="type === 1" :scale="scale" />
+    <PartAreaMod v-else-if="type === 2" v-bind="$attrs" />
   </div>
 </template>
 <script>
@@ -14,21 +10,7 @@ import PartAreaMod from './PartAreaMod'
 export default {
   name: 'DetailUi',
   components: { ScopeAreaMod, PartAreaMod },
-  props: ['selectArea', 'scale'],
-  data() {
-    return {}
-  },
-  computed: {
-    mode() {
-      if (this.selectArea) {
-        if (this.selectArea.isRoot) {
-          return 1 //選全區
-        }
-        return 2
-      }
-      return 0 //無選取
-    },
-  },
+  props: ['type', 'scale'],
 }
 </script>
 <style lang="postcss" scoped>

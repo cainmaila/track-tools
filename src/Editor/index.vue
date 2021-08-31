@@ -9,8 +9,12 @@
       v-model:color="scopeAreaData.color"
       :widthPx="scopeAreaData.widthPx"
       :heightPx="scopeAreaData.heightPx"
-      :selectArea="selectAreaRef"
+      :type="original.selAeeaType"
       :scale="scopeAreaData.scale"
+      v-model:selectAreaTag="selectAreaData.tag"
+      v-model:selectAreaColor="selectAreaData.color"
+      :selectAreaW="selectAreaData.realWidth"
+      :selectAreaH="selectAreaData.realHeight"
     />
   </div>
 </template>
@@ -21,6 +25,7 @@ import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
 import scopeAreaHandler from './scopeAreaHandler'
+import partAreaHandler from './partAreaHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
@@ -31,9 +36,10 @@ export default {
     const original = reactive({
       mode: 'sel',
       step: 1,
+      selAeeaType: 0,
     })
     const { scopeAreaData, scopeArea } = scopeAreaHandler() //處理 總區域 的變化
-    const selectAreaRef = ref(null)
+    const { selectAreaRef, selectAreaData } = partAreaHandler(scopeAreaData)
     const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
     onMounted(() => {
@@ -83,18 +89,29 @@ export default {
           case 'scope':
             area.isRoot = true
             scopeArea.value = area
+            original.selAeeaType = 1
             break
           case 'area':
             original.mode = 'sel'
             area.tag = 'Area'
+            original.selAeeaType = 2
             break
         }
         selectAreaRef.value = area
       })
 
       viewportRef.value.on('select', area => {
-        selectAreaRef.value = area
-        area?.isRoot && viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
+        if (area?.isRoot) {
+          selectAreaRef.value = null
+          viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
+          original.selAeeaType = 1
+        } else if (area) {
+          selectAreaRef.value = area
+          original.selAeeaType = 2
+        } else {
+          selectAreaRef.value = null
+          original.selAeeaType = 0
+        }
       })
     })
 
@@ -112,6 +129,7 @@ export default {
       areasRef,
       scopeAreaData,
       selectAreaRef,
+      selectAreaData,
     }
   },
 }
