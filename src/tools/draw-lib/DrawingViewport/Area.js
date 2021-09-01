@@ -37,6 +37,7 @@ class Area {
     this._editEnable = true //是否可以編輯狀態
     this._stageLock = false //場景鎖定暫時不能編輯
     this._tagTxt = ''
+    this._userData = {}
     this.create()
     this._setting.tag &&
       this.createTextTag(this._setting.tag, this._setting.tagStyle)
@@ -124,6 +125,16 @@ class Area {
   }
   get editEnable() {
     return this._editEnable
+  }
+  /**
+   * userData
+   * @memberof Area
+   */
+  set userData(val) {
+    this._userData = val || {}
+  }
+  get userData() {
+    return this._userData
   }
   /**
    * DrawingViewport鎖定，不建議直接使用，要鎖定請使用editEnable
