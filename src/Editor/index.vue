@@ -158,6 +158,7 @@ export default {
       overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊')
       if (!correct) {
         alert(error)
+        postEvent('areaData', { error })
         return
       }
 
@@ -222,7 +223,7 @@ export default {
           frame_color: numberToHex(room.setting.lineColor),
         })
       })
-      console.log('#outPut', outPut)
+      postEvent('areaData', outPut)
     }
 
     return {
