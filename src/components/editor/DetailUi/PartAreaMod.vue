@@ -15,7 +15,15 @@
         @input="val => $emit('update:selectAreaColor', val)"
       />
     </div>
-    <div>隔板高<At2Input type="number" value="0" max="99999999999999" /></div>
+    <div>
+      隔板高<At2Input
+        type="number"
+        step="0.01"
+        max="99999999999999"
+        :value="spaceHeight"
+        @input="val => $emit('update:spaceHeight', val)"
+      />
+    </div>
     <div>
       位移 x:{{ selectRealOffsetX.toFixed(2) }} ,y:{{
         selectRealOffsetY.toFixed(2)
@@ -37,8 +45,13 @@ export default {
     'selectAreaH',
     'selectRealOffsetX',
     'selectRealOffsetY',
+    'spaceHeight',
   ],
-  emits: ['update:selectAreaColor', 'update:selectAreaTag'],
+  emits: [
+    'update:selectAreaColor',
+    'update:selectAreaTag',
+    'update:spaceHeight',
+  ],
   data() {
     return {
       tag: '',

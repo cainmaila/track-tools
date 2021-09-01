@@ -9,6 +9,7 @@ function partAreaHandler(scopeAreaData) {
     realWidth: 0,
     realHeight: 0,
     color: 0,
+    spaceHeight: 0, //空間高度
   })
   const setBounds = () => {
     if (selectAreaRef.value) {
@@ -27,6 +28,7 @@ function partAreaHandler(scopeAreaData) {
     if (val) {
       selectAreaData.tag = val.tag
       selectAreaData.color = numberToHex(val.lineColor)
+      selectAreaData.spaceHeight = val.spaceHeight || 0 //空間高度
       setBounds()
       val && val.rectangle.on('edit-resize', setBounds)
       val && val.rectangle.on('select-end', setBounds)
@@ -47,6 +49,14 @@ function partAreaHandler(scopeAreaData) {
         const _colorNum = hexToNumber(color)
         selectAreaRef.value.lineColor = _colorNum
         selectAreaRef.value.fillColor = _colorNum
+      }
+    },
+  )
+  watch(
+    () => selectAreaData.spaceHeight,
+    spaceHeight => {
+      if (selectAreaRef.value) {
+        selectAreaRef.value.spaceHeight = spaceHeight
       }
     },
   )

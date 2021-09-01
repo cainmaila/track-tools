@@ -16,6 +16,7 @@
       :scale="scopeAreaData.scale"
       v-model:selectAreaTag="selectAreaData.tag"
       v-model:selectAreaColor="selectAreaData.color"
+      v-model:spaceHeight="selectAreaData.spaceHeight"
       :selectAreaW="selectAreaData.realWidth"
       :selectAreaH="selectAreaData.realHeight"
       :selectRealOffsetX="selectAreaData.realOffsetX"
