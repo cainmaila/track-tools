@@ -28,7 +28,7 @@ function partAreaHandler(scopeAreaData) {
     if (val) {
       selectAreaData.tag = val.tag
       selectAreaData.color = numberToHex(val.lineColor)
-      selectAreaData.spaceHeight = val.spaceHeight || 0 //空間高度
+      selectAreaData.spaceHeight = val.userData.spaceHeight || 0 //空間高度
       setBounds()
       val && val.rectangle.on('edit-resize', setBounds)
       val && val.rectangle.on('select-end', setBounds)

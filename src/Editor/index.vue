@@ -164,6 +164,19 @@ export default {
         alert('樓板高度必須設置')
         return
       }
+      //檢驗是否都在再範圍
+      let isContainsError = false
+      viewportRef.value
+        .ckgContainsRect(scopeArea.value.getRectangleBounds())
+        .forEach(ob => {
+          ob.contains || (isContainsError = true)
+        })
+      if (isContainsError) {
+        alert('部分區域超出範圍')
+        return
+      }
+
+      //準備資料
       const outPut = {
         unit: scopeAreaData.unit,
         scale: scopeAreaData.scale,
