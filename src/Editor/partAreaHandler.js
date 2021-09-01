@@ -56,7 +56,7 @@ function partAreaHandler(scopeAreaData) {
     () => selectAreaData.spaceHeight,
     spaceHeight => {
       if (selectAreaRef.value) {
-        selectAreaRef.value.spaceHeight = spaceHeight
+        selectAreaRef.value.userData.spaceHeight = spaceHeight
       }
     },
   )
