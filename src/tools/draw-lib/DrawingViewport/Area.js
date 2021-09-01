@@ -179,7 +179,30 @@ class Area {
   get setting() {
     return this._setting
   }
-
+  /**
+   * 寬
+   * @memberof Area
+   */
+  set width(val) {
+    this._outPoint.x = this._inPoint.x + val
+    this.draw()
+    this.restEditPo()
+  }
+  get width() {
+    return this._outPoint.x - this._inPoint.x
+  }
+  /**
+   * 高
+   * @memberof Area
+   */
+  set height(val) {
+    this._outPoint.y = this._inPoint.y + val
+    this.draw()
+    this.restEditPo()
+  }
+  get height() {
+    return this._outPoint.y - this._inPoint.y
+  }
   /**
    * 取得圈選區域
    * @return {PIXI.Rectangle} Rectangle
@@ -236,7 +259,7 @@ class Area {
       this._minY = this._outPoint.y
       this._dy = this._inPoint.y - this._outPoint.y
     }
-    this.drawBox(this._minX, this._minY, this._dx, this._dy)
+    this._drawBox(this._minX, this._minY, this._dx, this._dy)
     //_tag move
     if (this._tag) {
       this._tag.x = this._dx >> 1
@@ -244,7 +267,7 @@ class Area {
     }
     this._rectangle.emit('edit-resize')
   }
-  drawBox(x, y, w, h) {
+  _drawBox(x, y, w, h) {
     this._rectangle.clear()
     this._setting.hasLine &&
       this._rectangle.lineStyle(1, this._setting.lineColor, 1, 0.5, true)
