@@ -14,7 +14,7 @@
       height="20"
       color="#fff"
       @on-click="$emit('del', area)"
-      v-if="!area.isRoot"
+      v-if="!area.uaerData.isRoot"
     />
   </div>
 </template>

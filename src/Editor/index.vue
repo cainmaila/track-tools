@@ -101,7 +101,7 @@ export default {
       viewportRef.value.on('add-area', area => {
         switch (original.mode) {
           case 'scope':
-            area.isRoot = true
+            area.uaerData.isRoot = true
             scopeArea.value = area
             original.selAeeaType = 1
             break
@@ -115,7 +115,7 @@ export default {
       })
 
       viewportRef.value.on('select', area => {
-        if (area?.isRoot) {
+        if (area.uaerData?.isRoot) {
           selectAreaRef.value = null
           viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
           original.selAeeaType = 1
