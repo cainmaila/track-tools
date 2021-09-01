@@ -5,6 +5,7 @@ import TextTag from './TextTag'
  * 事件 emit
  * created
  * edit-resize
+ * select-start
  * select-end
  */
 
@@ -36,11 +37,9 @@ class Area {
     this._isEdit = false //編輯中，影響九宮編輯顯示
     this._editEnable = true //是否可以編輯狀態
     this._stageLock = false //場景鎖定暫時不能編輯
-    this._tagTxt = ''
     this._userData = {}
     this.create()
-    this._setting.tag &&
-      this.createTextTag(this._setting.tag, this._setting.tagStyle)
+    this._setting.tag && (this.tag = this._setting.tag)
     this.draw(inPoint)
   }
   /**
@@ -48,12 +47,12 @@ class Area {
    * @memberof Area
    */
   set tag(_text) {
-    this._tagTxt = _text
+    this._setting.tag = _text
     this.createTextTag(_text, this._setting.tagStyle)
     this.draw()
   }
   get tag() {
-    return this._tagTxt
+    return this._setting.tag
   }
   /**
    * 物件名
@@ -234,6 +233,7 @@ class Area {
     this._rectangle.interactive = true
     this._rectangle.on('pointerdown', event => {
       event.stopPropagation()
+      this._rectangle.emit('select-start')
       this._rectangle.parent.emit('select-start', { event, obj: this })
     })
     this._rectangle.on('pointerup', event => {

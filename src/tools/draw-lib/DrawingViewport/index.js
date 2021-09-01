@@ -195,7 +195,6 @@ class DrawingViewport extends Viewport {
             h: item.areaOb._dy,
             name: item.name,
             setting: item.areaOb.setting,
-            tag: item.areaOb.tag,
             userData: item.areaOb.userData,
           })
           break
@@ -215,7 +214,6 @@ class DrawingViewport extends Viewport {
       _area.draw({ x: itemMate.x + itemMate.w, y: itemMate.y + itemMate.h })
       _area.name = itemMate.name
       _area.createEditPo()
-      itemMate.tag && (_area.tag = itemMate.tag)
       _area.userData = itemMate.userData
     })
   }

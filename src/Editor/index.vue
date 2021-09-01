@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { numberToHex } from '@/tools/colorTools'
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
@@ -138,16 +139,67 @@ export default {
 
     const onSave = () => {
       const meta = viewportRef.value.getDrawingMeta()
-      console.log('#meta', meta)
-
-      // if (!scopeArea.value) {
-      //   alert('請先創建總區域')
-      //   return
-      // }
-      // if (selectAreaData.realWidth * selectAreaData.realHeight <= 0) {
-      //   alert('總區域空間不足')
-      //   return
-      // }
+      // console.log('#meta', meta)
+      const { items } = meta
+      let isSpaceHeightError = false
+      let scopeAreaMata = null
+      const roomsMata = []
+      items.forEach(area => {
+        if (area.userData.isRoot) {
+          scopeAreaMata = area
+        } else {
+          roomsMata.push(area)
+          !area.userData.spaceHeight && (isSpaceHeightError = true)
+        }
+      })
+      if (!scopeAreaMata) {
+        alert('請先創建總區域')
+        return
+      }
+      if (roomsMata.length === 0) {
+        alert('至少創建一個區域')
+        return
+      }
+      if (isSpaceHeightError) {
+        alert('樓板高度必須設置')
+        return
+      }
+      const outPut = {
+        unit: scopeAreaData.unit,
+        scale: scopeAreaData.scale,
+        elevation: scopeAreaData.elevation,
+        direction: scopeAreaData.direction,
+        scopeArea: {
+          tag: scopeAreaData.tag,
+          offset: { x: scopeAreaData.offsetX, y: scopeAreaData.offsetY },
+          size: {
+            x: scopeAreaData.realWidth,
+            y: scopeAreaData.realHeight,
+          },
+          color: numberToHex(scopeAreaData.color),
+        },
+        rooms: [],
+      }
+      const _offsetX = scopeAreaData.offsetX
+      const _offsetY = scopeAreaData.offsetY
+      const _scale = scopeAreaData.scale
+      const _unitSc = scopeAreaData.unit === 'cm' ? 0.01 : 1
+      roomsMata.forEach(room => {
+        outPut.rooms.push({
+          tag: room.setting.tag,
+          offset: {
+            x: ((room.x - _offsetX) / _scale) * _unitSc,
+            y: ((room.y - _offsetY) / _scale) * _unitSc,
+          },
+          size: {
+            x: (room.w / _scale) * _unitSc,
+            y: (room.h / _scale) * _unitSc,
+          },
+          color: numberToHex(room.setting.lineColor),
+          spaceHeight: room.userData.spaceHeight * _unitSc,
+        })
+      })
+      console.log('#outPut', outPut)
     }
 
     return {
