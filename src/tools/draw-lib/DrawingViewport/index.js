@@ -16,6 +16,19 @@ class DrawingViewport extends Viewport {
    * Creates an instance of DrawingViewport.
    * @param {Object} app - pixi app 實體
    * @param {Object} setting - 設定
+   * @param {string} setting.bg - 底圖
+   * @param {object} setting.aeraSetting - 區域繪製預設值
+   * @param {boolean} setting.aeraSetting.hasLine - 是否有線框 def true
+   * @param {number} setting.aeraSetting.lineColor - 線框色 def 0x000000
+   * @param {number} setting.aeraSetting.fillColor - 底色 def 0x000000
+   * @param {number} setting.aeraSetting.alpha - 透明度 0~1 def 0.3
+   * @param {number} setting.aeraSetting.editColor - 編輯點顏色 def 0x000000
+   * @param {number} setting.aeraSetting.editSize - 編輯點大小 def 12
+   * @param {string} setting.aeraSetting.tag - tag標籤
+   * @param {object} setting.aeraSetting.tagStyle - tag style
+   * @param {number} setting.aeraSetting.tagStyle.fill - tag 色 def 0x000000
+   * @param {number} setting.aeraSetting.tagStyle.fontSize - tag 大小 def 16
+   * @param {number} setting.aeraSetting.tagStyle.letterSpacing - tag letterSpacing def 1
    * @memberof DrawingViewport
    */
   constructor(app, setting) {
@@ -26,7 +39,7 @@ class DrawingViewport extends Viewport {
       bg: null, // bg 底圖url
       aeraSetting: null, //區塊設定
     }
-    this.setSetting(setting)
+    this._setSetting(setting)
     this._state = ''
     this._pointerdown = null
     this._pointerup = null
@@ -68,12 +81,9 @@ class DrawingViewport extends Viewport {
       this.state = 'edit'
     })
 
-    //============================================================================
     this._setting.bg && this._loadBg(this._setting.bg) //底圖
   }
-  setSetting(_setting) {
-    this._setting = { ...this._setting, ..._setting }
-  }
+  /* 選取一個物件 */
   selectItem(_item) {
     if (typeof _item == 'string') {
       _item = this.getChildByName(_item)
@@ -82,6 +92,8 @@ class DrawingViewport extends Viewport {
       this.targetObj = _item
     }
   }
+
+  /* 目前選取物件，要設定請使用 selectItem 方法 */
   set targetObj(val) {
     this._targetObj && (this._targetObj.isEdit = false)
     this._targetObj = val
@@ -92,36 +104,14 @@ class DrawingViewport extends Viewport {
   get targetObj() {
     return this._targetObj
   }
+  /* 繪製框模式，一次性，畫完就false */
   set drawMode(val) {
     this.state = val ? 'drawMode' : ''
   }
   get drawMode() {
     return this._operationLayer.visible
   }
-  set state(val) {
-    this.stateFSM(val, this._state)
-    this._state = val
-  }
-  set pointerdown(val) {
-    this._pointerup = null
-    this._pointerdown = this.toLocal(val)
-    this.state = 'draw'
-  }
-  set pointerup(val) {
-    if (this._pointerdown) {
-      this._pointerup = this.toLocal(val)
-      this.state = ''
-    }
-  }
-  set pointermove(val) {
-    const _new = this.toLocal(val)
-    this._moveDistance = {
-      x: this._pointermove.x - _new.x,
-      y: this._pointermove.y - _new.y,
-    }
-    this._pointermove = _new
-    this.moveHander()
-  }
+  /* 是否可以編輯圖面的物件 */
   set selectEnable(val) {
     if (this._selectEnable === val) return
     if (!val) {
@@ -136,6 +126,8 @@ class DrawingViewport extends Viewport {
   get selectEnable() {
     return this._selectEnable
   }
+
+  /* 取回所有物件 */
   getAllAreas() {
     const _areaArr = []
     this.children.forEach(item => {
@@ -144,6 +136,8 @@ class DrawingViewport extends Viewport {
     })
     return _areaArr
   }
+
+  /* 移除物件 */
   removeArea(_item) {
     if (typeof _item == 'string') {
       _item = this.getChildByName(_item)
@@ -166,9 +160,11 @@ class DrawingViewport extends Viewport {
       _item.destroy()
     }
   }
+  /* 縮放倍數 */
   zoom(sc) {
     this.scaled += sc
   }
+  /* 最適大小 */
   zoomTofit() {
     this._bg
       ? this.fit(false, this._bg.width, this._bg.height)
@@ -176,6 +172,7 @@ class DrawingViewport extends Viewport {
     this.x = (this._app.view.clientWidth - this.width) >> 1
     this.y = (this._app.view.clientHeight - this.height) >> 1
   }
+  /* 取回繪圖資訊 */
   getDrawingMeta() {
     const _map = { items: [] }
     this.children.forEach(item => {
@@ -203,6 +200,7 @@ class DrawingViewport extends Viewport {
     })
     return _map
   }
+  /* 設定繪圖資訊 */
   setDrawingMeta(_meta) {
     this.children.forEach(item => {
       item.destroy({ children: true })
@@ -217,13 +215,7 @@ class DrawingViewport extends Viewport {
       _area.userData = itemMate.userData
     })
   }
-  async _loadBg(_img) {
-    this._bg = new PIXI.Sprite(await PIXI.Texture.fromURL(_img))
-    this._bgUrl = _img
-    this._bg.name = 'BG|0'
-    this.addChildAt(this._bg, 0)
-    this.zoomTofit()
-  }
+  /* 取回某個物件 */
   getAreaByName(_name) {
     let _mc = null
     this.children.forEach(mc => {
@@ -281,6 +273,41 @@ class DrawingViewport extends Viewport {
     }
     return _returnAreaArr
   }
+  _setSetting(_setting) {
+    this._setting = { ...this._setting, ..._setting }
+  }
+  set state(val) {
+    this.stateFSM(val, this._state)
+    this._state = val
+  }
+  set pointerdown(val) {
+    this._pointerup = null
+    this._pointerdown = this.toLocal(val)
+    this.state = 'draw'
+  }
+  set pointerup(val) {
+    if (this._pointerdown) {
+      this._pointerup = this.toLocal(val)
+      this.state = ''
+    }
+  }
+  set pointermove(val) {
+    const _new = this.toLocal(val)
+    this._moveDistance = {
+      x: this._pointermove.x - _new.x,
+      y: this._pointermove.y - _new.y,
+    }
+    this._pointermove = _new
+    this.moveHander()
+  }
+  async _loadBg(_img) {
+    this._bg = new PIXI.Sprite(await PIXI.Texture.fromURL(_img))
+    this._bgUrl = _img
+    this._bg.name = 'BG|0'
+    this.addChildAt(this._bg, 0)
+    this.zoomTofit()
+  }
+
   moveHander() {
     switch (this._state) {
       case 'draw': //區域繪製
