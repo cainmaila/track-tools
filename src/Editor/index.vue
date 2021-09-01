@@ -34,6 +34,7 @@ import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, APP_NAME } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
+import verifyAreaHandler from './verifyAreaHandler'
 import scopeAreaHandler from './scopeAreaHandler'
 import partAreaHandler from './partAreaHandler'
 import FootUi from '@/components/editor/FootUi'
@@ -137,88 +138,88 @@ export default {
       }
     })
 
+    const verifyCorrect = verifyAreaHandler(viewportRef, scopeArea)
+
     const onSave = () => {
-      const meta = viewportRef.value.getDrawingMeta()
-      // console.log('#meta', meta)
-      const { items } = meta
-      let isSpaceHeightError = false
-      let scopeAreaMata = null
-      const roomsMata = []
-      items.forEach(area => {
-        if (area.userData.isRoot) {
-          scopeAreaMata = area
-        } else {
-          roomsMata.push(area)
-          !area.userData.spaceHeight && (isSpaceHeightError = true)
-        }
-      })
-      if (!scopeAreaMata) {
-        alert('請先創建總區域')
-        return
-      }
-      if (roomsMata.length === 0) {
-        alert('至少創建一個區域')
-        return
-      }
-      if (isSpaceHeightError) {
-        alert('樓板高度必須設置')
-        return
-      }
-      //檢驗是否都在再範圍
-      let isContainsError = false
-      viewportRef.value
-        .ckgContainsRect(scopeArea.value.getRectangleBounds())
-        .forEach(ob => {
-          ob.contains || (isContainsError = true)
-        })
-      if (isContainsError) {
-        alert('部分區域超出範圍')
-        return
-      }
-      //檢查區域是否交疊
-      let isOverlappingError = false
-      viewportRef.value.ckgOverlapping([scopeArea.value.name]).forEach(chk => {
-        chk.overlapping && (isOverlappingError = true)
-      })
-      if (isOverlappingError) {
-        alert('區域範圍不可重疊')
+      const {
+        scopeAreaMata, //總區域
+        roomsMata, //房間
+        isSpaceHeightNullArr, //樓板高度有缺
+        containsErrorArr, //超出總範圍裡的
+        overlappingErrorArr, //交疊的房間
+        correct, //資料正確
+      } = verifyCorrect()
+
+      let error = ''
+      !scopeAreaMata && (error += ' 請先創建總區域')
+      roomsMata.length === 0 && (error += ' 至少創建一個區域')
+      isSpaceHeightNullArr.length > 0 && (error += ' 樓板高度必須設置')
+      containsErrorArr.length > 0 && (error += ' 部分區域超出範圍')
+      overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊')
+      if (!correct) {
+        alert(error)
         return
       }
 
       //準備資料
-      const outPut = {
-        unit: scopeAreaData.unit,
-        scale: scopeAreaData.scale,
-        elevation: scopeAreaData.elevation,
-        direction: scopeAreaData.direction,
-        scopeArea: {
-          tag: scopeAreaData.tag,
-          offset: { x: scopeAreaData.offsetX, y: scopeAreaData.offsetY },
-          size: {
-            x: scopeAreaData.realWidth,
-            y: scopeAreaData.realHeight,
-          },
-          color: numberToHex(scopeAreaData.color),
-        },
-        rooms: [],
+      let display_unit = 0
+      let _unitSc = 1
+      switch (scopeAreaData.unit) {
+        case 'm':
+          display_unit = 0
+          _unitSc = 1
+          break
+        case 'cm':
+          display_unit = 1
+          _unitSc = 0.01
+          break
+        case 'mm':
+          display_unit = 2
+          _unitSc = 0.001
+          break
+        case 'ft':
+          display_unit = 3
+          _unitSc = 0.3048
+          break
+        case 'in':
+          display_unit = 4
+          _unitSc = 0.0254
+          break
       }
       const _offsetX = scopeAreaData.offsetX
       const _offsetY = scopeAreaData.offsetY
-      const _scale = scopeAreaData.scale
-      const _unitSc = scopeAreaData.unit === 'cm' ? 0.01 : 1
+      const scale = scopeAreaData.scale
+      //http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
+      const outPut = {
+        scale,
+        total_area: {
+          name: scopeAreaData.tag,
+          initial_point_offset: {
+            x: _offsetX,
+            y: _offsetY,
+          },
+          display_unit: display_unit,
+          length: scopeAreaData.realWidth,
+          width: scopeAreaData.realHeight,
+          high: scopeAreaData.elevation * _unitSc,
+          mn_angle: scopeAreaData.direction,
+          frame_color: numberToHex(scopeAreaData.color),
+        },
+        area: [],
+      }
+
       roomsMata.forEach(room => {
-        outPut.rooms.push({
-          tag: room.setting.tag,
-          offset: {
-            x: ((room.x - _offsetX) / _scale) * _unitSc,
-            y: ((room.y - _offsetY) / _scale) * _unitSc,
+        outPut.area.push({
+          name: room.setting.tag,
+          pos_left_up: {
+            x: ((room.x - _offsetX) / scale) * _unitSc,
+            y: ((room.y - _offsetY) / scale) * _unitSc,
           },
-          size: {
-            x: (room.w / _scale) * _unitSc,
-            y: (room.h / _scale) * _unitSc,
-          },
-          color: numberToHex(room.setting.lineColor),
-          spaceHeight: room.userData.spaceHeight * _unitSc,
+          display_unit: display_unit,
+          length: (room.w / scale) * _unitSc,
+          width: (room.h / scale) * _unitSc,
+          high: room.userData.spaceHeight * _unitSc,
+          frame_color: numberToHex(room.setting.lineColor),
         })
       })
       console.log('#outPut', outPut)
