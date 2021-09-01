@@ -14,6 +14,7 @@
       長<At2Input
         type="number"
         max="99999999999999"
+        step="0.01"
         :value="realWidth"
         @input="val => $emit('update:realWidth', val)"
       />
@@ -23,7 +24,8 @@
       寬<At2Input
         type="number"
         max="99999999999999"
-        :value="realHeight"
+        step="0.01"
+        :value="realHeight.toFixed(2)"
         @input="val => $emit('change-realHeight', val)"
       />
     </div>
