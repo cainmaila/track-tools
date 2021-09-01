@@ -39,7 +39,7 @@
         @input="val => $emit('update:elevation', val)"
       />
     </div>
-    <div>
+    <div class="flex">
       方位角<At2Input
         type="number"
         max="360"
@@ -47,6 +47,9 @@
         :value="direction"
         @input="val => $emit('update:direction', val)"
       />
+      <div :style="rotateStyle">
+        <At2Icon type="packup" width="16" height="16" />
+      </div>
     </div>
     <div>
       Color<At2Input type="color" :value="colorToHex" @input="emitColor" />
@@ -56,9 +59,10 @@
 <script>
 import { hexToNumber, numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
+import At2Icon from '~at2@/components/At2Icon'
 export default {
   name: 'ScopeAreaMod',
-  components: { At2Input },
+  components: { At2Input, At2Icon },
   props: [
     'tag',
     'realWidth',
@@ -81,6 +85,9 @@ export default {
   computed: {
     colorToHex() {
       return numberToHex(this.color || 0)
+    },
+    rotateStyle() {
+      return `transform: rotate(${this.direction}deg);`
     },
   },
   methods: {
