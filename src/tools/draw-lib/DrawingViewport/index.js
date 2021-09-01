@@ -244,13 +244,19 @@ class DrawingViewport extends Viewport {
     return _areaArr
   }
   /* 檢查是否交疊 */
-  ckgOverlapping() {
+  ckgOverlapping(excepts = []) {
     const _areaArr = []
     const _returnAreaArr = []
     this.children.forEach(mc => {
+      // getAreaByName
       const { type } = getTypeAndKey(mc)
+      let _f = false
       switch (type) {
         case 'Area':
+          excepts.forEach(_n => {
+            _n === mc.name && (_f = true)
+          })
+          if (_f) break
           _areaArr.push({
             name: mc.name,
             rectangle: mc.areaOb.getRectangleBounds(),

@@ -175,6 +175,15 @@ export default {
         alert('部分區域超出範圍')
         return
       }
+      //檢查區域是否交疊
+      let isOverlappingError = false
+      viewportRef.value.ckgOverlapping([scopeArea.value.name]).forEach(chk => {
+        chk.overlapping && (isOverlappingError = true)
+      })
+      if (isOverlappingError) {
+        alert('區域範圍不可重疊')
+        return
+      }
 
       //準備資料
       const outPut = {
