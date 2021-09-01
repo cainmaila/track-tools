@@ -101,7 +101,7 @@ export default {
       viewportRef.value.on('add-area', area => {
         switch (original.mode) {
           case 'scope':
-            area.uaerData.isRoot = true
+            area.userData.isRoot = true
             scopeArea.value = area
             original.selAeeaType = 1
             break
@@ -115,7 +115,7 @@ export default {
       })
 
       viewportRef.value.on('select', area => {
-        if (area.uaerData?.isRoot) {
+        if (area.userData?.isRoot) {
           selectAreaRef.value = null
           viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
           original.selAeeaType = 1
@@ -137,14 +137,17 @@ export default {
     })
 
     const onSave = () => {
-      if (!scopeArea.value) {
-        alert('請先創建總區域')
-        return
-      }
-      if (selectAreaData.realWidth * selectAreaData.realHeight <= 0) {
-        alert('總區域空間不足')
-        return
-      }
+      const meta = viewportRef.value.getDrawingMeta()
+      console.log('#meta', meta)
+
+      // if (!scopeArea.value) {
+      //   alert('請先創建總區域')
+      //   return
+      // }
+      // if (selectAreaData.realWidth * selectAreaData.realHeight <= 0) {
+      //   alert('總區域空間不足')
+      //   return
+      // }
     }
 
     return {
