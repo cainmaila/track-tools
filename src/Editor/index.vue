@@ -115,7 +115,7 @@ export default {
       })
 
       viewportRef.value.on('select', area => {
-        if (area.userData?.isRoot) {
+        if (area?.userData.isRoot) {
           selectAreaRef.value = null
           viewportRef.value.addChildAt(area.rectangle, 1) //選到root層，不上移 0層是底圖
           original.selAeeaType = 1
