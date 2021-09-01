@@ -14,6 +14,8 @@ function scopeAreaHandler() {
     realHeight: 10,
     scale: 0,
     color: 0xff00ff,
+    elevation: 0, //標高
+    direction: 0, //方位角 0-360
   })
 
   //取得寬高

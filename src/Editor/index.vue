@@ -11,6 +11,8 @@
       @change-realHeight="changeAreaRealHeight"
       v-model:color="scopeAreaData.color"
       v-model:unit="scopeAreaData.unit"
+      v-model:elevation="scopeAreaData.elevation"
+      v-model:direction="scopeAreaData.direction"
       :scale="scopeAreaData.scale"
       v-model:selectAreaTag="selectAreaData.tag"
       v-model:selectAreaColor="selectAreaData.color"
