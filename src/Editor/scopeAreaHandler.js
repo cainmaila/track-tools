@@ -57,7 +57,16 @@ function scopeAreaHandler() {
     scopeAreaData.scale = scopeAreaData.widthPx / scopeAreaData.realWidth
   })
 
-  return { scopeAreaData, scopeArea }
+  //計算實際高度
+  watch([() => scopeAreaData.scale, () => scopeAreaData.heightPx], () => {
+    scopeAreaData.realHeight = scopeAreaData.heightPx / scopeAreaData.scale
+  })
+
+  const changeAreaRealHeight = _h => {
+    scopeArea.value.height = _h * scopeAreaData.scale
+  }
+
+  return { scopeAreaData, scopeArea, changeAreaRealHeight }
 }
 
 export default scopeAreaHandler

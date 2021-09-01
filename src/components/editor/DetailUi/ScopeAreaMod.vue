@@ -18,7 +18,15 @@
         @input="val => $emit('update:realWidth', val)"
       />
     </div>
-    <div>寬:{{ (heightPx / scale).toFixed(2) }}</div>
+    <!-- <div>寬:{{ (heightPx / scale).toFixed(2) }}</div> -->
+    <div>
+      寬<At2Input
+        type="number"
+        max="99999999999999"
+        :value="realHeight"
+        @input="val => $emit('change-realHeight', val)"
+      />
+    </div>
     <div>比例尺:{{ scale.toFixed(2) }}</div>
     <div>樓層高<At2Input type="number" value="0" max="99999999999999" /></div>
     <div>方位角<At2Input type="number" max="360" value="0" /></div>
@@ -33,8 +41,14 @@ import At2Input from '~at2@/components/At2Input'
 export default {
   name: 'ScopeAreaMod',
   components: { At2Input },
-  props: ['tag', 'widthPx', 'heightPx', 'realWidth', 'color', 'scale', 'unit'],
-  emits: ['update:tag', 'update:realWidth', 'update:color', 'update:unit'],
+  props: ['tag', 'realWidth', 'realHeight', 'color', 'scale', 'unit'],
+  emits: [
+    'update:tag',
+    'update:realWidth',
+    'change-realHeight',
+    'update:color',
+    'update:unit',
+  ],
   computed: {
     colorToHex() {
       return numberToHex(this.color || 0)

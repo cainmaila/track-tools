@@ -4,18 +4,18 @@
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
     <LayerUi :areas="areasRef" @common="onCommon" />
     <DetailUi
+      :type="original.selAeeaType"
       v-model:tag="scopeAreaData.tag"
       v-model:realWidth="scopeAreaData.realWidth"
+      :realHeight="scopeAreaData.realHeight"
+      @change-realHeight="changeAreaRealHeight"
       v-model:color="scopeAreaData.color"
-      :widthPx="scopeAreaData.widthPx"
-      :heightPx="scopeAreaData.heightPx"
-      :type="original.selAeeaType"
+      v-model:unit="scopeAreaData.unit"
       :scale="scopeAreaData.scale"
       v-model:selectAreaTag="selectAreaData.tag"
       v-model:selectAreaColor="selectAreaData.color"
       :selectAreaW="selectAreaData.realWidth"
       :selectAreaH="selectAreaData.realHeight"
-      v-model:unit="scopeAreaData.unit"
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
     />
@@ -41,7 +41,11 @@ export default {
       step: 1,
       selAeeaType: 0,
     })
-    const { scopeAreaData, scopeArea } = scopeAreaHandler() //處理 總區域 的變化
+    const {
+      scopeAreaData,
+      scopeArea,
+      changeAreaRealHeight,
+    } = scopeAreaHandler() //處理 總區域 的變化
     const { selectAreaRef, selectAreaData } = partAreaHandler(scopeAreaData)
     const areasRef = ref([])
     const { ViewRef, viewportRef } = createViewPort(APP_NAME)
@@ -133,6 +137,7 @@ export default {
       scopeAreaData,
       selectAreaRef,
       selectAreaData,
+      changeAreaRealHeight,
     }
   },
 }
