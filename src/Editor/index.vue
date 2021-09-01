@@ -22,6 +22,9 @@
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
     />
+    <div class="top-ui flex-center">
+      <At2Btn @on-click="onSave">Save</At2Btn>
+    </div>
   </div>
 </template>
 
@@ -35,9 +38,10 @@ import partAreaHandler from './partAreaHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
+import At2Btn from '~at2@/components/At2Btn'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi, DetailUi },
+  components: { FootUi, LayerUi, DetailUi, At2Btn },
   setup() {
     const original = reactive({
       mode: 'sel',
@@ -132,6 +136,17 @@ export default {
       }
     })
 
+    const onSave = () => {
+      if (!scopeArea.value) {
+        alert('請先創建總區域')
+        return
+      }
+      if (selectAreaData.realWidth * selectAreaData.realHeight <= 0) {
+        alert('總區域空間不足')
+        return
+      }
+    }
+
     return {
       ViewRef,
       onCommon,
@@ -141,6 +156,7 @@ export default {
       selectAreaRef,
       selectAreaData,
       changeAreaRealHeight,
+      onSave,
     }
   },
 }
@@ -150,5 +166,14 @@ export default {
 #Stage {
   width: 100%;
   height: calc(100% - 55px);
+}
+.top-ui {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  & .at2-btn {
+    padding: 5px;
+  }
 }
 </style>
