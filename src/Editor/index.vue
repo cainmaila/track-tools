@@ -26,12 +26,10 @@
 </template>
 
 <script>
-import { numberToHex } from '@/tools/colorTools'
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
 import { postEvent, sdkListenerHandler } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
-import verifyAreaHandler from './verifyAreaHandler'
 import scopeAreaHandler from './scopeAreaHandler'
 import partAreaHandler from './partAreaHandler'
 import metaHandler from './metaHandler'
@@ -58,7 +56,10 @@ export default {
     const { getAreaMeta } = metaHandler(viewportRef, scopeArea, scopeAreaData)
     onMounted(() => {
       sdkListenerHandler({
-        setting: create, //收到設定創建viewerPort
+        setting: setting => {
+          //收到設定創建viewerPort
+          create(setting)
+        },
         getAreaMeta,
       })
       postEvent('ready')
@@ -140,94 +141,6 @@ export default {
       }
     })
 
-    const verifyCorrect = verifyAreaHandler(viewportRef, scopeArea)
-
-    const onSave = () => {
-      const {
-        scopeAreaMata, //總區域
-        roomsMata, //房間
-        isSpaceHeightNullArr, //樓板高度有缺
-        containsErrorArr, //超出總範圍裡的
-        overlappingErrorArr, //交疊的房間
-        correct, //資料正確
-      } = verifyCorrect()
-
-      let error = ''
-      !scopeAreaMata && (error += ' 請先創建總區域')
-      roomsMata.length === 0 && (error += ' 至少創建一個區域')
-      isSpaceHeightNullArr.length > 0 && (error += ' 樓板高度必須設置')
-      containsErrorArr.length > 0 && (error += ' 部分區域超出範圍')
-      overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊')
-      if (!correct) {
-        alert(error)
-        postEvent('areaData', { error })
-        return
-      }
-
-      //準備資料
-      let display_unit = 0
-      let _unitSc = 1
-      switch (scopeAreaData.unit) {
-        case 'm':
-          display_unit = 0
-          _unitSc = 1
-          break
-        case 'cm':
-          display_unit = 1
-          _unitSc = 0.01
-          break
-        case 'mm':
-          display_unit = 2
-          _unitSc = 0.001
-          break
-        case 'ft':
-          display_unit = 3
-          _unitSc = 0.3048
-          break
-        case 'in':
-          display_unit = 4
-          _unitSc = 0.0254
-          break
-      }
-      const _offsetX = scopeAreaData.offsetX
-      const _offsetY = scopeAreaData.offsetY
-      const scale = scopeAreaData.scale
-      //http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
-      const outPut = {
-        scale,
-        total_area: {
-          name: scopeAreaData.tag,
-          initial_point_offset: {
-            x: _offsetX,
-            y: _offsetY,
-          },
-          display_unit: display_unit,
-          length: scopeAreaData.realWidth,
-          width: scopeAreaData.realHeight,
-          high: scopeAreaData.elevation * _unitSc,
-          mn_angle: scopeAreaData.direction,
-          frame_color: numberToHex(scopeAreaData.color),
-        },
-        area: [],
-      }
-
-      roomsMata.forEach(room => {
-        outPut.area.push({
-          name: room.setting.tag,
-          pos_left_up: {
-            x: ((room.x - _offsetX) / scale) * _unitSc,
-            y: ((room.y - _offsetY) / scale) * _unitSc,
-          },
-          display_unit: display_unit,
-          length: (room.w / scale) * _unitSc,
-          width: (room.h / scale) * _unitSc,
-          high: room.userData.spaceHeight * _unitSc,
-          frame_color: numberToHex(room.setting.lineColor),
-        })
-      })
-      postEvent('areaData', outPut)
-    }
-
     return {
       ViewRef,
       onCommon,
@@ -237,7 +150,6 @@ export default {
       selectAreaRef,
       selectAreaData,
       changeAreaRealHeight,
-      onSave,
     }
   },
 }

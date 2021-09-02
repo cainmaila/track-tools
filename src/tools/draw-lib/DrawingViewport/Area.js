@@ -39,8 +39,8 @@ class Area {
     this._stageLock = false //場景鎖定暫時不能編輯
     this._userData = {}
     this.create()
-    this._setting.tag && (this.tag = this._setting.tag)
     this.draw(inPoint)
+    this._setting.tag && (this.tag = this._setting.tag)
   }
   /**
    * 顯示名稱tag
