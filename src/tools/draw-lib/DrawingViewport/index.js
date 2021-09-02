@@ -136,7 +136,18 @@ class DrawingViewport extends Viewport {
     })
     return _areaArr
   }
-
+  /* 創建一個區域 */
+  createArea({ x, y, w, h }, setting = {}) {
+    const _area = new Area(
+      { x, y },
+      { ...this._setting.aeraSetting, ...setting },
+      { w, h },
+    )
+    _area.createEditPo()
+    this.addChild(_area.rectangle)
+    this.emit('add-area', _area)
+    return _area
+  }
   /* 移除物件 */
   removeArea(_item) {
     if (typeof _item == 'string') {

@@ -19,8 +19,10 @@ class Area {
    * @param {number} inPoint.x
    * @param {number} inPoint.y
    * @param {object} setting - 設定
-   */
-  constructor(inPoint, setting) {
+   * @param {object} wh - 寬高 可選
+   * @param {number} wh.w - 寬
+   * @param {number} wh.h - 高   */
+  constructor(inPoint, setting, wh) {
     const _defSetting = {
       hasLine: true /* 線顯示*/,
       lineColor: 0x000000 /* 線色 */,
@@ -39,7 +41,11 @@ class Area {
     this._stageLock = false //場景鎖定暫時不能編輯
     this._userData = {}
     this.create()
-    this.draw(inPoint)
+    if (wh) {
+      wh.x = inPoint.x + wh.w
+      wh.y = inPoint.y + wh.h
+    }
+    this.draw(inPoint, wh)
     this._setting.tag && (this.tag = this._setting.tag)
   }
   /**

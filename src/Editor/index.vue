@@ -36,6 +36,7 @@ import metaHandler from './metaHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
+import { keyToUnit, mToUnit, mToPx } from '@/tools/unitTools'
 export default {
   name: 'AppEditor',
   components: { FootUi, LayerUi, DetailUi },
@@ -54,22 +55,7 @@ export default {
     const areasRef = ref([])
     const { ViewRef, viewportRef, create } = createViewPort()
     const { getAreaMeta } = metaHandler(viewportRef, scopeArea, scopeAreaData)
-    onMounted(() => {
-      sdkListenerHandler({
-        setting: setting => {
-          //收到設定創建viewerPort
-          create(setting)
-        },
-        getAreaMeta,
-        setAreaMeta: data => {
-          console.log('#setAreaMeta', data)
-          scopeAreaData.unit = 'm' //TODO: data.total_area.unit 回推
-          scopeAreaData.scale = data.scale
-          scopeAreaData.realWidth = data.total_area.width
-        },
-      })
-      postEvent('ready')
-    })
+
     const onCommon = ({ common, data }) => {
       // console.log('#onCommon', common, data)
       switch (common) {
@@ -107,13 +93,48 @@ export default {
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
 
+    const setScopeArea = area => {
+      area.userData.isRoot = true
+      scopeArea.value = area
+    }
+
+    onMounted(() => {
+      sdkListenerHandler({
+        setting: setting => {
+          //收到設定創建viewerPort
+          create(setting)
+        },
+        getAreaMeta,
+        setAreaMeta: data => {
+          console.log('#setAreaMeta', data)
+          scopeAreaData.direction = data.total_area.mn_angle //方位角
+          scopeAreaData.elevation = mToUnit(
+            data.total_area.high,
+            scopeAreaData.unit,
+          ) //標高
+          scopeAreaData.unit = keyToUnit(data.total_area.unit) //單位
+          scopeAreaData.realWidth = mToUnit(
+            /* 真實寬 */
+            data.total_area.length,
+            scopeAreaData.unit,
+          )
+          original.mode = 'scope'
+          viewportRef.value.createArea({
+            w: mToPx(data.total_area.length, data.scale, scopeAreaData.unit),
+            h: mToPx(data.total_area.width, data.scale, scopeAreaData.unit),
+            ...data.total_area.initial_point_offset,
+          })
+        },
+      })
+      postEvent('ready')
+    })
+
     watch(viewportRef, () => {
       areaLayerHandler(viewportRef.value, areasRef)
       viewportRef.value.on('add-area', area => {
         switch (original.mode) {
           case 'scope':
-            area.userData.isRoot = true
-            scopeArea.value = area
+            setScopeArea(area)
             original.selAeeaType = 1
             break
           case 'area':
