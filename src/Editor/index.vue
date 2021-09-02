@@ -22,9 +22,6 @@
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
     />
-    <div class="top-ui flex-center">
-      <At2Btn @on-click="onSave">Save</At2Btn>
-    </div>
   </div>
 </template>
 
@@ -32,18 +29,18 @@
 import { numberToHex } from '@/tools/colorTools'
 import { onMounted, ref, reactive, watch } from 'vue'
 import { createViewPort } from './viewPortHandler'
-import { postEvent, APP_NAME } from './sdkMessageHandler'
+import { postEvent, sdkListenerHandler } from './sdkMessageHandler'
 import { areaLayerHandler } from './areaLayerHandler'
 import verifyAreaHandler from './verifyAreaHandler'
 import scopeAreaHandler from './scopeAreaHandler'
 import partAreaHandler from './partAreaHandler'
+import metaHandler from './metaHandler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
-import At2Btn from '~at2@/components/At2Btn'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi, DetailUi, At2Btn },
+  components: { FootUi, LayerUi, DetailUi },
   setup() {
     const original = reactive({
       mode: 'sel',
@@ -57,8 +54,13 @@ export default {
     } = scopeAreaHandler() //處理 總區域 的變化
     const { selectAreaRef, selectAreaData } = partAreaHandler(scopeAreaData)
     const areasRef = ref([])
-    const { ViewRef, viewportRef } = createViewPort(APP_NAME)
+    const { ViewRef, viewportRef, create } = createViewPort()
+    const { getAreaMeta } = metaHandler(viewportRef, scopeArea, scopeAreaData)
     onMounted(() => {
+      sdkListenerHandler({
+        setting: create, //收到設定創建viewerPort
+        getAreaMeta,
+      })
       postEvent('ready')
     })
     const onCommon = ({ common, data }) => {
@@ -245,14 +247,5 @@ export default {
 #Stage {
   width: 100%;
   height: calc(100% - 55px);
-}
-.top-ui {
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-  & .at2-btn {
-    padding: 5px;
-  }
 }
 </style>

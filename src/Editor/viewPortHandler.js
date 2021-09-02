@@ -1,26 +1,18 @@
 import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 import { ref } from 'vue'
-function createViewPort(APP_NAME) {
+function createViewPort() {
   const ViewRef = ref(null)
   const viewportRef = ref()
-  window.addEventListener('message', ({ data }) => {
-    const { target, message } = data || {}
-    let initOb
-    if (target === APP_NAME) {
-      switch (message.type) {
-        case 'setting':
-          initOb = _drawingViewportInit(ViewRef.value, message.data) //傳入設定，創建viewport
-          viewportRef.value = initOb.viewport
-          break
-        default:
-          console.warn('未定的type', message)
-      }
-    }
-  })
+  let initOb
+  const create = setting => {
+    initOb = _drawingViewportInit(ViewRef.value, setting) //傳入設定，創建viewport
+    viewportRef.value = initOb.viewport
+  }
   return {
     ViewRef,
     viewportRef,
+    create,
   }
 }
 

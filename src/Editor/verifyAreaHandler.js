@@ -31,7 +31,7 @@ function verifyArea(viewportRef, scopeArea) {
 
   //檢查區域是否交疊
   const overlappingErrorArr = []
-  viewportRef.value.ckgOverlapping([scopeArea.value.name]).forEach(chk => {
+  viewportRef.value.ckgOverlapping([scopeArea.value?.name]).forEach(chk => {
     chk.overlapping && overlappingErrorArr.push(chk.name)
   })
 
