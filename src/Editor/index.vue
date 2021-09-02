@@ -93,11 +93,6 @@ export default {
       viewportRef.value.selectEnable = original.mode != 'mov'
     }
 
-    const setScopeArea = area => {
-      area.userData.isRoot = true
-      scopeArea.value = area
-    }
-
     onMounted(() => {
       sdkListenerHandler({
         setting: setting => {
@@ -118,6 +113,7 @@ export default {
             data.total_area.length,
             scopeAreaData.unit,
           )
+          //付現總區域
           original.mode = 'scope'
           viewportRef.value.createArea({
             w: mToPx(data.total_area.length, data.scale, scopeAreaData.unit),
@@ -134,7 +130,8 @@ export default {
       viewportRef.value.on('add-area', area => {
         switch (original.mode) {
           case 'scope':
-            setScopeArea(area)
+            area.userData.isRoot = true
+            scopeArea.value = area
             original.selAeeaType = 1
             break
           case 'area':

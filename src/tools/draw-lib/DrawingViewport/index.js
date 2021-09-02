@@ -143,8 +143,10 @@ class DrawingViewport extends Viewport {
       { ...this._setting.aeraSetting, ...setting },
       { w, h },
     )
+    _area.name = generateUUID('Area')
     _area.createEditPo()
     this.addChild(_area.rectangle)
+    this.targetObj = _area
     this.emit('add-area', _area)
     return _area
   }
