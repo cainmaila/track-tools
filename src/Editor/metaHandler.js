@@ -1,6 +1,7 @@
 import { numberToHex } from '@/tools/colorTools'
 import verifyAreaHandler from './verifyAreaHandler'
 import { postEvent } from './sdkMessageHandler'
+import { unitToKey, unitToM, pxToM } from '@/tools/unitTools'
 function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
   const verifyAreaData = verifyAreaHandler(viewportRef, scopeArea)
   const getAreaMeta = () => {
@@ -25,30 +26,8 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     }
 
     //準備資料
-    let display_unit = 0
-    let _unitSc = 1
-    switch (scopeAreaData.unit) {
-      case 'm':
-        display_unit = 0
-        _unitSc = 1
-        break
-      case 'cm':
-        display_unit = 1
-        _unitSc = 0.01
-        break
-      case 'mm':
-        display_unit = 2
-        _unitSc = 0.001
-        break
-      case 'ft':
-        display_unit = 3
-        _unitSc = 0.3048
-        break
-      case 'in':
-        display_unit = 4
-        _unitSc = 0.0254
-        break
-    }
+    const unit = scopeAreaData.unit
+    const display_unit = unitToKey(unit)
     const _offsetX = scopeAreaData.offsetX
     const _offsetY = scopeAreaData.offsetY
     const scale = scopeAreaData.scale
@@ -61,10 +40,10 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
           x: _offsetX,
           y: _offsetY,
         },
-        display_unit: display_unit,
-        length: scopeAreaData.realWidth,
-        width: scopeAreaData.realHeight,
-        high: scopeAreaData.elevation * _unitSc,
+        display_unit,
+        length: scopeAreaData.realWidth * 1,
+        width: scopeAreaData.realHeight * 1,
+        high: unitToM(scopeAreaData.elevation, unit),
         mn_angle: scopeAreaData.direction,
         frame_color: numberToHex(scopeAreaData.color),
       },
@@ -75,13 +54,13 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
       outPut.area.push({
         name: room.setting.tag,
         pos_left_up: {
-          x: ((room.x - _offsetX) / scale) * _unitSc,
-          y: ((room.y - _offsetY) / scale) * _unitSc,
+          x: pxToM(room.x - _offsetX, scale, unit),
+          y: pxToM(room.y - _offsetY, scale, unit),
         },
-        display_unit: display_unit,
-        length: (room.w / scale) * _unitSc,
-        width: (room.h / scale) * _unitSc,
-        high: room.userData.spaceHeight * _unitSc,
+        display_unit,
+        length: pxToM(room.w, scale, unit),
+        width: pxToM(room.h, scale, unit),
+        high: unitToM(room.userData.spaceHeight, unit),
         frame_color: numberToHex(room.setting.lineColor),
       })
     })

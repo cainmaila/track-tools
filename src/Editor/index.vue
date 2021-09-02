@@ -61,6 +61,12 @@ export default {
           create(setting)
         },
         getAreaMeta,
+        setAreaMeta: data => {
+          console.log('#setAreaMeta', data)
+          scopeAreaData.unit = 'm' //TODO: data.total_area.unit 回推
+          scopeAreaData.scale = data.scale
+          scopeAreaData.realWidth = data.total_area.width
+        },
       })
       postEvent('ready')
     })

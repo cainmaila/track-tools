@@ -13,7 +13,7 @@ function _postMessage(message) {
   )
 }
 
-function sdkListenerHandler({ setting, getAreaMeta }) {
+function sdkListenerHandler({ setting, getAreaMeta, setAreaMeta }) {
   window.addEventListener('message', ({ data }) => {
     const { target, message } = data || {}
     if (target === APP_NAME) {
@@ -23,6 +23,9 @@ function sdkListenerHandler({ setting, getAreaMeta }) {
           break
         case 'getAreaMeta':
           getAreaMeta && getAreaMeta()
+          break
+        case 'setAreaMeta':
+          setAreaMeta && setAreaMeta(message.data)
           break
         default:
           console.warn('未定的type', message)
