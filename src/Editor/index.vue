@@ -107,7 +107,7 @@ export default {
             data.total_area.high,
             scopeAreaData.unit,
           ) //標高
-          scopeAreaData.unit = keyToUnit(data.total_area.unit) //單位
+          scopeAreaData.unit = keyToUnit(data.total_area.display_unit) //單位
           scopeAreaData.realWidth = mToUnit(
             /* 真實寬 */
             data.total_area.length,
@@ -115,6 +115,7 @@ export default {
           )
           //付現總區域
           original.mode = 'scope'
+
           viewportRef.value.createArea({
             w: mToPx(data.total_area.length, data.scale, scopeAreaData.unit),
             h: mToPx(data.total_area.width, data.scale, scopeAreaData.unit),
