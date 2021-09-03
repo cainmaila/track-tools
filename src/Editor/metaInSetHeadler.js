@@ -1,10 +1,11 @@
 /* 載入區域 */
-import { keyToUnit, mToUnit, mToPx } from '@/tools/unitTools'
+import { keyToUnit, mToUnit, mToPx, toMsc } from '@/tools/unitTools'
 import { hexToNumber } from '@/tools/colorTools'
 function metaInSetHeadler(original, scopeAreaData, viewportRef) {
   const setAreaMeta = data => {
-    const { scale, total_area } = data
+    const { total_area } = data
     const unit = keyToUnit(total_area.display_unit) //單位
+    const scale = data.scale * toMsc(unit)
     const initial_point_offsetX = total_area.initial_point_offset.x
     const initial_point_offsetY = total_area.initial_point_offset.y
     scopeAreaData.tag = total_area.name //tag

@@ -1,7 +1,7 @@
 import { numberToHex } from '@/tools/colorTools'
 import verifyAreaHandler from './verifyAreaHandler'
 import { postEvent } from './sdkMessageHandler'
-import { unitToKey, unitToM, pxToM } from '@/tools/unitTools'
+import { unitToKey, unitToM, pxToM, toMsc } from '@/tools/unitTools'
 function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
   const verifyAreaData = verifyAreaHandler(viewportRef, scopeArea)
   const getAreaMeta = () => {
@@ -33,7 +33,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     const scale = scopeAreaData.scale
     //http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
     const outPut = {
-      scale,
+      scale: scale / toMsc(unit),
       total_area: {
         name: scopeAreaData.tag,
         initial_point_offset: {
