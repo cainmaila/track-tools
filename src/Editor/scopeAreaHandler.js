@@ -50,8 +50,9 @@ function scopeAreaHandler() {
   watch(
     () => scopeAreaData.color,
     color => {
-      scopeArea.value.lineColor =
-        typeof color == 'string' ? hexToNumber(color) : color
+      const _c = typeof color == 'string' ? hexToNumber(color) : color
+      scopeArea.value.lineColor = _c
+      scopeArea.value.fillColor = _c
     },
   )
   //比例變化

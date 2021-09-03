@@ -142,6 +142,13 @@ export default {
       })
     })
 
+    watch(
+      () => original.selAeeaType,
+      type => {
+        scopeArea.value.alpha = type === 1 ? 0.3 : 0
+      },
+    )
+
     watch(scopeArea, () => {
       if (scopeArea.value) {
         original.step = 2
