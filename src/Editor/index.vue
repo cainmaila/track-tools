@@ -102,7 +102,6 @@ export default {
         },
         getAreaMeta,
         setAreaMeta: data => {
-          console.log('#setAreaMeta', data)
           scopeAreaData.tag = data.total_area.name //tag
           scopeAreaData.color = data.total_area.frame_color //tag
           scopeAreaData.direction = data.total_area.mn_angle //方位角
