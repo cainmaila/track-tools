@@ -12,7 +12,7 @@ function scopeAreaHandler() {
     heightPx: 0,
     realWidth: 10,
     realHeight: 10,
-    scale: 0,
+    scale: 0, //比例尺，要注意的是這裡的值 是 px/顯示單位 ，(輸出輸入會換成 px/m)
     color: '#0011ff',
     elevation: 0, //標高
     direction: 0, //方位角 0-360
