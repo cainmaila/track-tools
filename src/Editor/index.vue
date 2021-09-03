@@ -37,6 +37,7 @@ import metaInSetHeadler from './metaInSetHeadler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
+import { numberToHex } from '@/tools/colorTools'
 export default {
   name: 'AppEditor',
   components: { FootUi, LayerUi, DetailUi },
@@ -101,6 +102,7 @@ export default {
       sdkListenerHandler({
         setting: setting => {
           //收到設定創建viewerPort
+          scopeAreaData.color = numberToHex(setting.aeraSetting.lineColor)
           create(setting)
         },
         getAreaMeta,
@@ -145,7 +147,7 @@ export default {
     watch(
       () => original.selAeeaType,
       type => {
-        scopeArea.value.alpha = type === 1 ? 0.3 : 0
+        scopeArea.value.alpha = type === 1 ? 0.1 : 0
       },
     )
 

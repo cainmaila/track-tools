@@ -53,13 +53,11 @@
         <At2Icon type="packup" width="16" height="16" />
       </div>
     </div>
-    <div>
-      Color<At2Input type="color" :value="colorToHex" @input="emitColor" />
-    </div>
+    <div>Color<At2Input type="color" :value="color" @input="emitColor" /></div>
   </div>
 </template>
 <script>
-import { hexToNumber, numberToHex } from '@/tools/colorTools'
+import { numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
 import At2Icon from '~at2@/components/At2Icon'
 export default {
@@ -94,7 +92,7 @@ export default {
   },
   methods: {
     emitColor(_hex) {
-      this.$emit('update:color', hexToNumber(_hex))
+      this.$emit('update:color', _hex)
     },
   },
 }

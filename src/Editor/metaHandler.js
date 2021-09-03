@@ -45,7 +45,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
         width: unitToM(scopeAreaData.realHeight, unit),
         high: unitToM(scopeAreaData.elevation, unit),
         mn_angle: scopeAreaData.direction,
-        frame_color: numberToHex(scopeAreaData.color),
+        frame_color: scopeAreaData.color,
       },
       area: [],
     }

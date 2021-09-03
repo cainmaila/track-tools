@@ -13,7 +13,7 @@ function scopeAreaHandler() {
     realWidth: 10,
     realHeight: 10,
     scale: 0,
-    color: 0xff00ff,
+    color: '#0011ff',
     elevation: 0, //標高
     direction: 0, //方位角 0-360
   })
