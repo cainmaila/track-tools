@@ -8,6 +8,9 @@
       <select :value="unit" @input="e => $emit('update:unit', e.target.value)">
         <option value="m">m</option>
         <option value="cm">cm</option>
+        <option value="mm">mm</option>
+        <option value="ft">ft</option>
+        <option value="in">in</option>
       </select>
     </div>
     <div>
@@ -19,7 +22,6 @@
         @input="val => $emit('update:realWidth', val)"
       />
     </div>
-    <!-- <div>寬:{{ (heightPx / scale).toFixed(2) }}</div> -->
     <div>
       寬<At2Input
         type="number"
