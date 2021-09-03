@@ -10,7 +10,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
       roomsMata, //房間
       isSpaceHeightNullArr, //樓板高度有缺
       containsErrorArr, //超出總範圍裡的
-      overlappingErrorArr, //交疊的房間
+      // overlappingErrorArr, //交疊的房間
       correct, //資料正確
     } = verifyAreaData()
 
@@ -19,7 +19,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     roomsMata.length === 0 && (error += ' 至少創建一個區域')
     isSpaceHeightNullArr.length > 0 && (error += ' 樓板高度必須設置')
     containsErrorArr.length > 0 && (error += ' 部分區域超出範圍')
-    overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊')
+    // overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊') //非必要條件
     if (!correct) {
       postEvent('areaData', { error })
       return

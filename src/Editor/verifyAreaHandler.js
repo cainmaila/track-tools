@@ -46,8 +46,8 @@ function verifyArea(viewportRef, scopeArea) {
       scopeAreaMata &&
       roomsMata.length > 0 &&
       isSpaceHeightNullArr.length === 0 &&
-      containsErrorArr.length === 0 &&
-      overlappingErrorArr.length === 0,
+      containsErrorArr.length === 0,
+    // && overlappingErrorArr.length === 0, /* 非必要條件 */
   }
 }
 
