@@ -29,7 +29,7 @@ function metaInSetHeadler(original, scopeAreaData, viewportRef) {
       {
         tag: total_area.name,
       },
-    )
+    ).alpha = 0
 
     //房間區域
     data.area.forEach(area => {

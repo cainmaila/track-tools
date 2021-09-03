@@ -138,8 +138,8 @@ export default {
           selectAreaRef.value = area
           original.selAeeaType = 2
         } else {
-          selectAreaRef.value = null
           original.selAeeaType = 0
+          selectAreaRef.value = null
         }
       })
     })

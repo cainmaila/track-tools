@@ -30,7 +30,6 @@ function scopeAreaHandler() {
   //圖綁定資料
   watch(scopeArea, () => {
     if (scopeArea.value) {
-      scopeArea.value.alpha = 0
       scopeArea.value.tag = scopeAreaData.tag
       resizeScopeArea()
       scopeArea.value.rectangle.on('edit-resize', resizeScopeArea)
