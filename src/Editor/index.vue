@@ -144,6 +144,7 @@ export default {
       })
     })
 
+    //選取全區時變色
     watch(
       () => original.selAeeaType,
       type => {
