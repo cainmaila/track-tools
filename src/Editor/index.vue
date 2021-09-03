@@ -89,6 +89,7 @@ export default {
           break
         case 'lock':
           data.editEnable = !data.editEnable
+          data.editEnable || (viewportRef.value.targetObj = null) //鎖定時
           break
         case 'select-area':
           original.mode = 'sel'
