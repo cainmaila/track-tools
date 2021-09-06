@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 import { ref } from 'vue'
+import { postEvent } from './sdkMessageHandler'
 function createViewPort() {
   const ViewRef = ref(null)
   const viewportRef = ref()
@@ -9,6 +10,9 @@ function createViewPort() {
     initOb = _drawingViewportInit(ViewRef.value, setting) //傳入設定，創建viewport
     viewportRef.value = initOb.viewport
   }
+  initOb.viewport.on('loaded', () => {
+    postEvent('loaded')
+  })
   return {
     ViewRef,
     viewportRef,

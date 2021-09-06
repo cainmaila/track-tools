@@ -6,6 +6,7 @@ import Area from './Area'
 
 /**
  * 區與繪製工具 emit
+ * loaded
  * select
  * add-area
  * remove-area
@@ -325,6 +326,7 @@ class DrawingViewport extends Viewport {
     this._bg.name = 'BG|0'
     this.addChildAt(this._bg, 0)
     this.zoomTofit()
+    this.emit('loaded')
   }
 
   moveHander() {

@@ -23,6 +23,7 @@ window.TrackEditor = window.TrackEditor || {
   setAreaMeta(meta) {
     postToEditor('setAreaMeta', meta)
   },
+  onLoaded() {},
   onAreaData() {},
   _addViewer() {
     const self = window.TrackEditor
@@ -48,6 +49,9 @@ window.TrackEditor = window.TrackEditor || {
         switch (data.message && data.message.type) {
           case 'ready':
             postToEditor('setting', self.setting)
+            break
+          case 'loaded':
+            self.onLoaded()
             break
           case 'areaData':
             meta = data.message.data
