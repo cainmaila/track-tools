@@ -23,6 +23,7 @@ window.TrackEditor = window.TrackEditor || {
   setAreaMeta(meta) {
     postToEditor('setAreaMeta', meta)
   },
+  onAreaData() {},
   _addViewer() {
     const self = window.TrackEditor
     self.view = document.createElement('iframe')
@@ -51,10 +52,9 @@ window.TrackEditor = window.TrackEditor || {
           case 'areaData':
             meta = data.message.data
             if (meta.error) {
-              alert(meta.error)
+              self.onAreaData(meta)
             } else {
-              sessionStorage.setItem('tree', JSON.stringify(meta))
-              alert('存檔成功')
+              self.onAreaData(meta)
             }
             break
         }
