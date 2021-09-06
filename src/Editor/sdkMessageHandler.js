@@ -4,7 +4,7 @@ function postEvent(type, data) {
 }
 
 function _postMessage(message) {
-  window.postMessage(
+  window.parent.postMessage(
     {
       app: APP_NAME,
       message,

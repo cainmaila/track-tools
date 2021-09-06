@@ -8,7 +8,7 @@ const devServer = process.env.BUILD
   ? {}
   : {
       host: 'localhost',
-      port: 8080,
+      port: 8090,
       https: true,
       cert: fs.readFileSync(
         path.resolve(process.env.SSL_CERT_FILE || 'localhost.pem'),
