@@ -9,10 +9,11 @@ function createViewPort() {
   const create = setting => {
     initOb = _drawingViewportInit(ViewRef.value, setting) //傳入設定，創建viewport
     viewportRef.value = initOb.viewport
+    initOb.viewport.on('loaded', () => {
+      postEvent('loaded')
+    })
   }
-  initOb.viewport.on('loaded', () => {
-    postEvent('loaded')
-  })
+
   return {
     ViewRef,
     viewportRef,
