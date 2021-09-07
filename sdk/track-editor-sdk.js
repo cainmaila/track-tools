@@ -54,7 +54,6 @@ window.TrackEditor = window.TrackEditor || {
             self.onLoaded()
             break
           case 'areaData':
-            meta = data.message.data
             if (meta.error) {
               self.onAreaData(meta)
             } else {

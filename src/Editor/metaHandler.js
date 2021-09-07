@@ -64,7 +64,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
         frame_color: numberToHex(room.setting.lineColor),
       })
     })
-    postEvent('areaData', outPut)
+    postEvent('areaData', JSON.parse(JSON.stringify(outPut)))
   }
 
   return {
