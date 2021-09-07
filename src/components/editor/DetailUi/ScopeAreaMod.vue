@@ -45,7 +45,7 @@
       方位角<At2Input
         type="number"
         max="360"
-        step="0.01"
+        step="1"
         :value="direction"
         @input="val => $emit('update:direction', val)"
       />
