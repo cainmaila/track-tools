@@ -28,6 +28,20 @@
       v-if="createAreaUiOff"
       @press="onPressCreatArea"
     />
+    <!-- <div
+      class="bn flex-center"
+      :class="{ disabled: step === 2, acc: mode === 'scope' }"
+      @click="step === 1 && emitCommon('scope')"
+    >
+      01
+    </div>
+    <div
+      class="bn flex-center"
+      :class="{ disabled: step === 1, acc: mode === 'area' }"
+      @click="step === 2 && emitCommon('area')"
+    >
+      02
+    </div> -->
   </div>
 </template>
 <script>
