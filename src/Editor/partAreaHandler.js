@@ -61,6 +61,18 @@ function partAreaHandler(scopeAreaData) {
     },
   )
   watch(() => scopeAreaData.scale, setBounds)
+  watch(
+    () => selectAreaData.realWidth,
+    w => {
+      selectAreaRef.value && selectAreaRef.value.setSizeWTag(w.toFixed(2))
+    },
+  )
+  watch(
+    () => selectAreaData.realHeight,
+    h => {
+      selectAreaRef.value && selectAreaRef.value.setSizeHTag(h.toFixed(2))
+    },
+  )
   return {
     selectAreaData,
     selectAreaRef,
