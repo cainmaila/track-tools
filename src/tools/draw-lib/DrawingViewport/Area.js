@@ -259,6 +259,23 @@ class Area {
     this._tag = _txt ? new TextTag(_txt, 5, style) : null
     this._tag && this._rectangle.addChild(this._tag)
   }
+  //顯示寬高tag
+  setSizeWTag(w) {
+    if (this._tagW) {
+      this._p2.removeChild(this._tagW)
+    }
+    this._tagW = new TextTag(w, 2, this._setting?.tagStyle)
+    this._tagW.y = 8
+    this._p2.addChild(this._tagW)
+  }
+  setSizeHTag(h) {
+    if (this._tagH) {
+      this._p6.removeChild(this._tagH)
+    }
+    this._tagH = new TextTag(h, 6, this._setting?.tagStyle)
+    this._tagH.x = -8
+    this._p6.addChild(this._tagH)
+  }
   draw(outPoint, inPoint) {
     inPoint && (this._inPoint = inPoint)
     outPoint && (this._outPoint = outPoint)

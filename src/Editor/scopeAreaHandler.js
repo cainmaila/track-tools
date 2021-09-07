@@ -57,11 +57,13 @@ function scopeAreaHandler() {
   //比例變化
   watch([() => scopeAreaData.widthPx, () => scopeAreaData.realWidth], () => {
     scopeAreaData.scale = scopeAreaData.widthPx / scopeAreaData.realWidth
+    scopeArea.value.setSizeWTag(scopeAreaData.realWidth)
   })
 
   //計算實際高度
   watch([() => scopeAreaData.scale, () => scopeAreaData.heightPx], () => {
     scopeAreaData.realHeight = scopeAreaData.heightPx / scopeAreaData.scale
+    scopeArea.value.setSizeHTag(scopeAreaData.realHeight.toFixed(2))
   })
 
   const changeAreaRealHeight = _h => {
