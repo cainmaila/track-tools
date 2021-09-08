@@ -51,9 +51,9 @@ module.exports = {
     //   template: 'public/index.html',
     //   title: 'Track Player' + ' v' + json.version,
     // },
-    // iospoc: {
-    //   entry: 'src/main-player-poc.js',
-    //   template: 'public/index.html',
-    // },
+    iospoc: {
+      entry: 'src/main-player-poc.js',
+      template: 'public/index.html',
+    },
   },
 }

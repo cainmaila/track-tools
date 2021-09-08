@@ -26,7 +26,7 @@ export default {
           {
             id: 'floor',
             // img: './img/MaFloorPlan.png',
-            img: './img/dopulin.jpg',
+            img: './img/aaa.jpg',
             offset: { x: 0, y: 0 },
             scale:
               new URLSearchParams(window.location.search)?.get('scale') * 1,
