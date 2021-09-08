@@ -1,0 +1,127 @@
+stages:
+  - build
+  - clear
+  - push
+  - deploy
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  LOCAL_SERVICE_NAME: anchor-tools/track-tools
+  REMOTE_SERVICE_NAME: anchor-tools/track-tools
+  REMOTE_SERVICE_HOST: harbor.anchortech.io
+  DEPLOY_BASH_PATH: /home/leedian/anchor-wow/web-deploy/web-action-viewer.sh
+
+# dev ======================================================================
+build-dev:
+  stage: build
+  only:
+    - develop
+  tags:
+    - build-server-taipei
+  script:
+    - tar -czvf tmp.tgz *
+    - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
+
+# clear-dev:
+# stage: clear
+# only:
+#   - develop
+# tags:
+#   - build-server-taipei
+# script:
+#   - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+# allow_failure: true
+
+# push-dev:
+#   stage: push
+#   only:
+#     - develop
+#   tags:
+#     - build-server-taipei
+#   script:
+#     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+#     - docker tag $LOCAL_SERVICE_NAME "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+#     - docker push "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+#   after_script:
+#     - docker rmi $LOCAL_SERVICE_NAME
+
+# deploy-dev:
+#   stage: deploy
+#   only:
+#     - develop
+#   tags:
+#     - atlv1-dev-apps
+#   environment:
+#     name: develop
+#   before_script:
+#     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+#   script:
+#     - bash ${DEPLOY_BASH_PATH}
+
+# All alpha ======================================================================
+build-alpha:
+  stage: build
+  only:
+    - master
+  tags:
+    - build-server-taipei
+  script:
+    - tar -czvf tmp.tgz *
+    - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
+
+clear-alpha:
+  stage: clear
+  only:
+    - master
+  tags:
+    - build-server-taipei
+  script:
+    - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:alpha"
+  allow_failure: true
+
+push-alpha:
+  stage: push
+  only:
+    - master
+  tags:
+    - build-server-taipei
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+    - docker tag $LOCAL_SERVICE_NAME "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:alpha"
+    - docker push "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:alpha"
+  after_script:
+    - docker rmi $LOCAL_SERVICE_NAME
+
+# Release ==================================================================
+build-release:
+  stage: build
+  only:
+    - tags
+  tags:
+    - build-server-taipei
+  script:
+    - tar -czvf tmp.tgz *
+    - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
+
+clear-release:
+  stage: clear
+  only:
+    - tags
+  tags:
+    - build-server-taipei
+  script:
+    - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:release-${CI_BUILD_TAG}"
+  allow_failure: true
+
+push-release:
+  stage: push
+  only:
+    - tags
+  tags:
+    - build-server-taipei
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+    - docker tag $LOCAL_SERVICE_NAME "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:release-${CI_BUILD_TAG}"
+    - docker push "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}:release-${CI_BUILD_TAG}"
+  after_script:
+    - docker rmi $LOCAL_SERVICE_NAME
