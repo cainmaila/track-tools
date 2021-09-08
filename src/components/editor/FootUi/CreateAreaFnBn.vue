@@ -3,7 +3,7 @@
     <div
       class="flex-center fn-bg"
       :class="{ disabled: step === 2, bn: step === 1 }"
-      @pointerup.stop="step === 1 && $emit('press', 'sope')"
+      @pointerup.stop="step === 1 && $emit('press', 'scope')"
     >
       <div class="txt">1.添加總識別區域</div>
       <At2Icon

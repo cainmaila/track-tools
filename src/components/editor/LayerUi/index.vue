@@ -1,16 +1,16 @@
 <template>
-  <!-- <div id="LayerUi"> -->
   <div id="LayerUi_MIN" class="flex-center bn" @pointerup.stop="onClose">
     <At2Icon type="list" width="24" height="24" color="#fff" />
   </div>
   <At2Panel
     id="LayerUi"
-    title="XXX"
+    title="註冊列表"
     mode="box"
     align="viewer-right"
     @on-close="onClose"
     v-if="panelShow"
   >
+    <div class="padde"></div>
     <AreaLayerUi
       v-for="area in areas"
       :key="area.name"
@@ -31,6 +31,7 @@ export default {
   name: 'LayerUi',
   components: { AreaLayerUi, At2Panel, At2Icon },
   props: ['areas'],
+  emits: ['common'],
   data() {
     return {
       panelShow: true,
@@ -61,6 +62,9 @@ export default {
   height: 40px;
   border-radius: 5px;
   background: #000;
+}
+.padde {
+  height: 20px;
 }
 @media (min-width: 600px) {
   #LayerUi {
