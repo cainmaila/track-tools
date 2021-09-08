@@ -11,7 +11,7 @@ variables:
   REMOTE_SERVICE_HOST: harbor.anchortech.io
   # DEPLOY_BASH_PATH: /home/leedian/anchor-wow/web-deploy/web-action-viewer.sh
   # DEPLOY_BASH_PATH: ~/anchor-tools/deploy/track-tool.sh
-  DEPLOY_BASH_PATH: /home/leedian/anchor-tools/deploy/track-tool.sh
+  DEPLOY_BASH_PATH: /home/anchor/anchor-tools/deploy/track-tool.sh
 
 # dev =======================================================================
 build-dev:
