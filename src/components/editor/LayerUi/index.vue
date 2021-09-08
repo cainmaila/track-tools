@@ -1,27 +1,30 @@
 <template>
-  <div id="LayerUi_MIN" class="flex-center bn" @pointerup.stop="onClose">
-    <At2Icon type="list" width="24" height="24" color="#fff" />
+  <div>
+    <div id="LayerUi_MIN" class="flex-center bn" @pointerup.stop="onClose">
+      <At2Icon type="list" width="24" height="24" color="#fff" />
+    </div>
+    <At2Panel
+      id="LayerUi"
+      title="註冊列表"
+      mode="box"
+      align="viewer-right"
+      @on-close="onClose"
+      v-if="panelShow"
+    >
+      <div class="padde"></div>
+      <AreaLayerUi
+        v-for="area in areas"
+        :key="area.name"
+        :area="area"
+        :isEdit="area.isEdit"
+        :canSelect="area.editEnable"
+        @del="onDel"
+        @lock="onLock"
+        @select="onSelect"
+      />
+      <div class="padde"></div>
+    </At2Panel>
   </div>
-  <At2Panel
-    id="LayerUi"
-    title="註冊列表"
-    mode="box"
-    align="viewer-right"
-    @on-close="onClose"
-    v-if="panelShow"
-  >
-    <div class="padde"></div>
-    <AreaLayerUi
-      v-for="area in areas"
-      :key="area.name"
-      :area="area"
-      :isEdit="area.isEdit"
-      :canSelect="area.editEnable"
-      @del="onDel"
-      @lock="onLock"
-      @select="onSelect"
-    />
-  </At2Panel>
 </template>
 <script>
 import At2Panel from '~at2@/components/At2Panel'
