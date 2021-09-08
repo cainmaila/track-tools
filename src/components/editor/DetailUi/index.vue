@@ -45,7 +45,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  background: #fff;
+  background: #f5f5f5;
   transform: translate3d(0, 0, 0);
   box-shadow: 0px 9px 24px 0px rgba(0, 0, 0, 0.1);
   &.close {
