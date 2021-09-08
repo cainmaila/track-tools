@@ -46,18 +46,18 @@ push-dev:
   after_script:
     - docker rmi $LOCAL_SERVICE_NAME
 
-# deploy-dev:
-#   stage: deploy
-#   only:
-#     - develop
-#   tags:
-#     - atlv1-dev-apps
-#   environment:
-#     name: develop
-#   before_script:
-#     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
-#   script:
-#     - bash ${DEPLOY_BASH_PATH}
+deploy-dev:
+  stage: deploy
+  only:
+    - develop
+  tags:
+    - atlv1-dev-apps
+  environment:
+    name: develop
+  before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+  script:
+    - bash ${DEPLOY_BASH_PATH}
 
 # All alpha ======================================================================
 build-alpha:
