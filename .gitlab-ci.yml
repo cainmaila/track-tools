@@ -6,8 +6,8 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  LOCAL_SERVICE_NAME: anchor-tools/track-tools
-  REMOTE_SERVICE_NAME: anchor-tools/track-tools
+  LOCAL_SERVICE_NAME: anchortools/track-tool
+  REMOTE_SERVICE_NAME: anchortools/track-tool
   REMOTE_SERVICE_HOST: harbor.anchortech.io
   DEPLOY_BASH_PATH: /home/leedian/anchor-wow/web-deploy/web-action-viewer.sh
 
@@ -23,27 +23,27 @@ build-dev:
     - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
 
 # clear-dev:
-# stage: clear
-# only:
-#   - develop
-# tags:
-#   - build-server-taipei
-# script:
-#   - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
-# allow_failure: true
+stage: clear
+only:
+  - develop
+tags:
+  - build-server-taipei
+script:
+  - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+allow_failure: true
 
 # push-dev:
-#   stage: push
-#   only:
-#     - develop
-#   tags:
-#     - build-server-taipei
-#   script:
-#     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
-#     - docker tag $LOCAL_SERVICE_NAME "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
-#     - docker push "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
-#   after_script:
-#     - docker rmi $LOCAL_SERVICE_NAME
+  stage: push
+  only:
+    - develop
+  tags:
+    - build-server-taipei
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_HUB_HOST
+    - docker tag $LOCAL_SERVICE_NAME "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+    - docker push "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+  after_script:
+    - docker rmi $LOCAL_SERVICE_NAME
 
 # deploy-dev:
 #   stage: deploy
