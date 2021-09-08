@@ -56,8 +56,8 @@ export default {
 <style lang="postcss" scoped>
 #LayerUi_MIN {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: calc(80px + 10px);
+  right: calc(20px + 10px);
   width: 40px;
   height: 40px;
   border-radius: 5px;
@@ -68,8 +68,8 @@ export default {
 }
 @media (min-width: 600px) {
   #LayerUi {
-    top: 10px;
-    right: 10px;
+    top: calc(80px + 10px);
+    right: calc(20px + 10px);
   }
 }
 </style>

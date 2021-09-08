@@ -2,7 +2,7 @@
   <div id="EditorTool" class="hight_100">
     <div id="Stage" ref="ViewRef"></div>
     <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
-    <LayerUi :areas="areasRef" @common="onCommon" />
+    <LayerUi class="right-top" :areas="areasRef" @common="onCommon" />
     <DetailUi
       :type="original.selAeeaType"
       v-model:tag="scopeAreaData.tag"
@@ -176,7 +176,12 @@ export default {
 
 <style>
 #Stage {
-  width: 100%;
-  height: calc(100% - 55px);
+  position: absolute;
+  top: 80px;
+  bottom: 75px;
+  left: 20px;
+  right: 20px;
+  border: 1px solid rgb(151, 151, 151);
+  box-sizing: content-box;
 }
 </style>
