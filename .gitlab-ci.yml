@@ -22,7 +22,7 @@ build-dev:
     - tar -czvf tmp.tgz *
     - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
 
-# clear-dev:
+clear-dev:
 stage: clear
 only:
   - develop
@@ -32,7 +32,7 @@ script:
   - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
 allow_failure: true
 
-# push-dev:
+push-dev:
   stage: push
   only:
     - develop
