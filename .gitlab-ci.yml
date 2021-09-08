@@ -11,7 +11,7 @@ variables:
   REMOTE_SERVICE_HOST: harbor.anchortech.io
   DEPLOY_BASH_PATH: /home/leedian/anchor-wow/web-deploy/web-action-viewer.sh
 
-# dev ======================================================================
+# dev =======================================================================
 build-dev:
   stage: build
   only:
