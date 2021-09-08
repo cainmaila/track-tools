@@ -49,8 +49,10 @@
         <div>比例尺:</div>
         <div class="inp">{{ scale.toFixed(2) }}</div>
       </div> -->
-      <div>
-        樓層高<At2Input
+      <div class="flex-between strip">
+        <div>樓層高度：</div>
+        <At2Input
+          class="inp"
           type="number"
           max="99999999999999"
           step="0.01"
@@ -60,29 +62,38 @@
       </div>
     </Box>
 
-    <div class="flex">
-      方位角<At2Input
+    <Box>
+      <template v-slot:til>
+        3. 平面圖上方方位 <span class="red">*</span></template
+      >
+      <div>
+        方位度數：
+      </div>
+      <At2Input
+        class="inp"
         type="number"
         max="360"
         step="1"
         :value="direction"
         @input="val => $emit('update:direction', val)"
       />
-      <div :style="rotateStyle">
-        <At2Icon type="packup" width="16" height="16" />
+    </Box>
+    <Box>
+      <template v-slot:til> 4. 其他</template>
+      <div>
+        區域顏色：
       </div>
-    </div>
-    <div>Color<At2Input type="color" :value="color" @input="emitColor" /></div>
+      <At2Input class="inp" type="color" :value="color" @input="emitColor" />
+    </Box>
   </div>
 </template>
 <script>
 import { numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
-import At2Icon from '~at2@/components/At2Icon'
 import Box from './Box'
 export default {
   name: 'ScopeAreaMod',
-  components: { At2Input, At2Icon, Box },
+  components: { At2Input, Box },
   props: [
     'tag',
     'realWidth',

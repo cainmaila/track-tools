@@ -42,6 +42,7 @@ export default {
   box-sizing: border-box;
   width: 300px;
   height: 100%;
+  overflow: hidden auto;
   position: absolute;
   left: 0;
   top: 0;
