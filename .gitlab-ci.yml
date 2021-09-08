@@ -23,14 +23,14 @@ build-dev:
     - docker build -t $LOCAL_SERVICE_NAME -f Dockerfile .
 
 clear-dev:
-stage: clear
-only:
-  - develop
-tags:
-  - build-server-taipei
-script:
-  - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
-allow_failure: true
+  stage: clear
+  only:
+    - develop
+  tags:
+    - build-server-taipei
+  script:
+    - docker rmi "${DOCKER_HUB_HOST}/${REMOTE_SERVICE_NAME}"
+  allow_failure: true
 
 push-dev:
   stage: push
