@@ -66,24 +66,28 @@
       <template v-slot:til>
         3. 平面圖上方方位 <span class="red">*</span></template
       >
-      <div>
-        方位度數：
+      <div class="flex-between strip">
+        <div>
+          方位度數：
+        </div>
+        <At2Input
+          class="inp"
+          type="number"
+          max="360"
+          step="1"
+          :value="direction"
+          @input="val => $emit('update:direction', val)"
+        />
       </div>
-      <At2Input
-        class="inp"
-        type="number"
-        max="360"
-        step="1"
-        :value="direction"
-        @input="val => $emit('update:direction', val)"
-      />
     </Box>
     <Box>
       <template v-slot:til> 4. 其他</template>
-      <div>
-        區域顏色：
+      <div class="flex-between strip">
+        <div>
+          區域顏色：
+        </div>
+        <At2Input class="inp" type="color" :value="color" @input="emitColor" />
       </div>
-      <At2Input class="inp" type="color" :value="color" @input="emitColor" />
     </Box>
   </div>
 </template>
