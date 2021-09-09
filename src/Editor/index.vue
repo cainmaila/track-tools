@@ -175,6 +175,11 @@ export default {
 </script>
 
 <style>
+#EditorTool {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 #Stage {
   position: absolute;
   top: 80px;

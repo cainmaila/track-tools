@@ -1,19 +1,18 @@
 <template>
   <div id="DetailUi" v-if="type > 0" :class="{ close: !tab }">
-    <div class="rest">
+    <div class="roll">
       <ScopeAreaMod v-bind="$attrs" v-if="type === 1" :scale="scale" />
       <PartAreaMod v-else-if="type === 2" v-bind="$attrs" />
-      <div class="x flex-center bn">
-        <At2Icon
-          class="tab-icon"
-          :class="{ on: tab }"
-          type="downT"
-          width="14"
-          height="14"
-          color="#000"
-          @pointerup.stop="onTab"
-        />
-      </div>
+    </div>
+    <div class="x flex-center bn" @pointerup.stop="onTab">
+      <At2Icon
+        class="tab-icon"
+        :class="{ on: tab }"
+        type="downT"
+        width="14"
+        height="14"
+        color="#000"
+      />
     </div>
   </div>
 </template>
@@ -42,7 +41,6 @@ export default {
   box-sizing: border-box;
   width: 300px;
   height: 100%;
-  overflow: hidden auto;
   position: absolute;
   left: 0;
   top: 0;
@@ -51,6 +49,10 @@ export default {
   box-shadow: 0px 9px 24px 0px rgba(0, 0, 0, 0.1);
   &.close {
     transform: translate3d(-300px, 0, 0);
+  }
+  & .roll {
+    height: 100%;
+    overflow: hidden auto;
   }
 }
 .x {
