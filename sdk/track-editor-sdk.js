@@ -38,7 +38,10 @@ window.TrackEditor = window.TrackEditor || {
     self.view.setAttribute('frameborder', 0)
     self.content.appendChild(self.view)
     self._addEventListener()
-    self.view.src = `${self.uri}?lang=${self.lang}`
+    self.view.src = ''
+    setTimeout(() => {
+      self.view.src = `${self.uri}?lang=${self.lang}`
+    }, 200)
   },
   _addEventListener() {
     const self = window.TrackEditor
