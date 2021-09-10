@@ -21,6 +21,7 @@
       :selectAreaH="selectAreaData.realHeight"
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
+      :info="info"
     />
   </div>
 </template>
@@ -42,6 +43,12 @@ export default {
   name: 'AppEditor',
   components: { FootUi, LayerUi, DetailUi },
   setup() {
+    const info = reactive({
+      name: 'Building A',
+      file: 'Building B - 6F.png',
+      size: '2.11 GB',
+      onwer: 'Carol',
+    })
     const original = reactive({
       mode: 'sel',
       step: 1,
@@ -161,6 +168,7 @@ export default {
     })
 
     return {
+      info,
       ViewRef,
       onCommon,
       original,

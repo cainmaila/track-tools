@@ -1,8 +1,9 @@
 <template>
-  <div id="DetailUi" v-if="type > 0" :class="{ close: !tab }">
+  <div id="DetailUi" :class="{ close: !tab }">
     <div class="roll">
       <ScopeAreaMod v-bind="$attrs" v-if="type === 1" :scale="scale" />
       <PartAreaMod v-else-if="type === 2" v-bind="$attrs" />
+      <FileInfoMod v-else v-bind="$attrs" />
     </div>
     <div class="x flex-center bn" @pointerup.stop="onTab">
       <At2Icon
@@ -20,9 +21,10 @@
 import At2Icon from '~at2@/components/At2Icon'
 import ScopeAreaMod from './ScopeAreaMod'
 import PartAreaMod from './PartAreaMod'
+import FileInfoMod from './FileInfoMod'
 export default {
   name: 'DetailUi',
-  components: { At2Icon, ScopeAreaMod, PartAreaMod },
+  components: { At2Icon, ScopeAreaMod, PartAreaMod, FileInfoMod },
   props: ['type', 'scale'],
   data() {
     return {
