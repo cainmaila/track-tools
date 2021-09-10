@@ -179,9 +179,9 @@ class DrawingViewport extends Viewport {
     this.scaled += sc
   }
   /* 最適大小 */
-  zoomTofit() {
+  zoomTofit(paddingW = 0, paddingH = 0) {
     this._bg
-      ? this.fit(false, this._bg.width, this._bg.height)
+      ? this.fit(false, this._bg.width + paddingW, this._bg.height + paddingH)
       : this.fit(false, this.width, this.height)
     this.x = (this._app.view.clientWidth - this.width) >> 1
     this.y = (this._app.view.clientHeight - this.height) >> 1
@@ -325,10 +325,8 @@ class DrawingViewport extends Viewport {
     this._bgUrl = _img
     this._bg.name = 'BG|0'
     this.addChildAt(this._bg, 0)
-    setTimeout(() => {
-      this.zoomTofit()
-      this.emit('loaded')
-    })
+    this.zoomTofit()
+    this.emit('loaded')
   }
 
   moveHander() {
