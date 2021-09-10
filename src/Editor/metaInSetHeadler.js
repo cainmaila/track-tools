@@ -3,6 +3,9 @@ import { keyToUnit, mToUnit, mToPx, toMsc } from '@/tools/unitTools'
 import { hexToNumber } from '@/tools/colorTools'
 function metaInSetHeadler(original, scopeAreaData, viewportRef) {
   const setAreaMeta = data => {
+    if (!data) {
+      return
+    }
     const { total_area } = data
     const unit = keyToUnit(total_area.display_unit) //單位
     const scale = data.scale * toMsc(unit)
