@@ -1,0 +1,12 @@
+{
+    "Editor": {
+        "FoottUi": {
+            "create": "create",
+            "move": "move",
+            "optimal": "optimal",
+            "select": "select",
+            "zoomIn": "zoomIn",
+            "zoomOut": "zoomOut"
+        }
+    }
+}

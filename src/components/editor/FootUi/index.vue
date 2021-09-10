@@ -1,23 +1,35 @@
 <template>
   <div id="FootUi">
     <FnBtn
-      title="選取"
+      :title="$t('Editor.FoottUi.select')"
       icon="edit"
       @press="emitCommon('sel')"
       :state="mode === 'sel'"
     />
-    <FnBtn title="最適" icon="icon_reduction" @press="emitCommon('fit')" />
-    <FnBtn title="放大" icon="zoomOut2" @press="emitCommon('zoom', 0.1)" />
-    <FnBtn title="縮小" icon="zoomIn" @press="emitCommon('zoom', -0.1)" />
     <FnBtn
-      title="移動"
+      :title="$t('Editor.FoottUi.optimal')"
+      icon="icon_reduction"
+      @press="emitCommon('fit')"
+    />
+    <FnBtn
+      :title="$t('Editor.FoottUi.zoomIn')"
+      icon="zoomOut2"
+      @press="emitCommon('zoom', 0.1)"
+    />
+    <FnBtn
+      :title="$t('Editor.FoottUi.zoomOut')"
+      icon="zoomIn"
+      @press="emitCommon('zoom', -0.1)"
+    />
+    <FnBtn
+      :title="$t('Editor.FoottUi.move')"
       icon="move3D"
       @press="emitCommon('mov')"
       :state="mode === 'mov'"
     />
     <div class="line"></div>
     <FnBtn
-      title="創建"
+      :title="$t('Editor.FoottUi.create')"
       icon="screenshot"
       @press="createAreaUiOff = !createAreaUiOff"
       :state="createAreaUiOff"

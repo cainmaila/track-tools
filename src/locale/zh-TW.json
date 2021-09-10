@@ -1,0 +1,12 @@
+{
+    "Editor": {
+        "FoottUi": {
+            "create": "創建",
+            "move": "移動",
+            "optimal": "最適",
+            "select": "選取",
+            "zoomIn": "放大",
+            "zoomOut": "縮小"
+        }
+    }
+}
