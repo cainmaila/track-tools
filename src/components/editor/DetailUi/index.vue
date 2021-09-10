@@ -49,6 +49,8 @@ export default {
   background: #f5f5f5;
   transform: translate3d(0, 0, 0);
   box-shadow: 0px 9px 24px 0px rgba(0, 0, 0, 0.1);
+  transition-property: transform;
+  transition-duration: 0.5s;
   &.close {
     transform: translate3d(-300px, 0, 0);
   }
