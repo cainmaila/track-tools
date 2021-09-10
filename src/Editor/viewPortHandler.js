@@ -1,10 +1,16 @@
 import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { postEvent } from './sdkMessageHandler'
 function createViewPort() {
   const ViewRef = ref(null)
   const viewportRef = ref()
+  const info = reactive({
+    name: '',
+    file: '',
+    size: '',
+    onwer: '',
+  })
   let initOb
   const create = setting => {
     initOb = _drawingViewportInit(ViewRef.value, setting) //傳入設定，創建viewport
@@ -12,12 +18,17 @@ function createViewPort() {
     initOb.viewport.on('loaded', () => {
       postEvent('loaded')
     })
+    info.name = setting.info.name
+    info.file = setting.info.file
+    info.size = setting.info.size
+    info.onwer = setting.info.onwer
   }
 
   return {
     ViewRef,
     viewportRef,
     create,
+    info,
   }
 }
 
