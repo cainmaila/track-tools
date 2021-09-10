@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js'
 import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 import { ref, reactive } from 'vue'
 import { postEvent } from './sdkMessageHandler'
+let app = null
 function createViewPort() {
   const ViewRef = ref(null)
   const viewportRef = ref()
@@ -34,7 +35,8 @@ function createViewPort() {
 
 /* 初始化 pixi 並創建 DrawingViewport 物件 */
 function _drawingViewportInit(view, setting) {
-  const app = new PIXI.Application({
+  app && app.destroy({ removeView: true }) //銷毀舊的
+  app = new PIXI.Application({
     antialias: true,
     autoDensity: true,
     resolution: window.devicePixelRatio || 1,
