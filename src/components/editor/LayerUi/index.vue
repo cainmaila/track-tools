@@ -5,7 +5,7 @@
     </div>
     <At2Panel
       id="LayerUi"
-      title="註冊列表"
+      :title="$t('Editor.LayerUi.title')"
       mode="box"
       align="viewer-right"
       @on-close="onClose"

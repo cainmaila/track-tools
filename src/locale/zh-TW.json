@@ -11,6 +11,9 @@
             "select": "選取",
             "zoomIn": "放大",
             "zoomOut": "縮小"
+        },
+        "LayerUi": {
+            "title": "註冊列表"
         }
     }
 }
