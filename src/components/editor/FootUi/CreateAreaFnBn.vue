@@ -5,7 +5,7 @@
       :class="{ disabled: step === 2, bn: step === 1 }"
       @pointerup.stop="step === 1 && $emit('press', 'scope')"
     >
-      <div class="txt">1.添加總識別區域</div>
+      <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.scope') }}</div>
       <At2Icon
         :type="step === 1 ? 'addO' : 'complete'"
         width="26"
@@ -18,7 +18,7 @@
       :class="{ disabled: step === 1, bn: step === 2 }"
       @pointerup.stop="step === 2 && $emit('press', 'area')"
     >
-      <div class="txt">2.添加識別區域</div>
+      <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.area') }}</div>
       <At2Icon
         :type="step <= 2 ? 'addO' : 'complete'"
         width="26"

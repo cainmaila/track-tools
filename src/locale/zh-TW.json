@@ -1,6 +1,10 @@
 {
     "Editor": {
         "FoottUi": {
+            "CreateAreaFnBn": {
+                "area": "2.添加識別區域",
+                "scope": "1.添加總識別區域"
+            },
             "create": "創建",
             "move": "移動",
             "optimal": "最適",
