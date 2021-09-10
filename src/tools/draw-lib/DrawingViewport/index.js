@@ -325,8 +325,10 @@ class DrawingViewport extends Viewport {
     this._bgUrl = _img
     this._bg.name = 'BG|0'
     this.addChildAt(this._bg, 0)
-    this.zoomTofit()
-    this.emit('loaded')
+    setTimeout(() => {
+      this.zoomTofit()
+      this.emit('loaded')
+    })
   }
 
   moveHander() {
