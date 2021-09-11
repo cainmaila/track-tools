@@ -18,5 +18,21 @@ export default function(store, viewPortRef) {
     viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
     store.mode === 'lock' && viewPortRef.value.lockCenter()
   }
-  return { pushPoint }
+  const generateHistory = () => {
+    return _historyFormat(viewPortRef.value.generateHistory())
+  }
+  return { pushPoint, generateHistory }
+}
+
+//轉換輸出格式 http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
+function _historyFormat(_history = []) {
+  return {
+    locations: _history.map(_po => {
+      return {
+        pos: `${_po.x},${_po.y}`,
+        fileId: _po.z,
+        date: _po.date,
+      }
+    }),
+  }
 }

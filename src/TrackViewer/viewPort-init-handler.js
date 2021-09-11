@@ -11,27 +11,10 @@ function viewPortInitHandler(store, appRef) {
     })
     viewPortRef.value = viewport
   }
-  const generateHistory = () => {
-    return _historyFormat(viewPortRef.value.generateHistory())
-  }
 
   return {
     viewPortRef,
     viewerSetting, //設定viewer
-    generateHistory, //要求返回紀錄
-  }
-}
-
-//轉換輸出格式 http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
-function _historyFormat(_history = []) {
-  return {
-    locations: _history.map(_po => {
-      return {
-        pos: `${_po.x},${_po.y}`,
-        fileId: _po.z,
-        date: _po.date,
-      }
-    }),
   }
 }
 
