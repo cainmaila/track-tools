@@ -4,18 +4,26 @@
   </div>
 </template>
 <script>
+import { reactive } from 'vue'
 import pixiInitHandler from './pixi-init-handler.js'
 import viewPortInitHandler from './viewPort-init-handler.js'
+import { iosInterfaceHandler } from './ios-interface-handler.js'
 export default {
   name: 'TrackViewer',
   setup() {
-    const { viewRef, appRef, onViewResize } = pixiInitHandler() //創建PIXI實體
-    const { viewPortRef } = viewPortInitHandler(appRef) //創建viewport 實體
+    /* Viewer狀態機 */
+    const store = reactive({
+      state: 'init', //init -> ready -> loaded
+    })
+    const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
+    const { viewPortRef } = viewPortInitHandler(store, appRef) //創建viewport 實體
+    iosInterfaceHandler(store) /* viewer 狀態通知 IOS */
     window.onresize = () => {
       onViewResize()
       viewPortRef.value.resize()
     }
     return {
+      store,
       viewRef,
       viewPortRef,
     }

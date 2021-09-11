@@ -1,6 +1,6 @@
 import { watch, ref } from 'vue'
 import DrawPathViewport from '@/tools/draw-lib/DrawPathViewport'
-function viewPortInitHandler(appRef) {
+function viewPortInitHandler(store, appRef) {
   const viewPortRef = ref()
   watch(appRef, app => {
     const viewport = new DrawPathViewport(app, {
@@ -16,6 +16,7 @@ function viewPortInitHandler(appRef) {
     viewport.on('resources-ready', () => {
       //樓板圖面載入
       viewport.floor = '1f'
+      store.state = 'loaded' /* 狀態機 */
     })
     viewPortRef.value = viewport
   })

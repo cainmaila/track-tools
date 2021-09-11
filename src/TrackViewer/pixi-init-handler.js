@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
 import * as PIXI from 'pixi.js'
-function pixiInitHandler() {
+function pixiInitHandler(store) {
   const viewRef = ref(null) //取得 id Viewer el
   const appRef = ref(null) //pixi app 實體
   const onViewResize = () => {
@@ -21,6 +21,7 @@ function pixiInitHandler() {
     appRef.value = app
     onViewResize()
     view.appendChild(app.view)
+    store.state = 'ready' /* 狀態機 */
   })
   return {
     viewRef,

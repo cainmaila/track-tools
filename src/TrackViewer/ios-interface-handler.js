@@ -37,6 +37,23 @@ function settingIosMessageHandler(settingHandle) {
   _ios_message_handler = { ...settingHandle }
 }
 
+import { watch } from 'vue'
+function iosInterfaceHandler(store) {
+  watch(
+    () => store.state,
+    state => {
+      switch (state) {
+        case 'ready':
+          postIOSEvent(TO_IOS_EVENT.readyToSetting)
+          break
+        case 'loaded':
+          postIOSEvent(TO_IOS_EVENT.resourcesLoaded)
+          break
+      }
+    },
+  )
+}
+
 //============================================================================
 
 function _postIOS(data, handler) {
@@ -77,6 +94,7 @@ window.generateRecord = () => {
 }
 
 export {
+  iosInterfaceHandler /* viewer 狀態通知 */,
   postIOSEvent /* 送出通訊規格 */,
   TO_IOS_EVENT /* 給 IOS 的事件定義 */,
   settingIosMessageHandler /* 設定 ios 傳入的處理程序 */,
