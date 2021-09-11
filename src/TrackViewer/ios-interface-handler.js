@@ -6,7 +6,7 @@ const HANDLER = 'TrackViewer'
 const TO_IOS_EVENT = {
   readyToSetting: 'readyToSetting', //viewer onReady
   resourcesLoaded: 'resourcesLoaded', //告知素材載入完成
-  resRecord: 'resRecord', //取回紀錄
+  resHistory: 'resHistory', //取回紀錄
   error: 'error', //錯誤
 }
 
@@ -38,7 +38,7 @@ let _ios_message_handler = {
   // }
   pushPoint: () => {}, //送入點
   setMode: () => {}, //設定顯示模式
-  generateRecord: () => {}, //要求產生紀錄
+  generateHistory: () => {}, //要求產生紀錄
 }
 
 /* 設定 ios 傳入的處理程序 */
@@ -103,8 +103,8 @@ window.setMode = mode => {
 }
 
 /* 要求取回紀錄 */
-window.generateRecord = () => {
-  _ios_message_handler.generateRecord()
+window.generateHistory = () => {
+  _ios_message_handler.generateHistory()
 }
 
 export {
