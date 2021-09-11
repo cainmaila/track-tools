@@ -26,14 +26,16 @@ function viewPortInitHandler(store, appRef) {
 }
 
 //轉換輸出格式 http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
-function _historyFormat(_history) {
-  return _history.map(_po => {
-    return {
-      pos: `${_po.x},${_po.y}`,
-      fileId: _po.z,
-      date: _po.date,
-    }
-  })
+function _historyFormat(_history = []) {
+  return {
+    locations: _history.map(_po => {
+      return {
+        pos: `${_po.x},${_po.y}`,
+        fileId: _po.z,
+        date: _po.date,
+      }
+    }),
+  }
 }
 
 export default viewPortInitHandler
