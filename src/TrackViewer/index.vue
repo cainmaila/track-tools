@@ -18,18 +18,23 @@ export default {
     /* Viewer狀態機 */
     const store = reactive({
       state: 'init', //init -> ready -> loaded
+    })
+    const viewerStore = reactive({
       mode: 'mono', //mone lock
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
-    const { pushPoint, generateHistory } = viewerHandler(store, viewPortRef) //mode變換處理 viewer命令處理
+    const { pushPoint, generateHistory } = viewerHandler(
+      viewerStore,
+      viewPortRef,
+    ) //mode變換處理 viewer命令處理
     //設定ios事件處理方法
     settingIosMessageHandler({
       viewerSetting,
       pushPoint,
       generateHistory,
       setMode: mode => {
-        store.mode = mode
+        viewerStore.mode = mode
       },
     })
     iosInterfaceHandler(store) /* viewer 狀態通知 IOS */

@@ -1,8 +1,8 @@
 /* 顯示 mode 變換 */
 import { watch } from 'vue'
-export default function(store, viewPortRef) {
+export default function(viewerStore, viewPortRef) {
   watch(
-    () => store.mode,
+    () => viewerStore.mode,
     mode => {
       switch (mode) {
         case 'mone':
@@ -16,7 +16,7 @@ export default function(store, viewPortRef) {
   )
   const pushPoint = point => {
     viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
-    store.mode === 'lock' && viewPortRef.value.lockCenter()
+    viewerStore.mode === 'lock' && viewPortRef.value.lockCenter()
   }
   const generateHistory = () => {
     return _historyFormat(viewPortRef.value.generateHistory())
