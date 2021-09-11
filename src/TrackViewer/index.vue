@@ -17,6 +17,7 @@ export default {
     /* Viewer狀態機 */
     const store = reactive({
       state: 'init', //init -> ready -> loaded
+      mode: 'mono', //mone lock
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const {
@@ -30,6 +31,9 @@ export default {
       viewerSetting,
       pushPoint,
       generateHistory,
+      setMode: mode => {
+        store.mode = mode
+      },
     })
     iosInterfaceHandler(store) /* viewer 狀態通知 IOS */
     window.onresize = () => {
