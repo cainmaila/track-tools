@@ -68,11 +68,11 @@ function iosInterfaceHandler(store) {
 
 function _postIOS(data, handler) {
   try {
-    // window.webkit.messageHandlers[handler].postMessage(
-    //   JSON.stringify(data),
-    //   '*',
-    // )
-    console.log('#_postIOS', data, handler)
+    window.webkit.messageHandlers[handler].postMessage(
+      JSON.stringify(data),
+      '*',
+    )
+    // console.log('#_postIOS', data, handler)
   } catch (error) {
     window.alert(error.message || error)
   }
