@@ -58,6 +58,23 @@
               ],
             })
             break
+          case 'loaded':
+            postToPlayer('setHistory', [
+              {
+                x: 1,
+                y: 1,
+                z: '1f',
+                date: 0,
+              },
+              {
+                x: 1,
+                y: 20,
+                z: '1f',
+                date: 10,
+              },
+            ])
+
+            break
         }
       }
 

@@ -8,6 +8,7 @@ import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import playerSdkMessageHandler from './playerSdk-message-handler'
+import playerHistoryHandler from './player-history-handler'
 export default {
   name: 'TrackPlayer',
   setup() {
@@ -20,8 +21,9 @@ export default {
     const { postEvent, sdkCommandHandlerSetting } = playerSdkMessageHandler(
       store,
     ) //sdk Message
-
+    const { setHistory } = playerHistoryHandler(viewPortRef)
     sdkCommandHandlerSetting.viewerSetting = viewerSetting //初始化
+    sdkCommandHandlerSetting.setHistory = setHistory //設定播放紀錄
 
     window.onresize = () => {
       onViewResize()
