@@ -6,6 +6,7 @@
 <script>
 import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
+import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 export default {
   name: 'TrackPlayer',
   setup() {
@@ -15,12 +16,15 @@ export default {
       mode: 'mono', //TODO: ?? mone lock
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
+    const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
     window.onresize = () => {
       onViewResize()
+      viewPortRef.value.resize()
     }
     return {
       viewRef,
       appRef,
+      viewerSetting,
     }
   },
 }

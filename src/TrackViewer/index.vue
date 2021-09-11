@@ -6,7 +6,7 @@
 <script>
 import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
-import viewPortInitHandler from './viewPort-init-handler.js'
+import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import viewerHandler from './viewer-handler.js'
 import {
   iosInterfaceHandler,
