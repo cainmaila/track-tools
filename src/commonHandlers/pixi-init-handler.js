@@ -1,3 +1,4 @@
+/* 幫你創建 PIXI 實體的好幫手，包含pixi的resize方法 */
 import { ref, onMounted } from 'vue'
 import * as PIXI from 'pixi.js'
 function pixiInitHandler(store) {
@@ -24,9 +25,9 @@ function pixiInitHandler(store) {
     store.state = 'ready' /* 狀態機 */
   })
   return {
-    viewRef,
-    appRef,
-    onViewResize,
+    viewRef, //顯示容器
+    appRef, //pixi實體
+    onViewResize, //要求 pixi resize方法
   }
 }
 

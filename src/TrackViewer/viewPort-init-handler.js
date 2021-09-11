@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import DrawPathViewport from '@/tools/draw-lib/DrawPathViewport'
 function viewPortInitHandler(store, appRef) {
   const viewPortRef = ref()
@@ -11,32 +11,13 @@ function viewPortInitHandler(store, appRef) {
     })
     viewPortRef.value = viewport
   }
-  const pushPoint = point => {
-    viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
-    store.mode === 'lock' && viewPortRef.value.lockCenter()
-  }
   const generateHistory = () => {
     return _historyFormat(viewPortRef.value.generateHistory())
   }
 
-  //mode 變換
-  watch(
-    () => store.mode,
-    mode => {
-      switch (mode) {
-        case 'mone':
-          viewPortRef.value.zoomTofit()
-          break
-        case 'lock':
-          viewPortRef.value.lockCenter()
-          break
-      }
-    },
-  )
   return {
     viewPortRef,
     viewerSetting, //設定viewer
-    pushPoint, //推送點
     generateHistory, //要求返回紀錄
   }
 }
