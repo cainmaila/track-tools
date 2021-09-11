@@ -104,7 +104,7 @@ window.setMode = mode => {
 
 /* 要求取回紀錄 */
 window.generateHistory = () => {
-  _ios_message_handler.generateHistory()
+  postIOSEvent(TO_IOS_EVENT.resHistory, _ios_message_handler.generateHistory())
 }
 
 export {
