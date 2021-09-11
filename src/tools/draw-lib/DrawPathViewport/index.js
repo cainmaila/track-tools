@@ -1,5 +1,14 @@
 import * as PIXI from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
+/**
+ * 創建樓路徑顯示
+ * @event resources-ready 素材準備完成
+ * @event change-floor 切換樓層
+ * @event push-point 收到位置
+ *
+ * @class DrawPathViewport
+ * @extends {Viewport}
+ */
 class DrawPathViewport extends Viewport {
   constructor(app, setting) {
     super({

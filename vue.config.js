@@ -47,6 +47,11 @@ module.exports = {
       template: 'public/index.html',
       title: 'Track Editor' + ' v' + json.version,
     },
+    viewer: {
+      entry: 'src/main-viewer.js',
+      template: 'public/index.html',
+      title: 'Track Viewer' + ' v' + json.version,
+    },
     // player: {
     //   entry: 'src/main-track-player.js',
     //   template: 'public/index.html',

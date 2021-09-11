@@ -1,5 +1,7 @@
 <template>
-  <div id="TrackPlayer"></div>
+  <div id="TrackPlayer">
+    <div></div>
+  </div>
 </template>
 <script>
 export default {
