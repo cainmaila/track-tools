@@ -4,9 +4,10 @@
   </div>
 </template>
 <script>
-import { reactive, watch } from 'vue'
+import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
+import playerSdkMessageHandler from './playerSdk-message-handler'
 export default {
   name: 'TrackPlayer',
   setup() {
@@ -16,26 +17,22 @@ export default {
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
+    const { postEvent, sdkCommandHandlerSetting } = playerSdkMessageHandler(
+      store,
+    ) //sdk Message
+
+    sdkCommandHandlerSetting.viewerSetting = viewerSetting //初始化
+
     window.onresize = () => {
       onViewResize()
       viewPortRef.value.resize()
     }
-    watch(appRef, () => {
-      viewerSetting({
-        floors: [
-          {
-            id: '1f',
-            img: './img/aaa.jpg',
-            offset: { x: 200, y: 90 },
-            scale: 10, //比例尺 px/m
-          },
-        ],
-      })
-    })
     return {
       viewRef,
       appRef,
       viewerSetting,
+      postEvent,
+      sdkCommandHandlerSetting,
     }
   },
 }
