@@ -11,6 +11,9 @@
       <li>
         <a href="./viewer.html">IOS Viewer</a>
       </li>
+      <li>
+        <a href="./player.html">Track Player</a>
+      </li>
     </ol>
   </div>
 </template>
