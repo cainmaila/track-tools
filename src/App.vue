@@ -8,6 +8,9 @@
       <li>
         <a href="./app-editor.html">Editor Tool DEMO</a>
       </li>
+      <li>
+        <a href="./viewer.html">IOS Viewer</a>
+      </li>
     </ol>
   </div>
 </template>

@@ -1,27 +1,19 @@
-import { watch, ref } from 'vue'
+import { ref } from 'vue'
 import DrawPathViewport from '@/tools/draw-lib/DrawPathViewport'
 function viewPortInitHandler(store, appRef) {
   const viewPortRef = ref()
-  watch(appRef, app => {
-    const viewport = new DrawPathViewport(app, {
-      floors: [
-        {
-          id: '1f',
-          img: './img/aaa.jpg',
-          offset: { x: 200, y: 90 },
-          scale: 10, //比例尺 px/m
-        },
-      ],
-    })
+  const viewerSetting = setting => {
+    const viewport = new DrawPathViewport(appRef.value, setting)
     viewport.on('resources-ready', () => {
       //樓板圖面載入
-      viewport.floor = '1f'
+      viewport.floor = setting.floors[0].id
       store.state = 'loaded' /* 狀態機 */
     })
     viewPortRef.value = viewport
-  })
+  }
   return {
     viewPortRef,
+    viewerSetting, //設定viewer
   }
 }
 

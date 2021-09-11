@@ -24,8 +24,18 @@ function postIOSEvent(event, data = null) {
   )
 }
 
-const _ios_message_handler = {
+let _ios_message_handler = {
   viewerSetting: () => {}, //viewer 初始化
+  // {
+  //   floors: [
+  //     {
+  //       id: '1f',
+  //       img: './img/aaa.jpg',
+  //       offset: { x: 200, y: 90 },
+  //       scale: 10, //比例尺 px/m
+  //     },
+  //   ],
+  // }
   pushPoint: () => {}, //送入點
   setMode: () => {}, //設定顯示模式
   generateRecord: () => {}, //要求產生紀錄
@@ -58,10 +68,11 @@ function iosInterfaceHandler(store) {
 
 function _postIOS(data, handler) {
   try {
-    window.webkit.messageHandlers[handler].postMessage(
-      JSON.stringify(data),
-      '*',
-    )
+    // window.webkit.messageHandlers[handler].postMessage(
+    //   JSON.stringify(data),
+    //   '*',
+    // )
+    console.log('#_postIOS', data, handler)
   } catch (error) {
     window.alert(error.message || error)
   }
@@ -70,13 +81,16 @@ function _postIOS(data, handler) {
 /* viewer 設定 */
 window.viewerSetting = setting => {
   try {
-    const _setting =
-      typeof setting === 'object' ? _setting : JSON.parse(_setting)
+    const _setting = typeof setting === 'object' ? setting : JSON.parse(setting)
+    if (!_setting.floors || _setting.floors.length === 0) {
+      throw new Error({ message: '沒有 floors' })
+    }
     _ios_message_handler.viewerSetting(_setting)
   } catch (error) {
     postIOSEvent(TO_IOS_EVENT.error, error.message)
   }
 }
+//window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10}]}')
 
 /* 傳入點 */
 window.pushPoint = pointsStr => {
