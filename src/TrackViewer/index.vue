@@ -19,9 +19,13 @@ export default {
       state: 'init', //init -> ready -> loaded
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
-    const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
+    const { viewPortRef, viewerSetting, pushPoint } = viewPortInitHandler(
+      store,
+      appRef,
+    ) //創建viewport 實體
     settingIosMessageHandler({
       viewerSetting,
+      pushPoint,
     })
     iosInterfaceHandler(store) /* viewer 狀態通知 IOS */
     window.onresize = () => {

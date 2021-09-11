@@ -11,9 +11,13 @@ function viewPortInitHandler(store, appRef) {
     })
     viewPortRef.value = viewport
   }
+  const pushPoint = point => {
+    viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
+  }
   return {
     viewPortRef,
     viewerSetting, //設定viewer
+    pushPoint, //推送點
   }
 }
 
