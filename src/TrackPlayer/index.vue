@@ -32,7 +32,6 @@ export default {
       appRef,
       viewerSetting,
       postEvent,
-      sdkCommandHandlerSetting,
     }
   },
 }
