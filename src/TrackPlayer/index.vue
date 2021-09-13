@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { reactive, watch } from 'vue'
+import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import playerSdkMessageHandler from './playerSdk-message-handler'
@@ -21,10 +21,7 @@ export default {
     const { postEvent, sdkCommandHandlerSetting } = playerSdkMessageHandler(
       store,
     ) //sdk Message
-    const { setHistory, startPlayHistory } = playerHistoryHandler(
-      store,
-      viewPortRef,
-    )
+    const { setHistory } = playerHistoryHandler(store, viewPortRef)
     sdkCommandHandlerSetting.viewerSetting = viewerSetting //初始化
     sdkCommandHandlerSetting.setHistory = setHistory //設定播放紀錄
 
@@ -33,16 +30,16 @@ export default {
       viewPortRef.value.resize()
     }
 
-    watch(
-      () => store.state,
-      state => {
-        switch (state) {
-          case 'history-ready':
-            startPlayHistory()
-            break
-        }
-      },
-    )
+    // watch(
+    //   () => store.state,
+    //   state => {
+    //     switch (state) {
+    //       case 'history-ready':
+    //         startPlayHistory()
+    //         break
+    //     }
+    //   },
+    // )
 
     return {
       viewRef,
