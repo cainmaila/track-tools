@@ -19,8 +19,7 @@ function playerHistoryHandler(store, viewPortRef) {
     historyHistoryRef.value = halper
     store.state = 'history-ready'
   }
-  const startPlayHistory = (_v = 0) => {
-    _v || (historyStore.v = 1)
+  const startPlayHistory = () => {
     historyStore.isPlay = true
   }
 
@@ -40,6 +39,7 @@ function playerHistoryHandler(store, viewPortRef) {
     isPlay => {
       clearInterval(_timeTmp)
       if (isPlay) {
+        historyStore.time >= historyStore.totaleTime && _setTime(0) //如果已經是結尾，就重頭開始
         _timeTmp = setInterval(() => {
           _setTime(
             historyHistoryRef.value.time + ~~(TIME_STEP * historyStore.v),
