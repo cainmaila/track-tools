@@ -14,6 +14,9 @@
       <li>
         <a href="./player.html">Track Player</a>
       </li>
+      <li>
+        <a href="./app-player.html">Track Player Tool DEMO</a>
+      </li>
     </ol>
   </div>
 </template>
