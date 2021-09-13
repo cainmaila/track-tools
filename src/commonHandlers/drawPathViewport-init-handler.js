@@ -11,6 +11,7 @@ function viewPortInitHandler(store, appRef) {
     })
     viewPortRef.value = viewport
   }
+
   return {
     viewPortRef,
     viewerSetting, //設定viewer

@@ -5,8 +5,9 @@
 </template>
 <script>
 import { reactive } from 'vue'
-import pixiInitHandler from './pixi-init-handler.js'
-import viewPortInitHandler from './viewPort-init-handler.js'
+import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
+import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
+import viewerHandler from './viewer-handler.js'
 import {
   iosInterfaceHandler,
   settingIosMessageHandler,
@@ -18,10 +19,23 @@ export default {
     const store = reactive({
       state: 'init', //init -> ready -> loaded
     })
+    const viewerStore = reactive({
+      mode: 'mono', //mone lock
+    })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
+    const { pushPoint, generateHistory } = viewerHandler(
+      viewerStore,
+      viewPortRef,
+    ) //mode變換處理 viewer命令處理
+    //設定ios事件處理方法
     settingIosMessageHandler({
       viewerSetting,
+      pushPoint,
+      generateHistory,
+      setMode: mode => {
+        viewerStore.mode = mode
+      },
     })
     iosInterfaceHandler(store) /* viewer 狀態通知 IOS */
     window.onresize = () => {

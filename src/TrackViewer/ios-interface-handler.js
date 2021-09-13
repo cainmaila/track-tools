@@ -6,7 +6,7 @@ const HANDLER = 'TrackViewer'
 const TO_IOS_EVENT = {
   readyToSetting: 'readyToSetting', //viewer onReady
   resourcesLoaded: 'resourcesLoaded', //告知素材載入完成
-  resRecord: 'resRecord', //取回紀錄
+  resHistory: 'resHistory', //取回紀錄
   error: 'error', //錯誤
 }
 
@@ -38,7 +38,7 @@ let _ios_message_handler = {
   // }
   pushPoint: () => {}, //送入點
   setMode: () => {}, //設定顯示模式
-  generateRecord: () => {}, //要求產生紀錄
+  generateHistory: () => {}, //要求產生紀錄
 }
 
 /* 設定 ios 傳入的處理程序 */
@@ -68,11 +68,11 @@ function iosInterfaceHandler(store) {
 
 function _postIOS(data, handler) {
   try {
-    // window.webkit.messageHandlers[handler].postMessage(
-    //   JSON.stringify(data),
-    //   '*',
-    // )
-    console.log('#_postIOS', data, handler)
+    window.webkit.messageHandlers[handler].postMessage(
+      JSON.stringify(data),
+      '*',
+    )
+    // console.log('#_postIOS', data, handler)
   } catch (error) {
     window.alert(error.message || error)
   }
@@ -103,8 +103,8 @@ window.setMode = mode => {
 }
 
 /* 要求取回紀錄 */
-window.generateRecord = () => {
-  _ios_message_handler.generateRecord()
+window.generateHistory = () => {
+  postIOSEvent(TO_IOS_EVENT.resHistory, _ios_message_handler.generateHistory())
 }
 
 export {

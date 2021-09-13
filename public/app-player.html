@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Player 範例</title>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #Player {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="Player">
+      <iframe
+        id="iframe"
+        width="100%"
+        height="100%"
+        style=" border:none"
+        src="./player.html"
+      ></iframe>
+    </div>
+    <script>
+      window.addEventListener('message', function(e) {
+        var data = e.data
+        if (data.app === 'TrackPlayerTool') {
+          var message = data.message
+          switch (message.type) {
+            case 'state':
+              stateFDS(message.data)
+              break
+          }
+        }
+      })
+
+      function stateFDS(state) {
+        switch (state) {
+          case 'ready':
+            postToPlayer('viewerSetting', {
+              floors: [
+                {
+                  id: '1f',
+                  img: './img/aaa.jpg',
+                  offset: { x: 200, y: 90 },
+                  scale: 10, //比例尺 px/m
+                },
+              ],
+            })
+            break
+          case 'loaded':
+            postToPlayer('setHistory', [
+              {
+                x: 1,
+                y: 1,
+                z: '1f',
+                date: 0,
+              },
+              {
+                x: 1,
+                y: 20,
+                z: '1f',
+                date: 1000,
+              },
+              {
+                x: 20,
+                y: 20,
+                z: '1f',
+                date: 2000,
+              },
+            ])
+
+            break
+        }
+      }
+
+      function postToPlayer(type, data) {
+        document.getElementById('iframe').contentWindow.postMessage(
+          {
+            target: 'TrackPlayerTool',
+            message: {
+              type,
+              data,
+            },
+          },
+          '*',
+        )
+      }
+    </script>
+  </body>
+</html>

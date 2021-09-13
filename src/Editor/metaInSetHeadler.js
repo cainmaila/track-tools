@@ -11,7 +11,7 @@ function metaInSetHeadler(original, scopeAreaData, viewportRef) {
     scopeAreaData.tag = total_area.name //tag
     scopeAreaData.color = total_area.frame_color //tag
     scopeAreaData.direction = total_area.mn_angle //方位角
-    scopeAreaData.elevation = mToUnit(total_area.high, unit) //標高
+    scopeAreaData.elevation = mToUnit(total_area.height, unit) //標高
     scopeAreaData.unit = unit //單位
     scopeAreaData.realWidth = mToUnit(
       /* 真實寬 */
@@ -49,7 +49,7 @@ function metaInSetHeadler(original, scopeAreaData, viewportRef) {
           fillColor: color,
         },
       )
-      roomArea.userData.spaceHeight = mToUnit(area.high, unit)
+      roomArea.userData.spaceHeight = mToUnit(area.height, unit)
     })
 
     viewportRef.value.targetObj = null
