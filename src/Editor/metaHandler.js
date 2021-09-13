@@ -43,7 +43,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
         display_unit,
         length: unitToM(scopeAreaData.realWidth, unit),
         width: unitToM(scopeAreaData.realHeight, unit),
-        high: unitToM(scopeAreaData.elevation, unit),
+        height: unitToM(scopeAreaData.elevation, unit),
         mn_angle: scopeAreaData.direction,
         frame_color: scopeAreaData.color,
       },
@@ -60,7 +60,7 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
         display_unit,
         length: pxToM(room.w, scale, unit),
         width: pxToM(room.h, scale, unit),
-        high: unitToM(room.userData.spaceHeight, unit),
+        height: unitToM(room.userData.spaceHeight, unit),
         frame_color: numberToHex(room.setting.lineColor),
       })
     })
