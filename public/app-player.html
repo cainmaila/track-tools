@@ -20,34 +20,15 @@
         overflow: hidden;
       }
     </style>
+    <script src="./track-player-sdk.min.js"></script>
   </head>
   <body>
-    <div id="Player">
-      <iframe
-        id="iframe"
-        width="100%"
-        height="100%"
-        style=" border:none"
-        src="./player.html"
-      ></iframe>
-    </div>
+    <div id="Player"></div>
     <script>
-      window.addEventListener('message', function(e) {
-        var data = e.data
-        if (data.app === 'TrackPlayerTool') {
-          var message = data.message
-          switch (message.type) {
-            case 'state':
-              stateFDS(message.data)
-              break
-          }
-        }
-      })
-
-      function stateFDS(state) {
+      window.TrackPlayer.onState = function(state) {
         switch (state) {
           case 'ready':
-            postToPlayer('viewerSetting', {
+            window.TrackPlayer.viewerSetting({
               floors: [
                 {
                   id: '1f',
@@ -59,7 +40,7 @@
             })
             break
           case 'loaded':
-            postToPlayer('setHistory', {
+            window.TrackPlayer.setHistory({
               locations: [
                 {
                   pos: '1,1',
@@ -78,23 +59,14 @@
                 },
               ],
             })
-
             break
         }
       }
-
-      function postToPlayer(type, data) {
-        document.getElementById('iframe').contentWindow.postMessage(
-          {
-            target: 'TrackPlayerTool',
-            message: {
-              type,
-              data,
-            },
-          },
-          '*',
-        )
-      }
+      window.TrackPlayer.setup({
+        contentId: 'Player',
+        uri: './player.html',
+        lang: 'zh-tw',
+      })
     </script>
   </body>
 </html>

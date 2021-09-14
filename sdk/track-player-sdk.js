@@ -7,14 +7,16 @@ console.info(
 )
 const VIEWER_ID = 'TrackPlayer'
 window.TrackPlayer = window.TrackPlayer || {
-  setup: ({ contentId, uri, lang, setting }) => {
+  setup: ({ contentId, uri, lang }) => {
     const self = window.TrackPlayer
     self.lang = lang
-    self.setting = setting
     self.content = document.getElementById(contentId)
     self.uri = uri
     self.view && self.view.remove() //移除舊的 viewer
     setTimeout(self._addViewer)
+  },
+  viewerSetting(setting) {
+    postToPlayer('viewerSetting', setting)
   },
   setHistory(_history) {
     postToPlayer('setHistory', _history)
