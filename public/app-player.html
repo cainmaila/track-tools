@@ -59,26 +59,25 @@
             })
             break
           case 'loaded':
-            postToPlayer('setHistory', [
-              {
-                x: 1,
-                y: 1,
-                z: '1f',
-                date: 0,
-              },
-              {
-                x: 1,
-                y: 20,
-                z: '1f',
-                date: 1000,
-              },
-              {
-                x: 20,
-                y: 20,
-                z: '1f',
-                date: 2000,
-              },
-            ])
+            postToPlayer('setHistory', {
+              locations: [
+                {
+                  pos: '1,1',
+                  fileId: '1f',
+                  date: 0,
+                },
+                {
+                  pos: '1,20',
+                  fileId: '1f',
+                  date: 1000,
+                },
+                {
+                  pos: '20,20',
+                  fileId: '1f',
+                  date: 2000,
+                },
+              ],
+            })
 
             break
         }
