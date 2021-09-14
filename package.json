@@ -8,7 +8,9 @@
     "build": "cross-env BUILD=yes vue-cli-service build",
     "start": "cross-env NODE_ENV=production node app/app.js",
     "lint": "vue-cli-service lint",
-    "sdk": "rollup -c",
+    "sdk-editor": "rollup -c rollup.editor.config.js",
+    "sdk-player": "rollup -c rollup.player.config.js",
+    "sdk": "yarn sdk-editor && yarn sdk-player",
     "i18n-sync": "sync-i18n --files **/src/locale/*.json --primary en --createResources zh-TW"
   },
   "dependencies": {
