@@ -1,7 +1,7 @@
 //播放控制
 import DrawPathPlayHelper from '@/tools/draw-lib/DrawPathViewport/DrawPathPlayHelper'
 import { reactive, ref, watch } from 'vue'
-const TIME_STEP = 200 //200ms間格
+const TIME_STEP = ~~(1000 / 30) //ms間格
 function playerHistoryHandler(store, viewPortRef) {
   const historyHistoryRef = ref(null)
   const historyStore = reactive({

@@ -6,6 +6,7 @@
       :playIng="historyStore.isPlay"
       :totale="historyStore.totaleTime"
       :time="historyStore.time"
+      v-model:v="historyStore.v"
       @update:time="setTime"
       @play="startPlayHistory"
       @stop="stopPlayHistory"
