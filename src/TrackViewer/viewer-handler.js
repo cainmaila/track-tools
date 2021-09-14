@@ -34,5 +34,6 @@ function _historyFormat(_history = []) {
         date: _po.date,
       }
     }),
+    dataVersion: 'v1',
   }
 }
