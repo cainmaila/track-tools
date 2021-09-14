@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import { Viewport } from 'pixi-viewport'
+import BaseViewport from '../BaseViewport'
 /**
  * 創建樓路徑顯示
  * @event resources-ready 素材準備完成
@@ -7,13 +7,11 @@ import { Viewport } from 'pixi-viewport'
  * @event push-point 收到位置
  *
  * @class DrawPathViewport
- * @extends {Viewport}
+ * @extends {BaseViewport}
  */
-class DrawPathViewport extends Viewport {
+class DrawPathViewport extends BaseViewport {
   constructor(app, setting) {
-    super({
-      interaction: app.renderer.plugins.interaction, // the interaction module is important for wheel to work properly when renderer.view is placed or scaled
-    })
+    super(app)
     this._floor = null //樓板ID
     this._floorObj = null //目前樓層物件
     this._pointsHistory = [] //點紀錄
@@ -21,12 +19,10 @@ class DrawPathViewport extends Viewport {
     this._nowPoMc = new PointTag() //目前點物件
     this._startPoMc = new PointTag() //開始點物件
     this._changeFloor = false //樓層切換時告知新線段的旗標
-    this._app = app
     this._setting = {
       floors: [],
       ...setting,
     }
-    app.stage.addChild(this)
     this._buildFloorsMap() //圖面載入結束 emit('resources-ready')
   }
   set floor(_id) {

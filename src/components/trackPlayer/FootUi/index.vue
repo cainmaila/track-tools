@@ -23,13 +23,20 @@
       <option :value="1.75">1.75x</option>
       <option :value="2">2x</option>
     </select>
+    <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'in')">放大</div>
+    <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'out')">
+      縮小
+    </div>
+    <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'fit')">
+      最適
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'FootUi',
   props: ['playIng', 'totale', 'time', 'v'],
-  emits: ['update:time', 'stop', 'play', 'update:v'],
+  emits: ['update:time', 'stop', 'play', 'update:v', 'zoom'],
   data() {
     return {}
   },
@@ -53,6 +60,7 @@ export default {
     height: 100%;
     border: solid 1px #fff;
     color: #fff;
+    box-sizing: border-box;
   }
 }
 </style>

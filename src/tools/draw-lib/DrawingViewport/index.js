@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import '@pixi/math-extras'
 import '@pixi/graphics-extras'
-import { Viewport } from 'pixi-viewport'
+import BaseViewport from '../BaseViewport'
 import Area from './Area'
 
 /**
@@ -12,7 +12,7 @@ import Area from './Area'
  * remove-area
  * drawMode
  */
-class DrawingViewport extends Viewport {
+class DrawingViewport extends BaseViewport {
   /**
    * Creates an instance of DrawingViewport.
    * @param {Object} app - pixi app 實體
@@ -33,9 +33,7 @@ class DrawingViewport extends Viewport {
    * @memberof DrawingViewport
    */
   constructor(app, setting) {
-    super({
-      interaction: app.renderer.plugins.interaction, // the interaction module is important for wheel to work properly when renderer.view is placed or scaled
-    })
+    super(app)
     this._setting = {
       bg: null, // bg 底圖url
       aeraSetting: null, //區塊設定
@@ -49,8 +47,6 @@ class DrawingViewport extends Viewport {
     this._drawObj = null
     this._targetObj = null
     this._selectEnable = true
-    this._app = app
-    app.stage.addChild(this)
     this._createOperationLayer()
 
     this.drag()

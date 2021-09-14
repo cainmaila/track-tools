@@ -10,6 +10,7 @@
       @update:time="setTime"
       @play="startPlayHistory"
       @stop="stopPlayHistory"
+      @zoom="setZoom"
     />
   </div>
 </template>
@@ -49,6 +50,19 @@ export default {
       viewPortRef.value.resize()
     }
 
+    const setZoom = zoomMode => {
+      const viewPort = viewPortRef.value
+      switch (zoomMode) {
+        case 'in':
+          viewPort.zoom(0.2)
+          break
+        case 'out':
+          break
+        case 'fit':
+          break
+      }
+    }
+
     return {
       viewRef,
       appRef,
@@ -58,6 +72,7 @@ export default {
       stopPlayHistory,
       historyStore,
       setTime,
+      setZoom,
     }
   },
 }
