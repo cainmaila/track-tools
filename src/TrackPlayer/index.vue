@@ -54,11 +54,13 @@ export default {
       const viewPort = viewPortRef.value
       switch (zoomMode) {
         case 'in':
-          viewPort.zoom(0.2)
+          viewPort.zoom(0.05)
           break
         case 'out':
+          viewPort.zoom(-0.05)
           break
         case 'fit':
+          viewPort.zoomTofit()
           break
       }
     }
