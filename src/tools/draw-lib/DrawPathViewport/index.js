@@ -62,10 +62,12 @@ class DrawPathViewport extends BaseViewport {
   }
   suspend() {
     this._changeFloor = true
-    this.emit('push-point', {
+    const _suspendPoint = {
       command: 'suspend',
       date: new Date().getTime(),
-    })
+    }
+    this._pointsHistory.push(_suspendPoint)
+    this.emit('push-point', _suspendPoint)
   }
   generateHistory() {
     return this._pointsHistory
@@ -74,7 +76,7 @@ class DrawPathViewport extends BaseViewport {
     this._restLineLayer()
     this._pointsHistory = []
     _history.forEach(_point => {
-      this.pushPoint(_point)
+      _point.command ? this.suspend() : this.pushPoint(_point) //目前有command只有暫停這種情況
     })
   }
   zoomTofit() {

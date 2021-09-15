@@ -39,13 +39,18 @@ class DrawPathPlayHelper {
     this._history.forEach(_po => {
       if (_po.date > _date) return
       this._timePo = _po
-      if (_po.z !== _floor) {
-        this._floor = _po.z
-        _t_line = []
-        _lines.push(_t_line)
-        _floor = _po.z
+      //依據樓層分層
+      if (_po?.command === 'suspend') {
+        _floor = 'suspend'
+      } else {
+        if (_po.z !== _floor) {
+          _t_line = []
+          _lines.push(_t_line)
+          this._floor = _po.z
+          _floor = _po.z
+        }
+        _t_line.push(_po)
       }
-      _t_line.push(_po)
     })
     this._lineArr = _lines
   }
@@ -56,7 +61,7 @@ class DrawPathPlayHelper {
     let _nowPo = null //目前點位置
     this._lineArr.forEach(line => {
       _nowPo = line[line.length - 1]
-      if (line[0].z === this.floor) {
+      if (line[0]?.z === this.floor) {
         this.viewport.floorObj.lineLayer.heplerDrawLine(line)
       }
     })
