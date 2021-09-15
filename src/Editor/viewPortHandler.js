@@ -18,6 +18,8 @@ function createViewPort() {
     viewportRef.value = initOb.viewport
     initOb.viewport.on('loaded', () => {
       viewportRef.value.zoomTofit(100, 360)
+      console.log('#create loaded')
+
       postEvent('loaded')
     })
     info.name = setting.info.name
