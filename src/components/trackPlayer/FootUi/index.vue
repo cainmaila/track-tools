@@ -60,6 +60,8 @@ export default {
 .foot-ui {
   width: 100%;
   height: 85px;
+  box-sizing: border-box;
+  padding: 0 10px;
   background: #000;
   & .f1 {
     width: 100%;
@@ -67,7 +69,12 @@ export default {
   }
   & .f2 {
     width: 100%;
+    max-width: 600px;
     height: 40px;
+    margin: 0 auto;
+    & input {
+      width: 100%;
+    }
   }
   & .bn {
     width: 55px;
