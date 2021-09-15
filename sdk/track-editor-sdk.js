@@ -51,8 +51,6 @@ window.TrackEditor = window.TrackEditor || {
             postToEditor('setting', self.setting)
             break
           case 'loaded':
-            console.log('#loaded!!')
-
             self.onLoaded()
             break
           case 'areaData':
