@@ -3,10 +3,19 @@ const dataVersion = 'v1'
 function historyToDataTransform(_history = []) {
   return {
     locations: _history.map(_po => {
-      return {
-        pos: `${_po.x},${_po.y}`,
-        fileId: _po.z,
-        date: _po.date,
+      switch (_po.command) {
+        case 'suspend':
+          return {
+            state: 1,
+            date: _po.date,
+          }
+        default:
+          return {
+            state: 0,
+            pos: `${_po.x},${_po.y}`,
+            fileId: _po.z,
+            date: _po.date,
+          }
       }
     }),
     dataVersion,
@@ -14,13 +23,24 @@ function historyToDataTransform(_history = []) {
 }
 
 function dataToHistoryTransform({ locations }) {
+  let _pos = null
   return locations.map(_po => {
-    const _pos = _po.pos.split(',')
-    return {
-      x: _pos[0] * 1,
-      y: _pos[1] * 1,
-      z: _po.fileId,
-      date: _po.date,
+    switch (_po.state) {
+      case 0:
+        _pos = _po.pos.split(',')
+        return {
+          x: _pos[0] * 1,
+          y: _pos[1] * 1,
+          z: _po.fileId,
+          date: _po.date,
+        }
+      case 1:
+        return {
+          command: 'suspend',
+          date: _po.date,
+        }
+      default:
+        console.warn('#未知的點物件', _po)
     }
   })
 }

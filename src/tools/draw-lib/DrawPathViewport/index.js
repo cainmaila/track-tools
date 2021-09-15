@@ -60,6 +60,13 @@ class DrawPathViewport extends BaseViewport {
     this.emit('push-point', _historyPoint)
     this._changeFloor = false
   }
+  suspend() {
+    this._changeFloor = true
+    this.emit('push-point', {
+      command: 'suspend',
+      date: new Date().getTime(),
+    })
+  }
   generateHistory() {
     return this._pointsHistory
   }
