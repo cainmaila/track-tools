@@ -43,7 +43,7 @@ function playerHistoryHandler(store, viewPortRef) {
         historyStore.time >= historyStore.totaleTime && _setTime(0) //如果已經是結尾，就重頭開始
         _timeTmp = setInterval(() => {
           _setTime(
-            historyHistoryRef.value.time + ~~(TIME_STEP * historyStore.v),
+            historyHistoryRef.value.time * 1 + ~~(TIME_STEP * historyStore.v),
           )
           historyStore.time >= historyStore.totaleTime && stopPlayHistory() //時間到底 暫停
         }, TIME_STEP)
