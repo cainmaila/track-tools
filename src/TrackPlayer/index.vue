@@ -1,6 +1,6 @@
 <template>
   <div id="TrackPlayer" class="page">
-    <div id="Viewer" class="page" ref="viewRef"></div>
+    <div id="Viewer" ref="viewRef"></div>
     <FootUi
       id="FootUi"
       :playIng="historyStore.isPlay"
@@ -84,5 +84,10 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+#Viewer {
+  width: 100%;
+  height: calc(100% - 85px);
+  overflow: hidden;
 }
 </style>
