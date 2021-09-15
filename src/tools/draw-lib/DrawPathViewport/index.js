@@ -1,5 +1,8 @@
 import * as PIXI from 'pixi.js'
 import BaseViewport from '../BaseViewport'
+export const TRACK_COMMAND = {
+  suspend: 'suspend',
+}
 /**
  * 創建樓路徑顯示
  * @event resources-ready 素材準備完成
@@ -63,7 +66,7 @@ class DrawPathViewport extends BaseViewport {
   suspend() {
     this._changeFloor = true
     const _suspendPoint = {
-      command: 'suspend',
+      command: TRACK_COMMAND.suspend,
       date: new Date().getTime(),
     }
     this._pointsHistory.push(_suspendPoint)

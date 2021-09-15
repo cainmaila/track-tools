@@ -24,7 +24,7 @@ export default {
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
-    const { pushPoint, generateHistory } = viewerHandler(
+    const { pushPoint, suspend, generateHistory } = viewerHandler(
       viewerStore,
       viewPortRef,
     ) //mode變換處理 viewer命令處理
@@ -32,6 +32,7 @@ export default {
     settingIosMessageHandler({
       viewerSetting,
       pushPoint,
+      suspend,
       generateHistory,
       setMode: mode => {
         viewerStore.mode = mode

@@ -37,6 +37,7 @@ let _ios_message_handler = {
   //   ],
   // }
   pushPoint: () => {}, //送入點
+  suspend: () => {}, //暫停繪製
   setMode: () => {}, //設定顯示模式
   generateHistory: () => {}, //要求產生紀錄
 }
@@ -95,6 +96,11 @@ window.viewerSetting = setting => {
 /* 傳入點 */
 window.pushPoint = pointsStr => {
   _ios_message_handler.pushPoint(pointsStr.split(','))
+}
+
+/* 暫停繪製 */
+window.suspend = () => {
+  _ios_message_handler.suspend()
 }
 
 /* 定位模式 */

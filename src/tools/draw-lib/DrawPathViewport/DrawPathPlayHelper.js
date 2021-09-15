@@ -1,3 +1,4 @@
+import { TRACK_COMMAND } from '../DrawPathViewport'
 class DrawPathPlayHelper {
   constructor(viewport) {
     this.viewport = viewport
@@ -40,8 +41,8 @@ class DrawPathPlayHelper {
       if (_po.date > _date) return
       this._timePo = _po
       //依據樓層分層
-      if (_po?.command === 'suspend') {
-        _floor = 'suspend'
+      if (_po?.command === TRACK_COMMAND.suspend) {
+        _floor = TRACK_COMMAND.suspend //暫停
       } else {
         if (_po.z !== _floor) {
           _t_line = []
@@ -61,7 +62,7 @@ class DrawPathPlayHelper {
     let _nowPo = null //目前點位置
     this._lineArr.forEach(line => {
       _nowPo = line[line.length - 1]
-      if (line[0]?.z === this.floor) {
+      if (line[0].z === this.floor) {
         this.viewport.floorObj.lineLayer.heplerDrawLine(line)
       }
     })

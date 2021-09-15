@@ -1,10 +1,11 @@
 const dataVersion = 'v1'
+import { TRACK_COMMAND } from '@/tools/draw-lib/DrawPathViewport'
 //轉換輸出格式 http://confluence.anchortech.io/display/LEED/AnchorTrack+SA+-+Web
 function historyToDataTransform(_history = []) {
   return {
     locations: _history.map(_po => {
       switch (_po.command) {
-        case 'suspend':
+        case TRACK_COMMAND.suspend:
           return {
             state: 1,
             date: _po.date,
@@ -36,7 +37,7 @@ function dataToHistoryTransform({ locations }) {
         }
       case 1:
         return {
-          command: 'suspend',
+          command: TRACK_COMMAND.suspend,
           date: _po.date,
         }
       default:
@@ -48,4 +49,5 @@ function dataToHistoryTransform({ locations }) {
 export {
   historyToDataTransform, //歷史紀錄轉API資料
   dataToHistoryTransform, //API資料轉player陣列
+  TRACK_COMMAND,
 }

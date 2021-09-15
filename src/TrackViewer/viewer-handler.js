@@ -19,8 +19,11 @@ export default function(viewerStore, viewPortRef) {
     viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
     viewerStore.mode === 'lock' && viewPortRef.value.lockCenter()
   }
+  const suspend = () => {
+    viewPortRef.value.suspend()
+  }
   const generateHistory = () => {
     return historyToDataTransform(viewPortRef.value.generateHistory())
   }
-  return { pushPoint, generateHistory }
+  return { pushPoint, generateHistory, suspend }
 }

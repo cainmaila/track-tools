@@ -70,6 +70,15 @@ window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":
 window.pushPoint("x,y,fileId") //fileId目前可省略
 ```
 
+### suspend
+
+暫停繪製
+範例
+
+```javasctiopt
+window.suspend() //如需繼續，只要再次pushPoint即可
+```
+
 #### setMode
 
 Viewer 顯示模式變換，兩種形式 `mone` 與 `lock`
