@@ -1,7 +1,6 @@
 /* 通訊至 IOS callbackHandler  */
 
-const HANDLER = 'eventHandler'
-const isIOS = !!window.webkit
+import { log, postIOSEvent } from '@/commonHandlers/ios-interface'
 
 /* 給 IOS 的事件定義 */
 const TO_IOS_EVENT = {
@@ -9,17 +8,6 @@ const TO_IOS_EVENT = {
   resourcesLoaded: 'resourcesLoaded', //告知素材載入完成
   resHistory: 'resHistory', //取回紀錄
   error: 'error', //錯誤
-}
-
-/* 送出通訊規格 */
-function postIOSEvent(event, data = null) {
-  _postIOS(
-    {
-      event,
-      data,
-    },
-    HANDLER,
-  )
 }
 
 let _ios_message_handler = {
@@ -64,28 +52,7 @@ function iosInterfaceHandler(store) {
   )
 }
 
-function log(data) {
-  const log = document.getElementById('LOG')
-  const mes = document.createElement('div')
-  mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
-  log.appendChild(mes)
-}
-
 //============================================================================
-
-function _postIOS(data) {
-  if (!isIOS) return
-  log(`送出 :` + JSON.stringify(data))
-  try {
-    window.webkit.messageHandlers['eventHandler'].postMessage(
-      JSON.stringify(data),
-      '*',
-    )
-    // console.log('#_postIOS', data, handler)
-  } catch (error) {
-    window.alert(error.message || error)
-  }
-}
 
 /* viewer 設定 */
 window.viewerSetting = setting => {

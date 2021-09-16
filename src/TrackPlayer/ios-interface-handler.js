@@ -1,7 +1,5 @@
 /* 通訊至 IOS callbackHandler  */
-
-const HANDLER = 'eventHandler'
-const isIOS = !!window.webkit
+import { log, postIOSEvent } from '@/commonHandlers/ios-interface'
 
 /* 給 IOS 的事件定義 */
 const TO_IOS_EVENT = {
@@ -9,17 +7,6 @@ const TO_IOS_EVENT = {
   resourcesLoaded: 'resourcesLoaded', //告知素材載入完成
   historyReady: 'historyReady', //歷史紀錄設定完成
   error: 'error', //錯誤
-}
-
-/* 送出通訊規格 */
-function postIOSEvent(event, data = null) {
-  _postIOS(
-    {
-      event,
-      data,
-    },
-    HANDLER,
-  )
 }
 
 let _ios_message_handler = {
@@ -64,29 +51,11 @@ function iosInterfaceHandler(store) {
   )
 }
 
-function log(data) {
-  const mes = document.createElement('div')
-  mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
-  document.getElementById('LOG').appendChild(mes)
-}
-
 //============================================================================
-
-function _postIOS(data, HANDLER) {
-  if (!isIOS) return
-  log(`送出 :` + JSON.stringify(data))
-  try {
-    window.webkit.messageHandlers[HANDLER].postMessage(
-      JSON.stringify(data),
-      '*',
-    )
-  } catch (error) {
-    window.alert(error.message || error)
-  }
-}
 
 /* viewer 設定 */
 window.viewerSetting = setting => {
+  log('#viewerSetting', setting)
   try {
     const _setting = typeof setting === 'object' ? setting : JSON.parse(setting)
     if (!_setting.floors || _setting.floors.length === 0) {
@@ -100,10 +69,16 @@ window.viewerSetting = setting => {
 //window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10}]}')
 
 /* 傳入點 */
-// window.setHistory = points => {
-//   log('#setHistory', points)
-//   _ios_message_handler.pushPoint(pointsStr.split(','))
-// }
+window.setHistory = points => {
+  log('#setHistory', points)
+  try {
+    _ios_message_handler.setHistory(
+      typeof points === 'object' ? points : JSON.parse(points),
+    )
+  } catch (error) {
+    postIOSEvent(TO_IOS_EVENT.error, error.message)
+  }
+}
 
 export {
   log,
