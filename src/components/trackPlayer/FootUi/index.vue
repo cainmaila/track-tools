@@ -10,7 +10,9 @@
         <FnBtn type="showall" @ck="$emit('zoom', 'fit')" />
       </div>
     </div>
-    <div class="f2 flex-center md">
+    <div class="f2 md">
+      <!-- <div class="time">47:02 / 1:47;22</div> -->
+      <div class="time">{{ timeStr }}</div>
       <input
         type="range"
         min="1"
@@ -22,6 +24,7 @@
   </div>
 </template>
 <script>
+import { msToTime } from '@/tools/time-format'
 import PlayBtn from './PlayBtn'
 import FnBtn from './FnBtn'
 import SelectV from './SelectV'
@@ -32,6 +35,11 @@ export default {
   emits: ['update:time', 'stop', 'play', 'zoom'],
   data() {
     return {}
+  },
+  computed: {
+    timeStr() {
+      return `${msToTime(this.time)} / ${msToTime(this.totale)}`
+    },
   },
   methods: {
     onChange(e) {
@@ -51,8 +59,6 @@ export default {
   padding: 0 10px;
   background: #000;
   & .f1 {
-    /* width: 100%; */
-    /* max-width: 600px; */
     height: 45px;
     /* margin: 0 auto; */
     display: flex;
@@ -60,12 +66,14 @@ export default {
     align-items: center;
   }
   & .f2 {
-    /* width: 100%; */
-    /* max-width: 600px; */
     height: 40px;
-    /* margin: 0 auto; */
     & input {
       width: 100%;
+    }
+    & .time {
+      text-align: right;
+      font-size: 12px;
+      color: #fff;
     }
   }
   & .md {
