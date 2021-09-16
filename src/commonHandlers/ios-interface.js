@@ -1,3 +1,5 @@
+/* 整合了一些 IOS使用工具 */
+
 const HANDLER = 'eventHandler'
 const isIOS = !!window.webkit
 
