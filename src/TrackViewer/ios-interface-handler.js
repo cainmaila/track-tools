@@ -73,11 +73,12 @@ function log(data) {
 //============================================================================
 
 function _postIOS(data, handler) {
-  console.log('去log', handler)
   log(`送出 :` + JSON.stringify(data))
   try {
-    // window.webkit.messageHandlers[handler].postMessage(
-    window.webkit.messageHandlers.postMessage(JSON.stringify(data), '*')
+    window.webkit.messageHandlerss[handler].postMessage(
+      JSON.stringify(data),
+      '*',
+    )
     // console.log('#_postIOS', data, handler)
   } catch (error) {
     window.alert(error.message || error)
