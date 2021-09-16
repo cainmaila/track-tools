@@ -72,10 +72,10 @@ function log(data) {
 
 //============================================================================
 
-function _postIOS(data, handler) {
+function _postIOS(data) {
   log(`送出 :` + JSON.stringify(data))
   try {
-    window.webkit.messageHandlerss[handler].postMessage(
+    window.webkit.messageHandlers['eventHandler'].postMessage(
       JSON.stringify(data),
       '*',
     )
