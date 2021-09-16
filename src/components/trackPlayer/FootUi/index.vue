@@ -1,12 +1,7 @@
 <template>
   <div class="foot-ui">
     <div class="f1 flex-center">
-      <div
-        class="bn flex-center"
-        @pointerup.stop="$emit(playIng ? 'stop' : 'play')"
-      >
-        {{ playIng ? '暫停' : '播放' }}
-      </div>
+      <PlayBtn :playIng="playIng" @ck-play="$emit(playIng ? 'stop' : 'play')" />
       <select @input.stop="onVchange" :value="v">
         <option :value="0.25">0.25x</option>
         <option :value="0.5">0.5x</option>
@@ -17,13 +12,13 @@
         <option :value="1.75">1.75x</option>
         <option :value="2">2x</option>
       </select>
-      <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'in')">
+      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'in')">
         放大
       </div>
-      <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'out')">
+      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'out')">
         縮小
       </div>
-      <div class="bn flex-center" @pointerup.stop="$emit('zoom', 'fit')">
+      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'fit')">
         最適
       </div>
     </div>
@@ -39,8 +34,10 @@
   </div>
 </template>
 <script>
+import PlayBtn from './PlayBtn'
 export default {
   name: 'FootUi',
+  components: { PlayBtn },
   props: ['playIng', 'totale', 'time', 'v'],
   emits: ['update:time', 'stop', 'play', 'update:v', 'zoom'],
   data() {
@@ -76,7 +73,7 @@ export default {
       width: 100%;
     }
   }
-  & .bn {
+  & .bn2 {
     width: 55px;
     height: 100%;
     border: solid 1px #fff;
