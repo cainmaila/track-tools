@@ -1,28 +1,24 @@
 <template>
   <div class="foot-ui">
-    <div class="f1 flex-center">
+    <div class="f1 md">
       <PlayBtn :playIng="playIng" @ck-play="$emit(playIng ? 'stop' : 'play')" />
-      <select @input.stop="onVchange" :value="v">
-        <option :value="0.25">0.25x</option>
-        <option :value="0.5">0.5x</option>
-        <option :value="0.75">0.75x</option>
-        <option :value="1">1x</option>
-        <option :value="1.25">1.25x</option>
-        <option :value="1.5">1.5x</option>
-        <option :value="1.75">1.75x</option>
-        <option :value="2">2x</option>
-      </select>
-      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'in')">
-        放大
-      </div>
-      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'out')">
-        縮小
-      </div>
-      <div class="bn2 bn flex-center" @pointerup.stop="$emit('zoom', 'fit')">
-        最適
+      <div class="flex-center">
+        <select @input.stop="onVchange" :value="v">
+          <option :value="0.25">0.25x</option>
+          <option :value="0.5">0.5x</option>
+          <option :value="0.75">0.75x</option>
+          <option :value="1">1x</option>
+          <option :value="1.25">1.25x</option>
+          <option :value="1.5">1.5x</option>
+          <option :value="1.75">1.75x</option>
+          <option :value="2">2x</option>
+        </select>
+        <FnBtn type="zoomOut2" @ck="$emit('zoom', 'in')" />
+        <FnBtn type="zoomIn" @ck="$emit('zoom', 'out')" />
+        <FnBtn type="showall" @ck="$emit('zoom', 'fit')" />
       </div>
     </div>
-    <div class="f2 flex-center">
+    <div class="f2 flex-center md">
       <input
         type="range"
         min="1"
@@ -35,9 +31,10 @@
 </template>
 <script>
 import PlayBtn from './PlayBtn'
+import FnBtn from './FnBtn'
 export default {
   name: 'FootUi',
-  components: { PlayBtn },
+  components: { PlayBtn, FnBtn },
   props: ['playIng', 'totale', 'time', 'v'],
   emits: ['update:time', 'stop', 'play', 'update:v', 'zoom'],
   data() {
@@ -61,17 +58,27 @@ export default {
   padding: 0 10px;
   background: #000;
   & .f1 {
-    width: 100%;
+    /* width: 100%; */
+    /* max-width: 600px; */
     height: 45px;
+    /* margin: 0 auto; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   & .f2 {
-    width: 100%;
-    max-width: 600px;
+    /* width: 100%; */
+    /* max-width: 600px; */
     height: 40px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     & input {
       width: 100%;
     }
+  }
+  & .md {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
   }
   & .bn2 {
     width: 55px;

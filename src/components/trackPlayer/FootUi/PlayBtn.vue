@@ -1,6 +1,6 @@
 <template>
-  <div class="play-btn bn flex-center">
-    <div class="play flex-center" @pointerup.stop="$emit('ck-play')">
+  <div class="play-btn flex-center">
+    <div class="play flex-center bn" @pointerup.stop="$emit('ck-play')">
       <At2Icon
         type="pause"
         width="16"

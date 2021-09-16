@@ -1,0 +1,19 @@
+<template>
+  <div class="fn-btn bn flex-center" @pointerup.stop="$emit('ck')">
+    <At2Icon :type="type" width="16" height="16" color="#fff" />
+  </div>
+</template>
+<script>
+import At2Icon from '~at2@/components/At2Icon'
+export default {
+  name: 'FnBtn',
+  props: ['type'],
+  components: { At2Icon },
+}
+</script>
+<style lang="postcss" scoped>
+.fn-btn {
+  width: 40px;
+  height: 40px;
+}
+</style>
