@@ -155,7 +155,7 @@ class LineLayer extends PIXI.Graphics {
     super()
     this._scale = scale
     this._lastPoint = null
-    this.lineStyle(1, 0xff0000, 1, 0.5, true)
+    this.lineStyle(3, 0x0071ff, 1, 0.5, true)
   }
   pushPoint(_point, isNewLine) {
     _point = this._scalePoint(_point)
@@ -187,7 +187,7 @@ class PointTag extends PIXI.Graphics {
   //TODO:人的相對大小
   constructor(r = 10) {
     super()
-    this.beginFill(0xff0000, 1)
+    this.beginFill(0x0071ff, 1)
     this.drawCircle(0, 0, r)
   }
 }

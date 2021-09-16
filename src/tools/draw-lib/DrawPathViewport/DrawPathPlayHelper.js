@@ -58,7 +58,7 @@ class DrawPathPlayHelper {
   _drawLineByTime() {
     this.viewport.floor = this.floor
     this.viewport.floorObj.lineLayer.clear()
-    this.viewport.floorObj.lineLayer.lineStyle(1, 0xff0000, 1, 0.5, true)
+    this.viewport.floorObj.lineLayer.lineStyle(3, 0x0071ff, 1, 0.5, true)
     let _nowPo = null //目前點位置
     this._lineArr.forEach(line => {
       _nowPo = line[line.length - 1]
