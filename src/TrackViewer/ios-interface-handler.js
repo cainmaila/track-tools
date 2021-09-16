@@ -1,6 +1,7 @@
 /* 通訊至 IOS callbackHandler  */
 
 const HANDLER = 'eventHandler'
+const isIOS = !!window.webkit
 
 /* 給 IOS 的事件定義 */
 const TO_IOS_EVENT = {
@@ -73,6 +74,7 @@ function log(data) {
 //============================================================================
 
 function _postIOS(data) {
+  if (!isIOS) return
   log(`送出 :` + JSON.stringify(data))
   try {
     window.webkit.messageHandlers['eventHandler'].postMessage(
@@ -101,25 +103,30 @@ window.viewerSetting = setting => {
 
 /* 傳入點 */
 window.pushPoint = pointsStr => {
+  log('#pushPoint', pointsStr)
   _ios_message_handler.pushPoint(pointsStr.split(','))
 }
 
 /* 暫停繪製 */
 window.suspend = () => {
+  log('#suspend')
   _ios_message_handler.suspend()
 }
 
 /* 定位模式 */
 window.setMode = mode => {
+  log('#setMode', mode)
   _ios_message_handler.setMode(mode)
 }
 
 /* 要求取回紀錄 */
 window.generateHistory = () => {
+  log('#generateHistory')
   postIOSEvent(TO_IOS_EVENT.resHistory, _ios_message_handler.generateHistory())
 }
 
 export {
+  log,
   iosInterfaceHandler /* viewer 狀態通知 */,
   postIOSEvent /* 送出通訊規格 */,
   TO_IOS_EVENT /* 給 IOS 的事件定義 */,
