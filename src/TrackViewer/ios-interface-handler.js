@@ -1,6 +1,6 @@
 /* 通訊至 IOS callbackHandler  */
 
-const HANDLER = 'TrackViewer'
+const HANDLER = 'eventHandler'
 
 /* 給 IOS 的事件定義 */
 const TO_IOS_EVENT = {
