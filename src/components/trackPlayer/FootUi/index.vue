@@ -4,6 +4,7 @@
       <PlayBtn :playIng="playIng" @ck-play="$emit(playIng ? 'stop' : 'play')" />
       <div class="flex-center">
         <SelectV v-bind="$attrs" />
+        <div class="line" />
         <FnBtn type="zoomOut2" @ck="$emit('zoom', 'in')" />
         <FnBtn type="zoomIn" @ck="$emit('zoom', 'out')" />
         <FnBtn type="showall" @ck="$emit('zoom', 'fit')" />
@@ -79,5 +80,11 @@ export default {
     color: #fff;
     box-sizing: border-box;
   }
+}
+.line {
+  width: 1px;
+  height: 20px;
+  margin: 0 10px;
+  background: #fff;
 }
 </style>

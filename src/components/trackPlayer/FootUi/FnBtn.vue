@@ -13,7 +13,7 @@ export default {
 </script>
 <style lang="postcss" scoped>
 .fn-btn {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 </style>

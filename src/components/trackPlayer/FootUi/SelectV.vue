@@ -29,6 +29,7 @@ select {
   background-color: #000;
   color: #fff;
   border: none;
+  font-size: 12px;
   &:focus-visible {
     outline-style: none;
   }
