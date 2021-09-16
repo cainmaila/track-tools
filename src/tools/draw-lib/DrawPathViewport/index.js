@@ -101,29 +101,27 @@ class DrawPathViewport extends BaseViewport {
   //================================================================
   _buildFloorsMap() {
     const _map = new Map()
-    const _loader = new PIXI.Loader()
-    this._setting.floors.forEach(_floor => {
-      _loader.add(_floor.id, _floor.img)
-    })
-    _loader.load((_, resources) => {
-      //TODO:圖面載入失敗例外處理
-      this._setting.floors.forEach(({ id, offset, scale }) => {
-        const floorMc = new PIXI.Sprite(resources[id]?.texture)
-        floorMc.name = id
-        offset || (offset = { x: 0, y: 0 })
-        _map.set(id, {
-          floorMc,
-          scale: scale || 1,
-          offset,
-        })
-        this._restLineLayer()
-      })
-      this.drag() //拖曳互動
-        .pinch()
-        .wheel()
-      this.emit('resources-ready')
-    })
     this._floorsMap = _map
+    let _len = this._setting.floors.length
+    this._setting.floors.forEach(async ({ id, offset, scale, img }) => {
+      const floorMc = new PIXI.Sprite(await PIXI.Texture.fromURL(img))
+      floorMc.name = id
+      offset || (offset = { x: 0, y: 0 })
+      _map.set(id, {
+        floorMc,
+        scale: scale || 1,
+        offset,
+      })
+      this._restLineLayer()
+      _len--
+      if (!_len) {
+        //最後
+        this.drag() //拖曳互動
+          .pinch()
+          .wheel()
+        this.emit('resources-ready')
+      }
+    })
   }
   _restLineLayer() {
     this._nowPo = null
