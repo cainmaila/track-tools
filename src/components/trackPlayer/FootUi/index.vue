@@ -3,16 +3,7 @@
     <div class="f1 md">
       <PlayBtn :playIng="playIng" @ck-play="$emit(playIng ? 'stop' : 'play')" />
       <div class="flex-center">
-        <select @input.stop="onVchange" :value="v">
-          <option :value="0.25">0.25x</option>
-          <option :value="0.5">0.5x</option>
-          <option :value="0.75">0.75x</option>
-          <option :value="1">1x</option>
-          <option :value="1.25">1.25x</option>
-          <option :value="1.5">1.5x</option>
-          <option :value="1.75">1.75x</option>
-          <option :value="2">2x</option>
-        </select>
+        <SelectV v-bind="$attrs" />
         <FnBtn type="zoomOut2" @ck="$emit('zoom', 'in')" />
         <FnBtn type="zoomIn" @ck="$emit('zoom', 'out')" />
         <FnBtn type="showall" @ck="$emit('zoom', 'fit')" />
@@ -32,11 +23,12 @@
 <script>
 import PlayBtn from './PlayBtn'
 import FnBtn from './FnBtn'
+import SelectV from './SelectV'
 export default {
   name: 'FootUi',
-  components: { PlayBtn, FnBtn },
-  props: ['playIng', 'totale', 'time', 'v'],
-  emits: ['update:time', 'stop', 'play', 'update:v', 'zoom'],
+  components: { PlayBtn, FnBtn, SelectV },
+  props: ['playIng', 'totale', 'time'],
+  emits: ['update:time', 'stop', 'play', 'zoom'],
   data() {
     return {}
   },
