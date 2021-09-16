@@ -12,9 +12,6 @@ const TO_IOS_EVENT = {
 
 /* 送出通訊規格 */
 function postIOSEvent(event, data = null) {
-  const message = { event }
-  data &&
-    (message.data = typeof data === 'object' ? JSON.stringify(data) : data)
   _postIOS(
     {
       event,
