@@ -50,6 +50,7 @@ function iosInterfaceHandler(store) {
   watch(
     () => store.state,
     state => {
+      log(state)
       switch (state) {
         case 'ready':
           postIOSEvent(TO_IOS_EVENT.readyToSetting)
@@ -62,9 +63,17 @@ function iosInterfaceHandler(store) {
   )
 }
 
+function log(data) {
+  const log = document.getElementById('LOG')
+  const mes = document.createElement('div')
+  mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
+  log.appendChild(mes)
+}
+
 //============================================================================
 
 function _postIOS(data, handler) {
+  log(`送出 ${handler}:` + JSON.stringify(data))
   try {
     window.webkit.messageHandlers[handler].postMessage(
       JSON.stringify(data),
