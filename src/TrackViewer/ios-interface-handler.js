@@ -65,6 +65,7 @@ function iosInterfaceHandler(store) {
 //============================================================================
 
 function _postIOS(data, handler) {
+  window.alert(`發送 ` + JSON.stringify(data))
   try {
     window.webkit.messageHandlers[handler].postMessage(
       JSON.stringify(data),
