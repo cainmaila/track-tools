@@ -7,7 +7,7 @@ const isIOS = !!window.webkit
 const TO_IOS_EVENT = {
   readyToSetting: 'readyToSetting', //viewer onReady
   resourcesLoaded: 'resourcesLoaded', //告知素材載入完成
-  resHistory: 'resHistory', //取回紀錄
+  historyReady: 'historyReady', //歷史紀錄設定完成
   error: 'error', //錯誤
 }
 
@@ -34,10 +34,7 @@ let _ios_message_handler = {
   //     },
   //   ],
   // }
-  pushPoint: () => {}, //送入點
-  suspend: () => {}, //暫停繪製
-  setMode: () => {}, //設定顯示模式
-  generateHistory: () => {}, //要求產生紀錄
+  setHistory: () => {}, //設定歷史紀錄
 }
 
 /* 設定 ios 傳入的處理程序 */
@@ -59,29 +56,30 @@ function iosInterfaceHandler(store) {
         case 'loaded':
           postIOSEvent(TO_IOS_EVENT.resourcesLoaded)
           break
+        case 'history-ready':
+          postIOSEvent(TO_IOS_EVENT.historyReady)
+          break
       }
     },
   )
 }
 
 function log(data) {
-  const log = document.getElementById('LOG')
   const mes = document.createElement('div')
   mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
-  log.appendChild(mes)
+  document.getElementById('LOG').appendChild(mes)
 }
 
 //============================================================================
 
-function _postIOS(data) {
+function _postIOS(data, HANDLER) {
   if (!isIOS) return
   log(`送出 :` + JSON.stringify(data))
   try {
-    window.webkit.messageHandlers['eventHandler'].postMessage(
+    window.webkit.messageHandlers[HANDLER].postMessage(
       JSON.stringify(data),
       '*',
     )
-    // console.log('#_postIOS', data, handler)
   } catch (error) {
     window.alert(error.message || error)
   }
@@ -89,7 +87,6 @@ function _postIOS(data) {
 
 /* viewer 設定 */
 window.viewerSetting = setting => {
-  log('#viewerSetting', setting)
   try {
     const _setting = typeof setting === 'object' ? setting : JSON.parse(setting)
     if (!_setting.floors || _setting.floors.length === 0) {
@@ -103,28 +100,10 @@ window.viewerSetting = setting => {
 //window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10}]}')
 
 /* 傳入點 */
-window.pushPoint = pointsStr => {
-  log('#pushPoint', pointsStr)
-  _ios_message_handler.pushPoint(pointsStr.split(','))
-}
-
-/* 暫停繪製 */
-window.suspend = () => {
-  log('#suspend')
-  _ios_message_handler.suspend()
-}
-
-/* 定位模式 */
-window.setMode = mode => {
-  log('#setMode', mode)
-  _ios_message_handler.setMode(mode)
-}
-
-/* 要求取回紀錄 */
-window.generateHistory = () => {
-  log('#generateHistory')
-  postIOSEvent(TO_IOS_EVENT.resHistory, _ios_message_handler.generateHistory())
-}
+// window.setHistory = points => {
+//   log('#setHistory', points)
+//   _ios_message_handler.pushPoint(pointsStr.split(','))
+// }
 
 export {
   log,
