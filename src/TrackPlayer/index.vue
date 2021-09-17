@@ -12,6 +12,12 @@
       @stop="stopPlayHistory"
       @zoom="setZoom"
     />
+    <At2Alert
+      id="SuspendAlert"
+      class="animate__animated animate__flipInX"
+      text="使用者中斷"
+      v-if="store.suspendAlertShow"
+    />
   </div>
 </template>
 <script>
@@ -22,13 +28,15 @@ import playerSdkMessageHandler from './playerSdk-message-handler'
 import playerHistoryHandler from './player-history-handler'
 
 import FootUi from '@/components/trackPlayer/FootUi'
+import At2Alert from '~at2@/components/At2Alert'
 export default {
   name: 'TrackPlayer',
-  components: { FootUi },
+  components: { FootUi, At2Alert },
   setup() {
     /* Viewer狀態機 */
     const store = reactive({
       state: 'init', //init -> ready -> loaded -> history-ready
+      suspendAlertShow: false,
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
@@ -75,6 +83,7 @@ export default {
       historyStore,
       setTime,
       setZoom,
+      store,
     }
   },
 }
@@ -89,5 +98,8 @@ export default {
   width: 100%;
   height: calc(100% - 85px);
   overflow: hidden;
+}
+#SuspendAlert {
+  pointer-events: none;
 }
 </style>

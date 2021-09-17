@@ -8,6 +8,7 @@ export const TRACK_COMMAND = {
  * @event resources-ready 素材準備完成
  * @event change-floor 切換樓層
  * @event push-point 收到位置
+ * @event suspend 暫停
  *
  * @class DrawPathViewport
  * @extends {BaseViewport}
@@ -73,6 +74,7 @@ class DrawPathViewport extends BaseViewport {
     }
     this._pointsHistory.push(_suspendPoint)
     this.emit('push-point', _suspendPoint)
+    this.emit('suspend')
   }
   generateHistory() {
     return this._pointsHistory

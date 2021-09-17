@@ -1,6 +1,11 @@
 <template>
   <div class="page">
     <div id="Viewer" class="page" ref="viewRef"></div>
+    <At2Alert
+      class="animate__animated animate__flipInX"
+      text="使用者中斷"
+      v-if="store.suspendAlertShow"
+    />
   </div>
 </template>
 <script>
@@ -8,16 +13,19 @@ import { reactive } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import viewerHandler from './viewer-handler.js'
+import At2Alert from '~at2@/components/At2Alert'
 import {
   iosInterfaceHandler,
   settingIosMessageHandler,
 } from './ios-interface-handler.js'
 export default {
   name: 'TrackViewer',
+  components: { At2Alert },
   setup() {
     /* Viewer狀態機 */
     const store = reactive({
       state: 'init', //init -> ready -> loaded
+      suspendAlertShow: false,
     })
     const viewerStore = reactive({
       mode: 'mono', //mone lock

@@ -9,6 +9,14 @@ function viewPortInitHandler(store, appRef) {
       viewport.floor = setting.floors[0].id
       store.state = 'loaded' /* 狀態機 */
     })
+    let _suspendTime = 0
+    viewport.on('suspend', () => {
+      store.suspendAlertShow = true
+      clearTimeout(_suspendTime)
+      _suspendTime = setTimeout(() => {
+        store.suspendAlertShow = false
+      }, 2000)
+    })
     viewPortRef.value = viewport
   }
 
