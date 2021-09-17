@@ -1,7 +1,7 @@
 <template>
   <div class="foot-ui">
     <div class="f1 md">
-      <PlayBtn :playIng="playIng" @ck-play="$emit(playIng ? 'stop' : 'play')" />
+      <PlayBtn :playIng="playIng" @ck-play="onPlay" />
       <div class="flex-center">
         <SelectV v-bind="$attrs" />
         <div class="line" />
@@ -47,6 +47,10 @@ export default {
     },
     onVchange(e) {
       this.$emit('update:v', e.target.value)
+    },
+    onPlay() {
+      new Audio(`./sound/btn-${this.playIng ? 'b' : 'a'}.mp3`).play()
+      this.$emit(this.playIng ? 'stop' : 'play')
     },
   },
 }

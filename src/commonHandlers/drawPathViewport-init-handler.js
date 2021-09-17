@@ -11,6 +11,7 @@ function viewPortInitHandler(store, appRef) {
     })
     let _suspendTime = 0
     viewport.on('suspend', () => {
+      new Audio(`./sound/btn-c.mp3`).play()
       store.suspendAlertShow = true
       clearTimeout(_suspendTime)
       _suspendTime = setTimeout(() => {
