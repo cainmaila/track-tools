@@ -17,6 +17,7 @@ class DrawPathPlayHelper {
     this._time = val > this.totaleTime ? this.totaleTime : val < 0 ? 0 : val //不能超過
     this._filterHistoryByTime()
     this._drawLineByTime()
+    // this.viewport.lockCenter()
   }
   get time() {
     return this._time
