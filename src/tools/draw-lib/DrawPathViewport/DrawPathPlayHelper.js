@@ -9,6 +9,7 @@ class DrawPathPlayHelper {
     this._time = 0
     this._timePo = null
     this._floor = ''
+    this._commandState = null
   }
   get totaleTime() {
     return this._endTime - this._startTime
@@ -19,8 +20,12 @@ class DrawPathPlayHelper {
     this._drawLineByTime()
     switch (this._timePo.command) {
       case TRACK_COMMAND.suspend: //目前時間是暫停
-        this.viewport.emit('suspend')
+        this._commandState !== TRACK_COMMAND.suspend &&
+          this.viewport.emit('suspend')
+        this._commandState = TRACK_COMMAND.suspend
         break
+      default:
+        this._commandState = null
     }
   }
   get time() {
