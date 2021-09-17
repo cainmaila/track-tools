@@ -91,7 +91,7 @@ class DrawPathViewport extends BaseViewport {
   }
   lockCenter() {
     if (!this._nowPo) return //必須要有點
-    this.scaled = 1
+    this.scaled = 10 / this._floorObj.scale //依照圖比例
     const _po = this.toLocal(
       this._floorObj.lineLayer.toGlobal(this._nowPoMc.position),
     )
