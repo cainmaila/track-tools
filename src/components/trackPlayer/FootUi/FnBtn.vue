@@ -1,5 +1,5 @@
 <template>
-  <div class="fn-btn bn flex-center" @pointerup.stop="$emit('ck')">
+  <div class="fn-btn bn flex-center" @pointerup.stop="onCk">
     <At2Icon :type="type" width="16" height="16" color="#fff" />
   </div>
 </template>
@@ -9,6 +9,12 @@ export default {
   name: 'FnBtn',
   props: ['type'],
   components: { At2Icon },
+  methods: {
+    onCk() {
+      new Audio(`./sound/ck.mp3`).play()
+      this.$emit('ck')
+    },
+  },
 }
 </script>
 <style lang="postcss" scoped>

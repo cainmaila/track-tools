@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     onPress() {
+      new Audio(`./sound/ck.mp3`).play()
       this.$emit('press')
     },
   },
