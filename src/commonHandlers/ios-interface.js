@@ -11,11 +11,12 @@ function postIOSEvent(event, data = null) {
   })
 }
 
+// eslint-disable-next-line no-unused-vars
 function log(data) {
-  const log = document.getElementById('LOG')
-  const mes = document.createElement('div')
-  mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
-  log.appendChild(mes)
+  // const log = document.getElementById('LOG')
+  // const mes = document.createElement('div')
+  // mes.innerHTML = typeof data === 'object' ? JSON.stringify(data) : data
+  // log.appendChild(mes)
 }
 
 export {
