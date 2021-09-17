@@ -35,6 +35,8 @@ class DrawPathViewport extends BaseViewport {
       this._floor = _id
       this._floorObj = this._floorsMap.get(_id)
       if (this._floorObj) {
+        this._startPoMc.resize(this._floorObj.scale)
+        this._nowPoMc.resize(this._floorObj.scale) //把點轉成跟人一樣 目前抓1m
         this.addChildAt(this._floorObj.floorMc, 0)
         this.zoomTofit()
       }
@@ -187,6 +189,10 @@ class PointTag extends PIXI.Graphics {
   //TODO:人的相對大小
   constructor(r = 10) {
     super()
+    this.resize(r)
+  }
+  resize(r) {
+    this.clear()
     this.beginFill(0x0071ff, 1)
     this.drawCircle(0, 0, r)
   }
