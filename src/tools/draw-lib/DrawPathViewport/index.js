@@ -91,13 +91,15 @@ class DrawPathViewport extends BaseViewport {
   }
   lockCenter() {
     if (!this._nowPo) return //必須要有點
-    this.scaled = 10 / this._floorObj.scale //依照圖比例
+    this.scaled = 20 / this._floorObj.scale //依照圖比例
     const _po = this.toLocal(
       this._floorObj.lineLayer.toGlobal(this._nowPoMc.position),
     )
     this.setTransform(
       -_po.x + this._app.view.clientWidth / 2,
       -_po.y + this._app.view.clientHeight / 2,
+      this.scaled,
+      this.scaled,
     )
   }
   //================================================================
@@ -157,7 +159,7 @@ class LineLayer extends PIXI.Graphics {
     super()
     this._scale = scale
     this._lastPoint = null
-    this.lineStyle(3, 0x0071ff, 1, 0.5, true)
+    this.lineStyle(3, 0x0071ff, 1, 0.5, false)
   }
   pushPoint(_point, isNewLine) {
     _point = this._scalePoint(_point)
