@@ -54,10 +54,15 @@
         uri: './editor.html',
         lang: 'zh-tw',
         setting: EditorSetting,
+        readOnly: true,
       })
 
       function onSave() {
         window.TrackEditor.getAreaMeta('getAreaMeta')
+      }
+
+      window.TrackEditor.onAreaData = function(data) {
+        sessionStorage.setItem('tree', JSON.stringify(data))
       }
 
       function onLoad() {

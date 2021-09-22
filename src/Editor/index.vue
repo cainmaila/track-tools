@@ -1,8 +1,18 @@
 <template>
   <div id="EditorTool" class="hight_100">
     <div id="Stage" ref="ViewRef"></div>
-    <FootUi @common="onCommon" :mode="original.mode" :step="original.step" />
-    <LayerUi class="right-top" :areas="areasRef" @common="onCommon" />
+    <FootUi
+      @common="onCommon"
+      :mode="original.mode"
+      :step="original.step"
+      :readOnly="original.readOnly"
+    />
+    <LayerUi
+      class="right-top"
+      :areas="areasRef"
+      @common="onCommon"
+      :readOnly="original.readOnly"
+    />
     <DetailUi
       :type="original.selAeeaType"
       v-model:tag="scopeAreaData.tag"
@@ -22,6 +32,7 @@
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
       :info="info"
+      :readOnly="original.readOnly"
     />
   </div>
 </template>
@@ -39,15 +50,20 @@ import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
 import { numberToHex } from '@/tools/colorTools'
+import { useUrlSearchParams } from '@vueuse/core'
 export default {
   name: 'AppEditor',
   components: { FootUi, LayerUi, DetailUi },
   setup() {
+    const { lang, readOnly } = useUrlSearchParams() || {}
     const original = reactive({
       mode: 'sel',
       step: 1,
       selAeeaType: 0,
+      readOnly: readOnly != undefined,
+      lang,
     })
+
     const {
       scopeAreaData,
       scopeArea,

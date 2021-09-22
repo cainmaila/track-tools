@@ -27,19 +27,22 @@
       @press="emitCommon('mov')"
       :state="mode === 'mov'"
     />
-    <div class="line"></div>
-    <FnBtn
-      :title="$t('Editor.FoottUi.create')"
-      icon="screenshot"
-      @press="createAreaUiOff = !createAreaUiOff"
-      :state="createAreaUiOff"
-    />
-    <CreateAreaFnBn
-      id="CreateAreaFnBn"
-      :step="step"
-      v-if="createAreaUiOff"
-      @press="onPressCreatArea"
-    />
+    <template v-if="!readOnly">
+      {{ readOnly }}
+      <div class="line"></div>
+      <FnBtn
+        :title="$t('Editor.FoottUi.create')"
+        icon="screenshot"
+        @press="createAreaUiOff = !createAreaUiOff"
+        :state="createAreaUiOff"
+      />
+      <CreateAreaFnBn
+        id="CreateAreaFnBn"
+        :step="step"
+        v-if="createAreaUiOff"
+        @press="onPressCreatArea"
+      />
+    </template>
   </div>
 </template>
 <script>
@@ -47,7 +50,7 @@ import FnBtn from './FnBtn'
 import CreateAreaFnBn from './CreateAreaFnBn'
 export default {
   name: 'FootUi',
-  props: ['mode', 'step'],
+  props: ['mode', 'step', 'readOnly'],
   emits: ['common'],
   components: { FnBtn, CreateAreaFnBn },
   data() {

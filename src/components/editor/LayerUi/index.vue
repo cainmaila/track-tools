@@ -18,6 +18,7 @@
         :area="area"
         :isEdit="area.isEdit"
         :canSelect="area.editEnable"
+        :readOnly="readOnly"
         @del="onDel"
         @lock="onLock"
         @select="onSelect"
@@ -33,7 +34,7 @@ import At2Icon from '~at2@/components/At2Icon'
 export default {
   name: 'LayerUi',
   components: { AreaLayerUi, At2Panel, At2Icon },
-  props: ['areas'],
+  props: ['areas', 'readOnly'],
   emits: ['common'],
   data() {
     return {

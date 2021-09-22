@@ -18,7 +18,7 @@
         icon-btn-size="20"
         circle
         @on-click="$emit('del', area)"
-        v-if="!area.userData.isRoot"
+        v-if="!area.userData.isRoot && !readOnly"
       />
     </div>
   </div>
@@ -28,7 +28,7 @@ import At2Btn from '~at2@/components/At2Btn'
 export default {
   name: 'AreaLayerUi',
   components: { At2Btn },
-  props: ['area', 'isEdit', 'canSelect'],
+  props: ['area', 'isEdit', 'canSelect', 'readOnly'],
 }
 </script>
 <style lang="postcss" scoped>
