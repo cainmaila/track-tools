@@ -30,7 +30,14 @@ class DrawPathViewport extends BaseViewport {
     this._buildFloorsMap() //圖面載入結束 emit('resources-ready')
   }
   set floor(_id) {
-    _id += ''
+    console.log(
+      '#floor',
+      _id,
+      this._floor,
+      this._floor !== _id,
+      this._floorsMap,
+    )
+
     if (this._floor !== _id) {
       this._changeFloor = true
       this._floorObj?.floorMc && this.removeChild(this._floorObj.floorMc)
