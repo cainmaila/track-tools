@@ -43,6 +43,8 @@ class DrawPathViewport extends BaseViewport {
       this._floorObj?.floorMc && this.removeChild(this._floorObj.floorMc)
       this._floor = _id
       this._floorObj = this._floorsMap.get(_id)
+      console.log('#_floorObj', this._floorObj)
+
       if (this._floorObj) {
         this._startPoMc.resize(this._floorObj.scale >> 1)
         this._nowPoMc.resize(this._floorObj.scale >> 1) //把點轉成跟人一樣 目前抓1m
