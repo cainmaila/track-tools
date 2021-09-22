@@ -1,7 +1,12 @@
 <template>
   <div id="DetailUi" :class="{ close: !tab }">
     <div class="roll">
-      <ScopeAreaMod v-bind="$attrs" v-if="type === 1" :scale="scale" />
+      <ScopeAreaMod
+        v-bind="$attrs"
+        v-if="type === 1"
+        :scale="scale"
+        :readOnly="readOnly"
+      />
       <PartAreaMod v-else-if="type === 2" v-bind="$attrs" />
       <FileInfoMod v-else v-bind="$attrs" />
     </div>
@@ -25,7 +30,7 @@ import FileInfoMod from './FileInfoMod'
 export default {
   name: 'DetailUi',
   components: { At2Icon, ScopeAreaMod, PartAreaMod, FileInfoMod },
-  props: ['type', 'scale'],
+  props: ['type', 'scale', 'readOnly'],
   data() {
     return {
       tab: true,

@@ -3,7 +3,10 @@
     <h3>總識別區域</h3>
     <Box>
       <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
-      <div>
+      <div v-if="readOnly">
+        {{ tag }}
+      </div>
+      <div v-else>
         <At2Input :value="tag" @input="val => $emit('update:tag', val)" />
       </div>
     </Box>
@@ -11,7 +14,11 @@
       <template v-slot:til>2. 總面積 <span class="red">*</span></template>
       <div class="flex-between strip">
         <div>單位:</div>
+        <div v-if="readOnly">
+          {{ unit }}
+        </div>
         <select
+          v-else
           class="inp"
           :value="unit"
           @input="e => $emit('update:unit', e.target.value)"
@@ -25,7 +32,11 @@
       </div>
       <div class="flex-between strip">
         <div>長度：</div>
+        <div v-if="readOnly">
+          {{ realWidth }}
+        </div>
         <At2Input
+          v-else
           class="inp"
           type="number"
           max="99999999999999"
@@ -36,7 +47,11 @@
       </div>
       <div class="flex-between strip">
         <div>寬度：</div>
+        <div v-if="readOnly">
+          {{ realHeight.toFixed(2) }}
+        </div>
         <At2Input
+          v-else
           class="inp"
           type="number"
           max="99999999999999"
@@ -51,7 +66,11 @@
       </div> -->
       <div class="flex-between strip">
         <div>樓層高度：</div>
+        <div v-if="readOnly">
+          {{ elevation }}
+        </div>
         <At2Input
+          v-else
           class="inp"
           type="number"
           max="99999999999999"
@@ -70,7 +89,11 @@
         <div>
           方位度數：
         </div>
+        <div v-if="readOnly">
+          {{ direction }}
+        </div>
         <At2Input
+          v-else
           class="inp"
           type="number"
           max="360"
@@ -80,7 +103,7 @@
         />
       </div>
     </Box>
-    <Box>
+    <Box v-if="!readOnly">
       <template v-slot:til> 4. 其他</template>
       <div class="flex-between strip">
         <div>
@@ -107,6 +130,7 @@ export default {
     'unit',
     'elevation',
     'direction',
+    'readOnly',
   ],
   emits: [
     'update:tag',
@@ -129,6 +153,9 @@ export default {
     emitColor(_hex) {
       this.$emit('update:color', _hex)
     },
+  },
+  mounted() {
+    console.log('aaaa', this.readOnly)
   },
 }
 </script>
