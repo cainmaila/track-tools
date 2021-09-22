@@ -7,7 +7,11 @@
         :scale="scale"
         :readOnly="readOnly"
       />
-      <PartAreaMod v-else-if="type === 2" v-bind="$attrs" />
+      <PartAreaMod
+        v-else-if="type === 2"
+        v-bind="$attrs"
+        :readOnly="readOnly"
+      />
       <FileInfoMod v-else v-bind="$attrs" />
     </div>
     <div class="x flex-center bn" @pointerup.stop="onTab">

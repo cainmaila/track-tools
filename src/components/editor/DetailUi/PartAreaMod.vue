@@ -3,7 +3,8 @@
     <h3>識別區域</h3>
     <Box>
       <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
-      <div>
+      <div v-if="readOnly">{{ selectAreaTag }}</div>
+      <div v-else>
         <At2Input
           :value="selectAreaTag"
           @input="val => $emit('update:selectAreaTag', val)"
@@ -26,7 +27,9 @@
       </div>
       <div class="flex-between strip">
         <div>房間高度：</div>
+        <div v-if="readOnly">{{ spaceHeight }}</div>
         <At2Input
+          v-else
           class="inp"
           type="number"
           step="0.01"
@@ -47,7 +50,7 @@
         <div>{{ selectRealOffsetY.toFixed(2) }}</div>
       </div>
     </Box>
-    <Box>
+    <Box v-if="!readOnly">
       <template v-slot:til> 4. 其他</template>
       <div class="flex-between strip">
         <div>
@@ -81,6 +84,7 @@ export default {
     'selectRealOffsetX',
     'selectRealOffsetY',
     'spaceHeight',
+    'readOnly',
   ],
   emits: [
     'update:selectAreaColor',
