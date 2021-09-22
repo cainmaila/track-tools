@@ -71,7 +71,9 @@ export default {
     } = scopeAreaHandler() //處理 總區域 的變化
     const { selectAreaRef, selectAreaData } = partAreaHandler(scopeAreaData)
     const areasRef = ref([])
-    const { ViewRef, viewportRef, create, info } = createViewPort()
+    const { ViewRef, viewportRef, create, info } = createViewPort(
+      original.readOnly,
+    )
     const { getAreaMeta } = metaHandler(viewportRef, scopeArea, scopeAreaData)
     const { setAreaMeta } = metaInSetHeadler(
       original,

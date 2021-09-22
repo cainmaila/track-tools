@@ -32,12 +32,13 @@ class DrawingViewport extends BaseViewport {
    * @param {number} setting.aeraSetting.tagStyle.letterSpacing - tag letterSpacing def 1
    * @memberof DrawingViewport
    */
-  constructor(app, setting) {
+  constructor(app, setting, readonly) {
     super(app)
     this._setting = {
       bg: null, // bg 底圖url
       aeraSetting: null, //區塊設定
     }
+    this._readonly = readonly
     this._setSetting(setting)
     this._state = ''
     this._pointerdown = null
@@ -66,16 +67,20 @@ class DrawingViewport extends BaseViewport {
 
     this.on('select-start', ({ obj, event }) => {
       this.targetObj = obj
-      this._pointermove = this.toLocal(event.data.global)
-      this.state = 'drag'
+      if (!this._readonly) {
+        this._pointermove = this.toLocal(event.data.global)
+        this.state = 'drag'
+      }
     })
     this.on('select-end', () => {
       this.state = ''
     })
     this.on('edit', ({ obj, type }) => {
-      obj.editType = type
-      this.targetObj = obj
-      this.state = 'edit'
+      if (!this._readonly) {
+        obj.editType = type
+        this.targetObj = obj
+        this.state = 'edit'
+      }
     })
 
     this._setting.bg && this._loadBg(this._setting.bg) //底圖

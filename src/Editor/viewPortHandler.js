@@ -3,7 +3,7 @@ import DrawingViewport from '@/tools/draw-lib/DrawingViewport'
 import { ref, reactive } from 'vue'
 import { postEvent } from './sdkMessageHandler'
 let app = null
-function createViewPort() {
+function createViewPort(readOnly) {
   const ViewRef = ref(null)
   const viewportRef = ref()
   const info = reactive({
@@ -14,7 +14,7 @@ function createViewPort() {
   })
   let initOb
   const create = setting => {
-    initOb = _drawingViewportInit(ViewRef.value, setting) //傳入設定，創建viewport
+    initOb = _drawingViewportInit(ViewRef.value, setting, readOnly) //傳入設定，創建viewport
     viewportRef.value = initOb.viewport
     initOb.viewport.on('loaded', () => {
       viewportRef.value.zoomTofit(100, 360)
@@ -35,7 +35,7 @@ function createViewPort() {
 }
 
 /* 初始化 pixi 並創建 DrawingViewport 物件 */
-function _drawingViewportInit(view, setting) {
+function _drawingViewportInit(view, setting, readOnly) {
   app && app.destroy({ removeView: true }) //銷毀舊的
   app = new PIXI.Application({
     antialias: true,
@@ -46,10 +46,14 @@ function _drawingViewportInit(view, setting) {
   resize()
   view.appendChild(app.view)
 
-  const viewport = new DrawingViewport(app, {
-    ...setting,
-    devicePixelRatio: window.devicePixelRatio || 1,
-  })
+  const viewport = new DrawingViewport(
+    app,
+    {
+      ...setting,
+      devicePixelRatio: window.devicePixelRatio || 1,
+    },
+    readOnly,
+  )
 
   window.onresize = () => {
     resize()

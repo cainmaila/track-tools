@@ -154,9 +154,6 @@ export default {
       this.$emit('update:color', _hex)
     },
   },
-  mounted() {
-    console.log('aaaa', this.readOnly)
-  },
 }
 </script>
 <style lang="postcss" scoped>
