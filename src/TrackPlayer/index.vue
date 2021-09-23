@@ -100,6 +100,9 @@ export default {
 }
 </script>
 <style lang="postcss" scoped>
+#trackPlayer {
+  user-select: none;
+}
 #FootUi {
   position: absolute;
   bottom: 0;
