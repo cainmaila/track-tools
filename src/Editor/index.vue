@@ -50,19 +50,18 @@ import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
 import { numberToHex } from '@/tools/colorTools'
-// import { useUrlSearchParams } from '@vueuse/core'
+import { useUrlSearchParams } from '@vueuse/core'
 export default {
   name: 'AppEditor',
   components: { FootUi, LayerUi, DetailUi },
   setup() {
-    // const { lang, readOnly } = useUrlSearchParams() || {}
+    const { lang, readOnly } = useUrlSearchParams() || {}
     const original = reactive({
       mode: 'sel',
       step: 1,
       selAeeaType: 0,
-      // readOnly: readOnly != undefined,
-      // lang,
-      readOnly: false, //TODO:QQ
+      readOnly: readOnly != undefined,
+      lang,
     })
 
     const {
