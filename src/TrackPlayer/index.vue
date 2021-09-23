@@ -26,6 +26,10 @@ import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import playerSdkMessageHandler from './playerSdk-message-handler'
 import playerHistoryHandler from './player-history-handler'
+import {
+  iosInterfaceHandler,
+  settingIosMessageHandler,
+} from './ios-interface-handler'
 
 import FootUi from '@/components/trackPlayer/FootUi'
 import At2Alert from '~at2@/components/At2Alert'
@@ -38,6 +42,7 @@ export default {
       state: 'init', //init -> ready -> loaded -> history-ready
       suspendAlertShow: false,
     })
+    iosInterfaceHandler(store)
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
     const { postEvent, sdkCommandHandlerSetting } = playerSdkMessageHandler(
@@ -52,6 +57,12 @@ export default {
     } = playerHistoryHandler(store, viewPortRef)
     sdkCommandHandlerSetting.viewerSetting = viewerSetting //初始化
     sdkCommandHandlerSetting.setHistory = setHistory //設定播放紀錄
+
+    //IOS接口
+    settingIosMessageHandler({
+      viewerSetting,
+      setHistory,
+    })
 
     window.onresize = () => {
       onViewResize()
