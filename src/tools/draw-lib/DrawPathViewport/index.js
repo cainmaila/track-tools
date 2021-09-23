@@ -30,6 +30,7 @@ class DrawPathViewport extends BaseViewport {
     this._buildFloorsMap() //圖面載入結束 emit('resources-ready')
   }
   set floor(_id) {
+    _id += ''
     if (this._floor !== _id) {
       this._changeFloor = true
       this._floorObj?.floorMc && this.removeChild(this._floorObj.floorMc)
@@ -110,9 +111,9 @@ class DrawPathViewport extends BaseViewport {
     let _len = this._setting.floors.length
     this._setting.floors.forEach(async ({ id, offset, scale, img }) => {
       const floorMc = new PIXI.Sprite(await PIXI.Texture.fromURL(img))
-      floorMc.name = id
+      floorMc.name = id + ''
       offset || (offset = { x: 0, y: 0 })
-      _map.set(id, {
+      _map.set(id + '', {
         floorMc,
         scale: scale || 1,
         offset,
