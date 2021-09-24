@@ -32,7 +32,7 @@
       <div class="line"></div>
       <FnBtn
         :title="$t('Editor.FoottUi.create')"
-        icon="screenshot"
+        icon="addArea"
         @press="createAreaUiOff = !createAreaUiOff"
         :state="createAreaUiOff"
       />
