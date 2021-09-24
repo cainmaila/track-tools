@@ -37,8 +37,8 @@ class DrawPathViewport extends BaseViewport {
       this._floor = _id
       this._floorObj = this._floorsMap.get(_id)
       if (this._floorObj) {
-        this._startPoMc.resize(this._floorObj.scale >> 1)
-        this._nowPoMc.resize(this._floorObj.scale >> 1) //把點轉成跟人一樣 目前抓1m
+        this._startPoMc.resize(this._floorObj.scale >> 2)
+        this._nowPoMc.resize(this._floorObj.scale >> 2) //把點轉成跟人一樣 目前抓0.5m
         this.addChildAt(this._floorObj.floorMc, 0)
         this.zoomTofit()
       }
