@@ -5,8 +5,8 @@
       <div class="flex-center">
         <SelectV v-bind="$attrs" />
         <div class="line" />
-        <FnBtn type="zoomOut2" @ck="$emit('zoom', 'in')" />
-        <FnBtn type="zoomIn" @ck="$emit('zoom', 'out')" />
+        <FnBtn type="zoomIn" @ck="$emit('zoom', 'in')" />
+        <FnBtn type="zoomOut" @ck="$emit('zoom', 'out')" />
         <FnBtn type="showall" @ck="$emit('zoom', 'fit')" />
       </div>
     </div>
