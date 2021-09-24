@@ -15,8 +15,6 @@ class DrawPathPlayHelper {
     return this._endTime - this._startTime
   }
   set time(val) {
-    console.log('#test log time', val)
-
     this._time = val > this.totaleTime ? this.totaleTime : val < 0 ? 0 : val //不能超過
     this._filterHistoryByTime()
     this._drawLineByTime()
@@ -49,6 +47,8 @@ class DrawPathPlayHelper {
     let _t_line = null
     let _floor = null
     const _date = this._startTime + this._time
+    console.log('xxxxxxx', _date, this._startTime, this._time)
+
     this._history.forEach(_po => {
       if (_po.date > _date) return
       this._timePo = _po
