@@ -2,7 +2,7 @@
   <div id="FootUi">
     <FnBtn
       :title="$t('Editor.FoottUi.select')"
-      icon="fold"
+      icon="vernier"
       @press="emitCommon('sel')"
       :state="mode === 'sel'"
     />
@@ -23,7 +23,7 @@
     />
     <FnBtn
       :title="$t('Editor.FoottUi.move')"
-      icon="move3D"
+      icon="move"
       @press="emitCommon('mov')"
       :state="mode === 'mov'"
     />
