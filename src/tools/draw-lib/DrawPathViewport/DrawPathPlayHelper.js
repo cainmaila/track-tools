@@ -15,6 +15,7 @@ class DrawPathPlayHelper {
     return this._endTime - this._startTime
   }
   set time(val) {
+    val *= 1
     this._time = val > this.totaleTime ? this.totaleTime : val < 0 ? 0 : val //不能超過
     this._filterHistoryByTime()
     this._drawLineByTime()
@@ -36,7 +37,7 @@ class DrawPathPlayHelper {
   }
   setHistory(_history) {
     this._history = _history
-    this._startTime = this._history[0].date
+    this._startTime = this._history[0].date * 1
     this._endTime = this._history[this._history.length - 1].date
     this.time = 0
     this.viewport._setNowPoint(this._history[0]) //起點繪製
@@ -48,11 +49,7 @@ class DrawPathPlayHelper {
     let _floor = null
     const _date = this._startTime + this._time
     this._history.forEach(_po => {
-      console.log('#aaa', _po, _date, _po.date * 1 > _date * 1)
-      if (_po.date * 1 > _date * 1) {
-        console.log('#xxxxx')
-        return
-      }
+      if (_po.date * 1 > _date) return
       this._timePo = _po
       //依據樓層分層
       if (_po?.command === TRACK_COMMAND.suspend) {
