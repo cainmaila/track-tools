@@ -13,7 +13,7 @@ variables:
   # DEPLOY_BASH_PATH: ~/anchor-tools/deploy/track-tool.sh
   DEPLOY_BASH_PATH: /home/anchor/anchor-tools/deploy/track-tool.sh
 
-# dev =======================================================================
+# dev ======================================================================
 build-dev:
   stage: build
   only:
