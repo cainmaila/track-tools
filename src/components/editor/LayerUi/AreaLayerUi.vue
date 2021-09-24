@@ -3,22 +3,22 @@
     <div @click="$emit('select', area)">{{ area.name }}</div>
     <div class="flex">
       <At2Btn
-        icon="unMoved"
-        icon-width="16"
-        icon-height="16"
-        icon-btn-size="20"
-        circle
-        :type="canSelect ? `default` : `black`"
-        @on-click="$emit('lock', area)"
-      />
-      <At2Btn
         icon="icon_delete"
-        icon-width="16"
-        icon-height="16"
+        icon-width="12"
+        icon-height="12"
         icon-btn-size="20"
         circle
         @on-click="$emit('del', area)"
         v-if="!area.userData.isRoot && !readOnly"
+      />
+      <At2Btn
+        icon="unlock"
+        icon-width="12"
+        icon-height="12"
+        icon-btn-size="20"
+        circle
+        :type="canSelect ? `default` : `black`"
+        @on-click="$emit('lock', area)"
       />
     </div>
   </div>
