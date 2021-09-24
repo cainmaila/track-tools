@@ -15,6 +15,8 @@ class DrawPathPlayHelper {
     return this._endTime - this._startTime
   }
   set time(val) {
+    console.log('#test log time', val)
+
     this._time = val > this.totaleTime ? this.totaleTime : val < 0 ? 0 : val //不能超過
     this._filterHistoryByTime()
     this._drawLineByTime()
