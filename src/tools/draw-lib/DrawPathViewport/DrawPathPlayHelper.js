@@ -47,10 +47,11 @@ class DrawPathPlayHelper {
     let _t_line = null
     let _floor = null
     const _date = this._startTime + this._time
-    console.log('xxxxxxx', _date, this._startTime, this._time)
-
     this._history.forEach(_po => {
-      if (_po.date > _date) return
+      if (_po.date > _date) {
+        console.log('#xxx')
+        return
+      }
       this._timePo = _po
       //依據樓層分層
       if (_po?.command === TRACK_COMMAND.suspend) {
