@@ -2,7 +2,7 @@
   <div id="FootUi">
     <FnBtn
       :title="$t('Editor.FoottUi.select')"
-      icon="edit"
+      icon="fold"
       @press="emitCommon('sel')"
       :state="mode === 'sel'"
     />
@@ -13,12 +13,12 @@
     />
     <FnBtn
       :title="$t('Editor.FoottUi.zoomIn')"
-      icon="zoomOut2"
+      icon="zoomIn"
       @press="emitCommon('zoom', 0.1)"
     />
     <FnBtn
       :title="$t('Editor.FoottUi.zoomOut')"
-      icon="zoomIn"
+      icon="zoomOut"
       @press="emitCommon('zoom', -0.1)"
     />
     <FnBtn

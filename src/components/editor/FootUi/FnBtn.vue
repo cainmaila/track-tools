@@ -1,6 +1,6 @@
 <template>
   <div class="fn-btn flex-center bn" @pointerup.stop="onPress">
-    <At2Icon :type="icon" width="25" height="17" :color="color" />
+    <At2Icon :type="icon" width="32" height="32" :color="color" />
   </div>
 </template>
 <script>
