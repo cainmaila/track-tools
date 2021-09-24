@@ -87,7 +87,7 @@ export default {
           original.mode = 'sel'
           break
         case 'fit':
-          viewportRef.value.zoomTofit(100, 360)
+          viewportRef.value.zoomTofit(100 + 100, 360 + 100)
           break
         case 'zoom':
           viewportRef.value.zoom(data)

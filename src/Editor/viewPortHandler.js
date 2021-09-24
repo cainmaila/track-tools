@@ -17,7 +17,7 @@ function createViewPort(readOnly) {
     initOb = _drawingViewportInit(ViewRef.value, setting, readOnly) //傳入設定，創建viewport
     viewportRef.value = initOb.viewport
     initOb.viewport.on('loaded', () => {
-      viewportRef.value.zoomTofit(100, 360)
+      viewportRef.value.zoomTofit(100 + 100, 360 + 100)
       postEvent('loaded')
     })
     info.name = setting.info.name
