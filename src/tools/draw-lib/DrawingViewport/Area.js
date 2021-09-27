@@ -39,6 +39,7 @@ class Area {
     this._isEdit = false //編輯中，影響九宮編輯顯示
     this._editEnable = true //是否可以編輯狀態
     this._stageLock = false //場景鎖定暫時不能編輯
+    this._selectEnable = true //是否可選取，必須可選取才可編輯
     this._userData = {}
     this.create()
     if (wh) {
@@ -121,15 +122,26 @@ class Area {
     return this._isEdit
   }
   /**
-   * 是否能夠選取編輯
+   * 是否能夠選取編輯，selectEnable要true才能生效
    * @memberof Area
    */
   set editEnable(val) {
     this._editEnable = val
-    this._chkInteractive()
+    val || (this.isEdit = false)
   }
   get editEnable() {
     return this._editEnable
+  }
+  /**
+   * 是否能夠選取
+   * @memberof Area
+   */
+  set selectEnable(val) {
+    this._selectEnable = val
+    this._chkInteractive()
+  }
+  get selectEnable() {
+    return this._selectEnable
   }
   /**
    * userData
@@ -151,7 +163,7 @@ class Area {
     this._chkInteractive()
   }
   _chkInteractive() {
-    this._rectangle.interactive = this._editEnable && !this._stageLock
+    this._rectangle.interactive = this._selectEnable && !this._stageLock
     this._rectangle.interactive || (this.isEdit = false)
   }
   /**

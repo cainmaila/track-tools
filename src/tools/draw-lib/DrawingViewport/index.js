@@ -67,7 +67,7 @@ class DrawingViewport extends BaseViewport {
 
     this.on('select-start', ({ obj, event }) => {
       this.targetObj = obj
-      if (!this._readonly) {
+      if (!this._readonly && this.targetObj.editEnable) {
         this._pointermove = this.toLocal(event.data.global)
         this.state = 'drag'
       }
@@ -76,7 +76,7 @@ class DrawingViewport extends BaseViewport {
       this.state = ''
     })
     this.on('edit', ({ obj, type }) => {
-      if (!this._readonly) {
+      if (!this._readonly && this.targetObj.editEnable) {
         obj.editType = type
         this.targetObj = obj
         this.state = 'edit'
@@ -90,7 +90,7 @@ class DrawingViewport extends BaseViewport {
     if (typeof _item == 'string') {
       _item = this.getChildByName(_item)
     }
-    if (_item?.editEnable) {
+    if (_item?.selectEnable) {
       this.targetObj = _item
     }
   }
