@@ -1,6 +1,8 @@
 <template>
   <div class="area-layer-ui flex" :class="{ acc: isEdit }">
-    <div @click="$emit('select', area)">{{ area.name }}</div>
+    <div class="txt-cont flex" @click="$emit('select', area)">
+      {{ area.name }}
+    </div>
     <div class="flex">
       <At2Btn
         icon="icon_delete"
@@ -43,6 +45,10 @@ export default {
   &.acc {
     background: #113b93;
   }
+}
+.txt-cont {
+  height: 100%;
+  width: 100%;
 }
 .at2-btn {
   margin-left: 15px;
