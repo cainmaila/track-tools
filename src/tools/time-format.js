@@ -1,10 +1,16 @@
+const S = 1000
+const M = S * 60
 function msToTime(ms) {
-  let _time = ~~(ms / 1000) //to s
-  const s = _time % 60
-  _time = ~~(_time / 60) //to m
-  const m = _time % 60
-  const h = ~~(_time / 60)
-  return `${h ? h + ':' : ''}${m + ':'}${s}`
+  const m = _makeUpZ(~~(ms / M) + '')
+  const s = _makeUpZ(~~((ms % M) / S) + '')
+  return `${m}:${s}`
 }
 
 export { msToTime }
+
+function _makeUpZ(_s) {
+  while (_s.length < 2) {
+    _s = '0' + _s
+  }
+  return _s
+}
