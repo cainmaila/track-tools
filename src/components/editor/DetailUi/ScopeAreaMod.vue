@@ -57,7 +57,7 @@
           max="99999999999999"
           step="0.01"
           :value="realHeight.toFixed(2)"
-          @input="val => $emit('change-realHeight', val)"
+          @change="val => $emit('change-realHeight', val)"
         />
       </div>
       <!-- <div class="flex-between strip">
