@@ -419,10 +419,18 @@ class AreaEditPoint extends PIXI.Graphics {
   get type() {
     return this._type
   }
-  create() {
+  setSize(_size) {
+    this._size = _size
+    this.draw()
+  }
+  draw() {
+    this.clear()
     this.beginFill(this._color)
     this.drawRect(-this._size >> 1, -this._size >> 1, this._size, this._size)
     this.endFill()
+  }
+  create() {
+    this.draw()
     this.interactive = true
     this.on('pointerdown', event => {
       event.stopPropagation()
