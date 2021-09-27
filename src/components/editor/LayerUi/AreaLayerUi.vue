@@ -3,7 +3,7 @@
     <div class="txt-cont flex" @pointerup.stop="$emit('select', area)">
       {{ area.name }}
     </div>
-    <div class="flex">
+    <div class="flex" v-if="!readOnly">
       <div
         class="sp btn bn flex-center"
         :class="{ lock: !canSelect }"
@@ -23,7 +23,7 @@
         icon-btn-size="20"
         circle
         @on-click="$emit('del', area)"
-        v-if="!area.userData.isRoot && !readOnly"
+        v-if="!area.userData.isRoot"
       />
       <div v-else class="sp"></div>
     </div>
