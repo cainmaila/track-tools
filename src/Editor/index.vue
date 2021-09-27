@@ -13,6 +13,9 @@
       @common="onCommon"
       :readOnly="original.readOnly"
     />
+    <TopUi id="TopUi" :save="!original.readOnly" @ui="topUiHandler">{{
+      info.name
+    }}</TopUi>
     <DetailUi
       :type="original.selAeeaType"
       v-model:tag="scopeAreaData.tag"
@@ -49,11 +52,12 @@ import metaInSetHeadler from './metaInSetHeadler'
 import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
+import TopUi from '@/components/editor/TopUi'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi, DetailUi },
+  components: { FootUi, LayerUi, DetailUi, TopUi },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
     const original = reactive({
@@ -179,6 +183,17 @@ export default {
       }
     })
 
+    const topUiHandler = event => {
+      switch (event) {
+        case 'save':
+          getAreaMeta()
+          break
+        case 'exit':
+          postEvent('exit')
+          break
+      }
+    }
+
     return {
       info,
       ViewRef,
@@ -189,6 +204,7 @@ export default {
       selectAreaRef,
       selectAreaData,
       changeAreaRealHeight,
+      topUiHandler,
     }
   },
 }
@@ -208,5 +224,10 @@ export default {
   right: 20px;
   border: 1px solid rgb(151, 151, 151);
   box-sizing: content-box;
+}
+#TopUi {
+  position: absolute;
+  left: 50%;
+  top: 20px;
 }
 </style>

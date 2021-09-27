@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime.js' //fix babel 7.x-无法解析'core-js/modules/es.array.concat'
-const Version = '1.0.1'
+const Version = '1.0.2'
 console.info(
   ` 🤘%c Hello TrackEditorSDK Version ${Version} %c`,
   'background: #236D94; color: #fff; border-radius: 10px;',
@@ -26,6 +26,7 @@ window.TrackEditor = window.TrackEditor || {
   },
   onLoaded() {},
   onAreaData() {},
+  onExit() {},
   _addViewer() {
     const self = window.TrackEditor
     self.view = document.createElement('iframe')
@@ -63,6 +64,9 @@ window.TrackEditor = window.TrackEditor || {
             } else {
               self.onAreaData(meta)
             }
+            break
+          case 'exit':
+            self.onExit()
             break
         }
       }
