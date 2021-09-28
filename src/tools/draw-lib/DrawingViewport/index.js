@@ -88,7 +88,6 @@ class DrawingViewport extends BaseViewport {
     this._editPoSize = 8
     this.on('zoomed', () => {
       this._resizeEditPoSize()
-      this.resizeEditPo(this._editPoSize)
     })
     this._setting.bg && this._loadBg(this._setting.bg) //底圖
   }
@@ -184,6 +183,7 @@ class DrawingViewport extends BaseViewport {
   /* 縮放倍數 */
   zoom(sc) {
     this.scaled += sc
+    this._resizeEditPoSize()
   }
   /* 最適大小 */
   zoomTofit(paddingW = 0, paddingH = 0) {
@@ -195,13 +195,12 @@ class DrawingViewport extends BaseViewport {
     this._resizeEditPoSize()
   }
   _resizeEditPoSize() {
-    console.log('22222', this._setting.aeraSetting)
-
     this._editPoSize =
       this.toLocal(
         { x: this._setting.aeraSetting?.editSize || 9, y: 0 },
         this.app.stage,
       ).x - this.toLocal({ x: 0, y: 0 }, this.app.stage).x
+    this.resizeEditPo(this._editPoSize)
   }
   /* 取回繪圖資訊 */
   getDrawingMeta() {
@@ -243,6 +242,7 @@ class DrawingViewport extends BaseViewport {
       _area.draw({ x: itemMate.x + itemMate.w, y: itemMate.y + itemMate.h })
       _area.name = itemMate.name
       _area.createEditPo()
+      // _area.setEditPoSize(this._editPoSize)
       _area.userData = itemMate.userData
     })
   }
@@ -400,6 +400,7 @@ class DrawingViewport extends BaseViewport {
   }
   drawAreaEnd() {
     this._drawObj.createEditPo()
+    this._drawObj.setEditPoSize(this._editPoSize)
     this._drawObj.name = generateUUID('Area')
     this.targetObj = this._drawObj
     this._drawObj = null
