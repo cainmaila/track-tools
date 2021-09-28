@@ -11,6 +11,7 @@
         v-else-if="type === 2"
         v-bind="$attrs"
         :readOnly="readOnly"
+        :selectEditEnable="selectEditEnable"
       />
       <FileInfoMod v-else v-bind="$attrs" />
     </div>
@@ -34,7 +35,7 @@ import FileInfoMod from './FileInfoMod'
 export default {
   name: 'DetailUi',
   components: { At2Icon, ScopeAreaMod, PartAreaMod, FileInfoMod },
-  props: ['type', 'scale', 'readOnly'],
+  props: ['type', 'scale', 'readOnly', 'selectEditEnable'],
   data() {
     return {
       tab: true,
