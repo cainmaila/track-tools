@@ -54,7 +54,6 @@ function _drawingViewportInit(view, setting, readOnly) {
     },
     readOnly,
   )
-
   window.onresize = () => {
     resize()
     viewport.resize()

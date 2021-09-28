@@ -38,6 +38,7 @@ class DrawingViewport extends BaseViewport {
       bg: null, // bg 底圖url
       aeraSetting: null, //區塊設定
     }
+    this.app = app
     this._readonly = readonly
     this._setSetting(setting)
     this._state = ''
@@ -48,6 +49,7 @@ class DrawingViewport extends BaseViewport {
     this._drawObj = null
     this._targetObj = null
     this._selectEnable = true
+
     this._createOperationLayer()
 
     this.drag()
@@ -82,7 +84,11 @@ class DrawingViewport extends BaseViewport {
         this.state = 'edit'
       }
     })
-
+    //縮放時改變點
+    this._editPoSize = 8
+    this.on('zoomed', () => {
+      this._resizeEditPoSize()
+    })
     this._setting.bg && this._loadBg(this._setting.bg) //底圖
   }
   /* 選取一個物件 */
@@ -94,7 +100,6 @@ class DrawingViewport extends BaseViewport {
       this.targetObj = _item
     }
   }
-
   /* 目前選取物件，要設定請使用 selectItem 方法 */
   set targetObj(val) {
     this._targetObj && (this._targetObj.isEdit = false)
@@ -102,6 +107,7 @@ class DrawingViewport extends BaseViewport {
     val && this.addChild(val.rectangle) //移到最上層
     this._targetObj && (this._targetObj.isEdit = true)
     this.emit('select', val)
+    val && val.setEditPoSize(this._editPoSize)
   }
   get targetObj() {
     return this._targetObj
@@ -178,6 +184,7 @@ class DrawingViewport extends BaseViewport {
   /* 縮放倍數 */
   zoom(sc) {
     this.scaled += sc
+    this._resizeEditPoSize()
   }
   /* 最適大小 */
   zoomTofit(paddingW = 0, paddingH = 0) {
@@ -186,6 +193,15 @@ class DrawingViewport extends BaseViewport {
       : this.fit(false, this.width, this.height)
     this.x = (this._app.view.clientWidth - this.width) >> 1
     this.y = (this._app.view.clientHeight - this.height) >> 1
+    this._resizeEditPoSize()
+  }
+  _resizeEditPoSize() {
+    this._editPoSize =
+      this.toLocal(
+        { x: this._setting.aeraSetting?.editSize || 9, y: 0 },
+        this.app.stage,
+      ).x - this.toLocal({ x: 0, y: 0 }, this.app.stage).x
+    this._targetObj && this._targetObj.setEditPoSize(this._editPoSize)
   }
   /* 取回繪圖資訊 */
   getDrawingMeta() {
@@ -294,6 +310,12 @@ class DrawingViewport extends BaseViewport {
     }
     return _returnAreaArr
   }
+  /* 編輯點大小變更 */
+  resizeEditPo(_size) {
+    this.getAllAreas().forEach(area => {
+      area.setEditPoSize(_size)
+    })
+  }
   _setSetting(_setting) {
     this._setting = { ...this._setting, ..._setting }
   }
@@ -378,6 +400,7 @@ class DrawingViewport extends BaseViewport {
   }
   drawAreaEnd() {
     this._drawObj.createEditPo()
+    this._drawObj.setEditPoSize(this._editPoSize)
     this._drawObj.name = generateUUID('Area')
     this.targetObj = this._drawObj
     this._drawObj = null

@@ -391,6 +391,19 @@ class Area {
     this.restEditPo()
     this.isEdit = false
   }
+  setEditPoSize(_size) {
+    if (this._setting.editSize === _size) return
+    this._setting.editSize = _size
+    //點大小
+    this._p1.setSize(_size)
+    this._p2.setSize(_size)
+    this._p3.setSize(_size)
+    this._p4.setSize(_size)
+    this._p6.setSize(_size)
+    this._p7.setSize(_size)
+    this._p8.setSize(_size)
+    this._p9.setSize(_size)
+  }
   restEditPo() {
     const _w = this._dx
     const _h = this._dy
@@ -419,10 +432,19 @@ class AreaEditPoint extends PIXI.Graphics {
   get type() {
     return this._type
   }
-  create() {
+  setSize(_size) {
+    if (this._size === _size) return
+    this._size = _size
+    this.draw()
+  }
+  draw() {
+    this.clear()
     this.beginFill(this._color)
     this.drawRect(-this._size >> 1, -this._size >> 1, this._size, this._size)
     this.endFill()
+  }
+  create() {
+    this.draw()
     this.interactive = true
     this.on('pointerdown', event => {
       event.stopPropagation()
