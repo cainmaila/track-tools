@@ -1,7 +1,7 @@
 <template>
   <div class="area-layer-ui flex" :class="{ acc: isEdit }">
     <div class="txt-cont flex" @pointerup.stop="$emit('select', area)">
-      {{ area.name }}
+      {{ area.tag || 'Area' }}
     </div>
     <div class="flex" v-if="!readOnly">
       <div
