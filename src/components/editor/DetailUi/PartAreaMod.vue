@@ -101,7 +101,7 @@ export default {
   },
   computed: {
     canEdit() {
-      console.log('2222', this.readOnly, this.selectEditEnable)
+      console.log('#canEdit', this.readOnly, this.selectEditEnable)
 
       return !this.readOnly && this.selectEditEnable
     },
