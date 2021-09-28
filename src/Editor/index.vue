@@ -115,6 +115,7 @@ export default {
         case 'lock':
           data.editEnable = !data.editEnable
           data.editEnable || (viewportRef.value.targetObj = null) //鎖定時
+          data.editEnable && viewportRef.value.selectItem(data)
           break
         case 'select-area':
           original.mode = 'sel'
@@ -168,6 +169,12 @@ export default {
           selectAreaRef.value = null
         }
       })
+    })
+
+    //選取區塊顯示策略
+    watch(selectAreaRef, (val, old) => {
+      val && (val.alpha = 0.6)
+      old && (old.alpha = 0.3)
     })
 
     //選取全區時變色

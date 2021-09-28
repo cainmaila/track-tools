@@ -109,14 +109,14 @@ class Area {
    */
   set isEdit(_f) {
     this._isEdit = !!_f
-    this._p1.visible = _f
-    this._p2.visible = _f
-    this._p3.visible = _f
-    this._p4.visible = _f
-    this._p6.visible = _f
-    this._p7.visible = _f
-    this._p8.visible = _f
-    this._p9.visible = _f
+    this._p1.visible = _f && this.editEnable
+    this._p2.visible = _f && this.editEnable
+    this._p3.visible = _f && this.editEnable
+    this._p4.visible = _f && this.editEnable
+    this._p6.visible = _f && this.editEnable
+    this._p7.visible = _f && this.editEnable
+    this._p8.visible = _f && this.editEnable
+    this._p9.visible = _f && this.editEnable
   }
   get isEdit() {
     return this._isEdit
