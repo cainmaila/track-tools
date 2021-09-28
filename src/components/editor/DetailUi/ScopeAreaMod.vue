@@ -3,7 +3,7 @@
     <h3>總識別區域</h3>
     <Box>
       <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
-      <div v-if="readOnly">
+      <div v-if="!canEdit">
         {{ tag }}
       </div>
       <div v-else>
@@ -14,7 +14,7 @@
       <template v-slot:til>2. 總面積 <span class="red">*</span></template>
       <div class="flex-between strip">
         <div>單位:</div>
-        <div v-if="readOnly">
+        <div v-if="!canEdit">
           {{ unit }}
         </div>
         <select
@@ -32,7 +32,7 @@
       </div>
       <div class="flex-between strip">
         <div>長度：</div>
-        <div v-if="readOnly">
+        <div v-if="!canEdit">
           {{ realWidth }}
         </div>
         <At2Input
@@ -47,7 +47,7 @@
       </div>
       <div class="flex-between strip">
         <div>寬度：</div>
-        <div v-if="readOnly">
+        <div v-if="!canEdit">
           {{ realHeight.toFixed(2) }}
         </div>
         <At2Input
@@ -66,7 +66,7 @@
       </div> -->
       <div class="flex-between strip">
         <div>樓層高度：</div>
-        <div v-if="readOnly">
+        <div v-if="!canEdit">
           {{ elevation }}
         </div>
         <At2Input
@@ -89,7 +89,7 @@
         <div>
           方位度數：
         </div>
-        <div v-if="readOnly">
+        <div v-if="!canEdit">
           {{ direction }}
         </div>
         <At2Input
@@ -103,7 +103,7 @@
         />
       </div>
     </Box>
-    <Box v-if="!readOnly">
+    <Box v-if="canEdit">
       <template v-slot:til> 4. 其他</template>
       <div class="flex-between strip">
         <div>
@@ -131,6 +131,7 @@ export default {
     'elevation',
     'direction',
     'readOnly',
+    'scopeAreaEditEnable',
   ],
   emits: [
     'update:tag',
@@ -147,6 +148,9 @@ export default {
     },
     rotateStyle() {
       return `transform: rotate(${this.direction}deg);`
+    },
+    canEdit() {
+      return this.readOnly && this.scopeAreaEditEnable
     },
   },
   methods: {
