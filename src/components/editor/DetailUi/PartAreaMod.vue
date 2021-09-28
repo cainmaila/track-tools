@@ -3,7 +3,7 @@
     <h3>識別區域</h3>
     <Box>
       <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
-      <div v-if="readOnly">{{ selectAreaTag }}</div>
+      <div v-if="!canEdit">{{ selectAreaTag }}</div>
       <div v-else>
         <At2Input
           :value="selectAreaTag"
@@ -27,7 +27,7 @@
       </div>
       <div class="flex-between strip">
         <div>房間高度：</div>
-        <div v-if="readOnly">{{ spaceHeight }}</div>
+        <div v-if="!canEdit">{{ spaceHeight }}</div>
         <At2Input
           v-else
           class="inp"
@@ -50,7 +50,7 @@
         <div>{{ selectRealOffsetY.toFixed(2) }}</div>
       </div>
     </Box>
-    <Box v-if="!readOnly">
+    <Box v-if="canEdit">
       <template v-slot:til> 4. 其他</template>
       <div class="flex-between strip">
         <div>
@@ -83,6 +83,7 @@ export default {
     'selectAreaH',
     'selectRealOffsetX',
     'selectRealOffsetY',
+    'selectEditEnable',
     'spaceHeight',
     'readOnly',
   ],
@@ -97,6 +98,13 @@ export default {
       color: '',
       bounds: null,
     }
+  },
+  computed: {
+    canEdit() {
+      console.log('2222', this.readOnly, this.selectEditEnable)
+
+      return !this.readOnly && this.selectEditEnable
+    },
   },
 }
 </script>

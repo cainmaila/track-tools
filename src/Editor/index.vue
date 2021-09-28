@@ -34,6 +34,7 @@
       :selectAreaH="selectAreaData.realHeight"
       :selectRealOffsetX="selectAreaData.realOffsetX"
       :selectRealOffsetY="selectAreaData.realOffsetY"
+      :selectEditEnable="selectAreaRef?.editEnable"
       :info="info"
       :readOnly="original.readOnly"
     />
