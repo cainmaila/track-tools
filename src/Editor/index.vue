@@ -27,7 +27,7 @@
       v-model:elevation="scopeAreaData.elevation"
       v-model:direction="scopeAreaData.direction"
       :scale="scopeAreaData.scale"
-      :scopeAreaEditEnable="areasRef?.editEnable"
+      :scopeAreaEditEnable="scopeArea?.editEnable"
       v-model:selectAreaTag="selectAreaData.tag"
       v-model:selectAreaColor="selectAreaData.color"
       v-model:spaceHeight="selectAreaData.spaceHeight"
