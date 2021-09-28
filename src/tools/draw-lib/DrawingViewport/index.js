@@ -107,6 +107,7 @@ class DrawingViewport extends BaseViewport {
     val && this.addChild(val.rectangle) //移到最上層
     this._targetObj && (this._targetObj.isEdit = true)
     this.emit('select', val)
+    val && val.setEditPoSize(this._editPoSize)
   }
   get targetObj() {
     return this._targetObj
@@ -200,7 +201,7 @@ class DrawingViewport extends BaseViewport {
         { x: this._setting.aeraSetting?.editSize || 9, y: 0 },
         this.app.stage,
       ).x - this.toLocal({ x: 0, y: 0 }, this.app.stage).x
-    this.resizeEditPo(this._editPoSize)
+    this._targetObj && this._targetObj.setEditPoSize(this._editPoSize)
   }
   /* 取回繪圖資訊 */
   getDrawingMeta() {
@@ -242,7 +243,6 @@ class DrawingViewport extends BaseViewport {
       _area.draw({ x: itemMate.x + itemMate.w, y: itemMate.y + itemMate.h })
       _area.name = itemMate.name
       _area.createEditPo()
-      // _area.setEditPoSize(this._editPoSize)
       _area.userData = itemMate.userData
     })
   }
