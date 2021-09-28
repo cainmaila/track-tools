@@ -239,6 +239,7 @@ class DrawingViewport extends BaseViewport {
     _meta.bg && this._loadBg(_meta.bg.url)
     _meta.items.forEach(itemMate => {
       const _area = new Area({ x: itemMate.x, y: itemMate.y }, itemMate.setting)
+      _area.editEnable = !this._readonly
       this.addChild(_area.rectangle)
       _area.draw({ x: itemMate.x + itemMate.w, y: itemMate.y + itemMate.h })
       _area.name = itemMate.name
