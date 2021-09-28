@@ -150,7 +150,7 @@ export default {
       return `transform: rotate(${this.direction}deg);`
     },
     canEdit() {
-      return this.readOnly && this.scopeAreaEditEnable
+      return !this.readOnly && this.scopeAreaEditEnable
     },
   },
   methods: {

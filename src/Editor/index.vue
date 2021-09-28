@@ -202,6 +202,7 @@ export default {
       onCommon,
       original,
       areasRef,
+      scopeArea,
       scopeAreaData,
       selectAreaRef,
       selectAreaData,
