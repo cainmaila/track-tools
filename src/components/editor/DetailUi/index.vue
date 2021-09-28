@@ -6,6 +6,7 @@
         v-if="type === 1"
         :scale="scale"
         :readOnly="readOnly"
+        :scopeAreaEditEnable="scopeAreaEditEnable"
       />
       <PartAreaMod
         v-else-if="type === 2"
@@ -35,7 +36,13 @@ import FileInfoMod from './FileInfoMod'
 export default {
   name: 'DetailUi',
   components: { At2Icon, ScopeAreaMod, PartAreaMod, FileInfoMod },
-  props: ['type', 'scale', 'readOnly', 'selectEditEnable'],
+  props: [
+    'type',
+    'scale',
+    'readOnly',
+    'selectEditEnable',
+    'scopeAreaEditEnable',
+  ],
   data() {
     return {
       tab: true,
