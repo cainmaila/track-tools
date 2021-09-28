@@ -153,6 +153,7 @@ class DrawingViewport extends BaseViewport {
     )
     _area.name = generateUUID('Area')
     _area.createEditPo()
+    _area.editEnable = !this._readonly
     this.addChild(_area.rectangle)
     this.targetObj = _area
     this.emit('add-area', _area)
