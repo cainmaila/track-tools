@@ -46,7 +46,7 @@ class Area {
       wh.x = inPoint.x + wh.w
       wh.y = inPoint.y + wh.h
     }
-    this.draw(inPoint, wh)
+    this.draw(wh, inPoint)
     this._setting.tag && (this.tag = this._setting.tag)
   }
   /**
