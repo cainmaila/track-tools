@@ -1,11 +1,15 @@
 <template>
-  <At2Mask class="exit-dialig flex-center">
-    <At2Dialog class="dialog" @close-dialog="$emit('x')">
+  <At2Mask
+    class="exit-dialig flex-center animate__animated animate__fadeIn animate__faster"
+  >
+    <At2Dialog class="dialog" @close-dialog="$emit('event', 'x')">
       <template v-slot:title>提示</template>
       <div class="content"><slot /></div>
       <template v-slot:footer>
-        <At2Btn border pill size="32" @on-click="$emit('x')">取消</At2Btn>
-        <At2Btn pill size="32" @on-click="$emit('exit')">確定</At2Btn>
+        <At2Btn border pill size="32" @on-click="$emit('event', 'x')"
+          >取消</At2Btn
+        >
+        <At2Btn pill size="32" @on-click="$emit('event', 'exit')">確定</At2Btn>
       </template>
     </At2Dialog>
   </At2Mask>

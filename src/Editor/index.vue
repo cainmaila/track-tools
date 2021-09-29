@@ -43,7 +43,9 @@
       :info="info"
       :readOnly="original.readOnly"
     />
-    <ExitDialig v-if="false">此次編輯將不儲存，確定離開?</ExitDialig>
+    <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
+      >此次編輯將不儲存，確定離開?</ExitDialig
+    >
   </div>
 </template>
 
@@ -74,6 +76,7 @@ export default {
       selAeeaType: 0,
       readOnly: readOnly != undefined,
       lang,
+      exitxitDialigShow: false,
     })
 
     const {
@@ -204,6 +207,19 @@ export default {
           getAreaMeta()
           break
         case 'exit':
+          original.readOnly
+            ? postEvent('exit')
+            : (original.exitxitDialigShow = true)
+          break
+      }
+    }
+
+    const exitDialigHandler = event => {
+      original.exitxitDialigShow = false
+      switch (event) {
+        case 'x':
+          break
+        case 'exit':
           postEvent('exit')
           break
       }
@@ -221,6 +237,7 @@ export default {
       selectAreaData,
       changeAreaRealHeight,
       topUiHandler,
+      exitDialigHandler,
     }
   },
 }
