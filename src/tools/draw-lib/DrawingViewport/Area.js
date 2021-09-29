@@ -291,6 +291,7 @@ class Area {
   draw(outPoint, inPoint) {
     inPoint && (this._inPoint = inPoint)
     outPoint && (this._outPoint = outPoint)
+    this._outPoint || (this._outPoint = this._inPoint) //_outPoint 補丁
     if (this._inPoint.x < this._outPoint.x) {
       this._minX = this._inPoint.x
       this._dx = this._outPoint.x - this._inPoint.x
