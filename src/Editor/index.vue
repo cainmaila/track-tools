@@ -13,9 +13,13 @@
       @common="onCommon"
       :readOnly="original.readOnly"
     />
-    <TopUi id="TopUi" :save="!original.readOnly" @ui="topUiHandler">{{
-      info.name
-    }}</TopUi>
+    <TopUi
+      id="TopUi"
+      :save="!original.readOnly"
+      :step="original.step"
+      @ui="topUiHandler"
+      >{{ info.name }}</TopUi
+    >
     <DetailUi
       :type="original.selAeeaType"
       v-model:tag="scopeAreaData.tag"

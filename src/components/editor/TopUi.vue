@@ -17,7 +17,7 @@
         @on-click="$emit('ui', 'save')"
         type=""
         :border="false"
-        :disabled="false"
+        :disabled="step <= 1"
         pill
         size="26"
       >
@@ -31,7 +31,7 @@ import At2Btn from '~at2@/components/At2Btn'
 export default {
   name: 'TopUi',
   components: { At2Btn },
-  props: ['save'],
+  props: ['save', 'step'],
   data() {
     return {}
   },
