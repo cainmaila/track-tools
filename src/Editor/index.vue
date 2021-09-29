@@ -44,7 +44,7 @@
       :readOnly="original.readOnly"
     />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
-      >此次編輯將不儲存，確定離開?</ExitDialig
+      >確定離開?</ExitDialig
     >
   </div>
 </template>
