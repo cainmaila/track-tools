@@ -1,15 +1,14 @@
 /* 整合了一些 IOS使用工具 */
 
 const HANDLER = 'eventHandler'
-const isIOS = !!(window.webkit && window.webkit[HANDLER])
+const isIOS = !!window.webkit
 
 /* 送出通訊規格 */
 function postIOSEvent(event, data = null) {
-  isIOS &&
-    _postIOS({
-      event,
-      data,
-    })
+  _postIOS({
+    event,
+    data,
+  })
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -37,6 +36,6 @@ function _postIOS(data) {
       '*',
     )
   } catch (error) {
-    console.error(error.message || error)
+    console.warn(error.message || error)
   }
 }
