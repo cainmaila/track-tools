@@ -9,7 +9,9 @@ class BaseViewport extends Viewport {
   }
   /* 縮放倍數 */
   zoom(sc) {
-    this.scaled += sc
+    const _sc = this.scaled + sc
+    if (_sc <= 0) return //縮小例外處理
+    this.scaled = _sc
   }
 }
 
