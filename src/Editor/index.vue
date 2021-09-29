@@ -43,6 +43,7 @@
       :info="info"
       :readOnly="original.readOnly"
     />
+    <ExitDialig v-if="false">此次編輯將不儲存，確定離開?</ExitDialig>
   </div>
 </template>
 
@@ -59,11 +60,12 @@ import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
 import TopUi from '@/components/editor/TopUi'
+import ExitDialig from '@/components/ExitDialig'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi, DetailUi, TopUi },
+  components: { FootUi, LayerUi, DetailUi, TopUi, ExitDialig },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
     const original = reactive({
