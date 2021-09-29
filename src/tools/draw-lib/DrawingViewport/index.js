@@ -331,10 +331,8 @@ class DrawingViewport extends BaseViewport {
     this.state = 'draw'
   }
   set pointerup(val) {
-    if (this._pointerdown) {
-      this._pointerup = this.toLocal(val)
-      this.state = ''
-    }
+    this._pointerup = this.toLocal(val)
+    this.state = ''
   }
   set pointermove(val) {
     const _new = this.toLocal(val)
