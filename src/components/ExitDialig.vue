@@ -31,7 +31,8 @@ export default {
   position: absolute;
   right: 0px;
   & .dialog {
-    max-width: 80%;
+    width: 90%;
+    max-width: 250px;
     & .content {
       padding: 20px;
     }
