@@ -43,6 +43,7 @@
           step="0.01"
           :value="realWidth"
           @input="val => $emit('update:realWidth', val)"
+          :error="realWidth > 0 ? '' : '長度必須大於0'"
         />
       </div>
       <div class="flex-between strip">

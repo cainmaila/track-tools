@@ -58,12 +58,13 @@
       })
 
       window.TrackEditor.onAreaData = function(data) {
+        console.log('#onAreaData', data)
         sessionStorage.setItem('tree', JSON.stringify(data))
       }
 
       window.TrackEditor.onLoaded = function() {
         console.log('#onLoaded')
-        onLoad()
+        // onLoad()
       }
 
       function onLoad() {

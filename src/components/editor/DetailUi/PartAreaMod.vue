@@ -36,6 +36,7 @@
           max="99999999999999"
           :value="spaceHeight"
           @input="val => $emit('update:spaceHeight', val)"
+          :error="spaceHeight == 0 ? '隔間高度必須大於0' : ''"
         />
       </div>
     </Box>
