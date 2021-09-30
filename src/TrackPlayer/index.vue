@@ -1,6 +1,7 @@
 <template>
   <div id="TrackPlayer" class="page">
     <div id="Viewer" ref="viewRef"></div>
+    <PointTimeInfo id="PointTimeInfo" :time="store.nowPo?.date" />
     <FootUi
       id="FootUi"
       :playIng="historyStore.isPlay"
@@ -32,15 +33,17 @@ import {
 } from './ios-interface-handler'
 
 import FootUi from '@/components/trackPlayer/FootUi'
+import PointTimeInfo from '@/components/trackPlayer/PointTimeInfo'
 import At2Alert from '~at2@/components/At2Alert'
 export default {
   name: 'TrackPlayer',
-  components: { FootUi, At2Alert },
+  components: { FootUi, At2Alert, PointTimeInfo },
   setup() {
     /* Viewer狀態機 */
     const store = reactive({
       state: 'init', //init -> ready -> loaded -> history-ready
       suspendAlertShow: false,
+      nowPo: null,
     })
     iosInterfaceHandler(store)
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
@@ -54,7 +57,10 @@ export default {
       startPlayHistory,
       stopPlayHistory,
       setTime,
-    } = playerHistoryHandler(store, viewPortRef)
+    } = playerHistoryHandler(store, viewPortRef, po => {
+      //點的位置變動觸發
+      store.nowPo = po
+    })
     sdkCommandHandlerSetting.viewerSetting = viewerSetting //初始化
     sdkCommandHandlerSetting.setHistory = setHistory //設定播放紀錄
 
@@ -115,5 +121,16 @@ export default {
 }
 #SuspendAlert {
   pointer-events: none;
+}
+#PointTimeInfo {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+}
+@media (--s-viewport) {
+  #PointTimeInfo {
+    top: 85px;
+    left: 45px;
+  }
 }
 </style>

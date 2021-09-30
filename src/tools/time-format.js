@@ -6,7 +6,15 @@ function msToTime(ms) {
   return `${m}:${s}`
 }
 
-export { msToTime }
+/* to 2012-11-04 14:55:45 */
+function toDateAndTime(_t) {
+  return new Date(_t)
+    .toISOString()
+    .replace(/T/, ' ')
+    .replace(/\..+/, '')
+}
+
+export { msToTime, toDateAndTime }
 
 function _makeUpZ(_s) {
   while (_s.length < 2) {

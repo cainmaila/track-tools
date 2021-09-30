@@ -3,7 +3,7 @@ import DrawPathPlayHelper from '@/tools/draw-lib/DrawPathViewport/DrawPathPlayHe
 import { reactive, ref, watch } from 'vue'
 import { dataToHistoryTransform } from '@/tools/trackMeta-tools'
 const TIME_STEP = ~~(1000 / 30) //ms間格
-function playerHistoryHandler(store, viewPortRef) {
+function playerHistoryHandler(store, viewPortRef, onPoChange) {
   const historyHistoryRef = ref(null)
   const historyStore = reactive({
     totaleTime: 0, //總時間ms
@@ -16,9 +16,9 @@ function playerHistoryHandler(store, viewPortRef) {
     const halper = new DrawPathPlayHelper(viewPortRef.value)
     halper.setHistory(dataToHistoryTransform(history))
     historyStore.totaleTime = halper.totaleTime
-    historyStore.time = 0
     historyHistoryRef.value = halper
     store.state = 'history-ready'
+    halper.onPoChange = onPoChange
   }
   const startPlayHistory = () => {
     historyStore.isPlay = true

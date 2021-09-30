@@ -8,6 +8,7 @@ class DrawPathPlayHelper {
     this._endTime = 0
     this._time = 0
     this._timePo = null
+    this._nowPo = null
     this._floor = ''
     this._commandState = null
   }
@@ -28,6 +29,7 @@ class DrawPathPlayHelper {
       default:
         this._commandState = null
     }
+    this._restNowPo()
   }
   get time() {
     return this._time
@@ -39,9 +41,14 @@ class DrawPathPlayHelper {
     this._history = _history
     this._startTime = this._history[0].date * 1
     this._endTime = this._history[this._history.length - 1].date
-    this.time = 0
     this.viewport._setNowPoint(this._history[0]) //起點繪製
+    this.time = 0
+    setTimeout(() => {
+      this.onPoChange(this._history[0])
+    })
   }
+  //點變動觸發
+  onPoChange() {}
   //================================================================
   _filterHistoryByTime() {
     const _lines = []
@@ -65,6 +72,10 @@ class DrawPathPlayHelper {
       }
     })
     this._lineArr = _lines
+  }
+  _restNowPo() {
+    this._nowPo?.date == this._timePo?.date || this.onPoChange(this._timePo)
+    this._nowPo = this._timePo
   }
   _drawLineByTime() {
     this.viewport.floor = this.floor
