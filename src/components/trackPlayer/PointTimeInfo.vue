@@ -5,13 +5,13 @@
   </div>
 </template>
 <script>
-import { toDateAndTime } from '@/tools/time-format'
+import { dataFormat } from '@/tools/time-format'
 export default {
   name: 'PointTimeInfo',
   props: ['time'],
   computed: {
     dateStr() {
-      return this.time ? toDateAndTime(this.time * 1) : ''
+      return this.time ? dataFormat(this.time * 1) : ''
     },
   },
 }
