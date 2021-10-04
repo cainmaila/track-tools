@@ -17,7 +17,7 @@
     </div>
     <div class="p1" v-else>
       <div class="txt-center">
-        <img src="img/teachingMod/step2.jpg" alt="" />
+        <img src="img/teachingMod/setp2.png" alt="" />
       </div>
       <div class="txt">
         <div>1. B為「識別區域」請點擊B按鈕 “添加 識別區域”。</div>
