@@ -9,7 +9,7 @@
       <div class="foot">
         <slot name="foot"></slot>
       </div>
-      <div class="close-bn bn" @pointerup.stop="$emit('x')">
+      <div class="close-bn bn" @pointerup.stop="$emit('readMe', null)">
         <At2Icon type="close" color="#fff" width="12" height="12" />
       </div>
     </div>
@@ -20,6 +20,7 @@ import At2Icon from '~at2@/components/At2Icon'
 export default {
   name: 'ReadMeMod',
   components: { At2Icon },
+  emits: ['readMe'],
   data() {
     return {}
   },

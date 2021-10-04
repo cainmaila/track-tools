@@ -66,7 +66,17 @@
         <div class="inp">{{ scale.toFixed(2) }}</div>
       </div> -->
       <div class="flex-between strip">
-        <div>樓層高度：</div>
+        <div class="flex">
+          樓層高度：
+          <div class="bn" @pointerup.stop="$emit('readMe', 'direction')">
+            <At2Icon
+              type="information"
+              color="#1a4fbe"
+              width="16"
+              height="16"
+            />
+          </div>
+        </div>
         <div v-if="!canEdit">
           {{ elevation }}
         </div>
@@ -87,8 +97,16 @@
         3. 平面圖上方方位 <span class="red">*</span></template
       >
       <div class="flex-between strip">
-        <div>
+        <div class="flex">
           方位度數：
+          <div class="bn" @pointerup.stop="$emit('readMe', 'altitude')">
+            <At2Icon
+              type="information"
+              color="#1a4fbe"
+              width="16"
+              height="16"
+            />
+          </div>
         </div>
         <div v-if="!canEdit">
           {{ direction }}
@@ -118,10 +136,11 @@
 <script>
 import { numberToHex } from '@/tools/colorTools'
 import At2Input from '~at2@/components/At2Input'
+import At2Icon from '~at2@/components/At2Icon'
 import Box from './Box'
 export default {
   name: 'ScopeAreaMod',
-  components: { At2Input, Box },
+  components: { At2Input, Box, At2Icon },
   props: [
     'tag',
     'realWidth',
@@ -135,6 +154,7 @@ export default {
     'scopeAreaEditEnable',
   ],
   emits: [
+    'readMe',
     'update:tag',
     'update:realWidth',
     'change-realHeight',

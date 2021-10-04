@@ -42,8 +42,13 @@
       :selectEditEnable="selectAreaRef?.editEnable"
       :info="info"
       :readOnly="original.readOnly"
+      @readMe="onReadMe"
     />
-    <!-- <AltitudeMod /> -->
+    <AltitudeMod v-if="readMeStore.mod == 'altitude'" @readMe="onReadMe" />
+    <DirectionMod
+      v-else-if="readMeStore.mod == 'direction'"
+      @readMe="onReadMe"
+    />
     <TeachingMod :helpDefault="original.helpDefault" />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
@@ -65,7 +70,8 @@ import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
 import TopUi from '@/components/editor/TopUi'
 import TeachingMod from '@/components/editor/TeachingMod'
-// import AltitudeMod from '@/components/editor/readBd/AltitudeMod'
+import AltitudeMod from '@/components/editor/readBd/AltitudeMod'
+import DirectionMod from '@/components/editor/readBd/DirectionMod'
 import ExitDialig from '@/components/ExitDialig'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
@@ -78,7 +84,8 @@ export default {
     TopUi,
     ExitDialig,
     TeachingMod,
-    // AltitudeMod,
+    AltitudeMod,
+    DirectionMod,
   },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
@@ -91,6 +98,10 @@ export default {
       exitxitDialigShow: false,
       helpDefault:
         localStorage?.getItem('helpDefault') !== 'false' ? true : false,
+    })
+
+    const readMeStore = reactive({
+      mod: null, //direction altitude
     })
 
     const {
@@ -240,8 +251,13 @@ export default {
       }
     }
 
+    const onReadMe = type => {
+      readMeStore.mod = type //direction altitude
+    }
+
     return {
       info,
+      readMeStore,
       ViewRef,
       onCommon,
       original,
@@ -253,6 +269,7 @@ export default {
       changeAreaRealHeight,
       topUiHandler,
       exitDialigHandler,
+      onReadMe,
     }
   },
 }
