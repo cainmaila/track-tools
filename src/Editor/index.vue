@@ -43,7 +43,7 @@
       :info="info"
       :readOnly="original.readOnly"
     />
-    <TeachingMod />
+    <TeachingMod :helpDefault="original.helpDefault" />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
     >
@@ -79,6 +79,8 @@ export default {
       readOnly: readOnly != undefined,
       lang,
       exitxitDialigShow: false,
+      helpDefault:
+        localStorage?.getItem('helpDefault') !== 'false' ? true : false,
     })
 
     const {
@@ -137,6 +139,7 @@ export default {
     }
 
     onMounted(() => {
+      localStorage.setItem('helpDefault', false)
       sdkListenerHandler({
         setting: setting => {
           //收到設定創建viewerPort

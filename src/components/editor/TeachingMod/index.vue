@@ -33,9 +33,10 @@ export default {
     P1,
     At2Icon,
   },
+  props: ['helpDefault'],
   data() {
     return {
-      show: false,
+      show: this.helpDefault,
       page: 0,
     }
   },
