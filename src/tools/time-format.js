@@ -47,3 +47,11 @@ function _makeUpZ(_s) {
   }
   return _s
 }
+
+function makeUp0(str) {
+  str += ''
+  if (str.length < 2) {
+    return `0${str}`
+  }
+  return str
+}
