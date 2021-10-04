@@ -9,7 +9,7 @@ function msToTime(ms) {
 /* to 2012-11-04 14:55:45 */
 function toDateAndTime(_t) {
   return new Date(_t)
-    .toISOString()
+    .toLocaleString()
     .replace(/T/, ' ')
     .replace(/\..+/, '')
 }
