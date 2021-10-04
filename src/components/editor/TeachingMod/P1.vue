@@ -2,7 +2,7 @@
   <div v-if="rest">
     <div class="p1" v-if="pav == 0">
       <div class="txt-center">
-        <img src="/img/teachingMod/p1.png" alt="" />
+        <img src="img/teachingMod/p1.png" alt="" />
       </div>
       <div class="txt">
         <div>1. A為「總識別區域」請先點擊A按鈕 “添加 總識別區域”。</div>
@@ -17,7 +17,7 @@
     </div>
     <div class="p1" v-else>
       <div class="txt-center">
-        <img src="/img/teachingMod/step2.jpg" alt="" />
+        <img src="img/teachingMod/step2.jpg" alt="" />
       </div>
       <div class="txt">
         <div>1. B為「識別區域」請點擊B按鈕 “添加 識別區域”。</div>
