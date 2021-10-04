@@ -43,6 +43,7 @@
       :info="info"
       :readOnly="original.readOnly"
     />
+    <TeachingMod />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
     >
@@ -62,12 +63,13 @@ import FootUi from '@/components/editor/FootUi'
 import LayerUi from '@/components/editor/LayerUi'
 import DetailUi from '@/components/editor/DetailUi'
 import TopUi from '@/components/editor/TopUi'
+import TeachingMod from '@/components/editor/TeachingMod'
 import ExitDialig from '@/components/ExitDialig'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
 export default {
   name: 'AppEditor',
-  components: { FootUi, LayerUi, DetailUi, TopUi, ExitDialig },
+  components: { FootUi, LayerUi, DetailUi, TopUi, ExitDialig, TeachingMod },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
     const original = reactive({
