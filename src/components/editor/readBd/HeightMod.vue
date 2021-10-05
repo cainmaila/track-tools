@@ -6,9 +6,9 @@
       </div>
     </template>
     <template v-slot:foot>
-      <div class="til">樓板高度</div>
+      <div class="til">房間高度</div>
       <div>
-        房間的樓板地板到天花板的高度
+        當前區域的高度 (上圖橘色區域高度)
       </div>
     </template>
   </ReadMeMod>
@@ -27,7 +27,12 @@ export default {
 .img-bg {
   width: 100%;
   height: 100%;
-  background-color: #7ea4b7;
+  background: linear-gradient(
+    -225deg,
+    rgb(232, 242, 218) 0%,
+    rgb(76, 126, 128) 91%,
+    rgb(76, 126, 128) 100%
+  );
   text-align: center;
 }
 .til {
