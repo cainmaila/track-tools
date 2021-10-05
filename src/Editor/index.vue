@@ -13,6 +13,9 @@
       @common="onCommon"
       :readOnly="original.readOnly"
     />
+    <div class="help-bn bn" @pointerup.stop="original.helpDefault = true">
+      <At2Icon type="help" width="24" height="24" color="#1a4fbe" />
+    </div>
     <TopUi
       id="TopUi"
       :save="!original.readOnly"
@@ -44,9 +47,6 @@
       :readOnly="original.readOnly"
       @readMe="onReadMe"
     />
-    <div class="help-bn bn" @pointerup.stop="original.helpDefault = true">
-      <At2Icon type="help" width="24" height="24" />
-    </div>
     <AltitudeMod v-if="readMeStore.mod == 'altitude'" @readMe="onReadMe" />
     <DirectionMod
       v-else-if="readMeStore.mod == 'direction'"

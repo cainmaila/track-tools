@@ -1,7 +1,7 @@
 <template>
   <div class="lab-text">
     <div class="lab" v-if="lab">{{ lab }}</div>
-    <div class="text">
+    <div class="text txt-enter">
       <slot />
     </div>
   </div>
