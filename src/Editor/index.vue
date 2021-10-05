@@ -56,6 +56,7 @@
     <TeachingMod
       :helpDefault="original.helpDefault"
       @x="original.helpDefault = false"
+      v-if="original.helpDefault"
     />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
@@ -81,6 +82,7 @@ import AltitudeMod from '@/components/editor/readBd/AltitudeMod'
 import DirectionMod from '@/components/editor/readBd/DirectionMod'
 import HeightMod from '@/components/editor/readBd/HeightMod'
 import ExitDialig from '@/components/ExitDialig'
+import At2Icon from '~at2@/components/At2Icon'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
 export default {
@@ -95,6 +97,7 @@ export default {
     AltitudeMod,
     DirectionMod,
     HeightMod,
+    At2Icon,
   },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
@@ -263,7 +266,6 @@ export default {
     const onReadMe = type => {
       readMeStore.mod = type //direction altitude
     }
-
     return {
       info,
       readMeStore,

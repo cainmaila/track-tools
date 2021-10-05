@@ -27,6 +27,7 @@ export default {
     At2Btn,
     P1,
   },
+  emits: ['x'],
   props: ['helpDefault'],
   data() {
     return {
