@@ -15,7 +15,7 @@ function verifyArea(viewportRef, scopeArea) {
       scopeAreaMata = area
     } else {
       roomsMata.push(area)
-      area.userData.spaceHeight || isSpaceHeightNullArr.push(area.name)
+      area.userData.spaceHeight * 1 || isSpaceHeightNullArr.push(area.name)
     }
   })
 
