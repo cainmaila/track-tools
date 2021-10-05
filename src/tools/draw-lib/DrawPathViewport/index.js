@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import '@pixi/graphics-extras'
 import BaseViewport from '../BaseViewport'
 export const TRACK_COMMAND = {
   suspend: 'suspend',
@@ -198,7 +199,8 @@ class PointTag extends PIXI.Graphics {
   resize(r) {
     this.clear()
     this.beginFill(0x0071ff, 1)
-    this.drawCircle(0, 0, r)
+    this.drawTorus(0, 0, r * 0.8, r)
+    this.drawCircle(0, 0, r >> 1)
   }
 }
 export default DrawPathViewport
