@@ -79,11 +79,13 @@
 </template>
 <script>
 import At2Input from '~at2@/components/At2Input'
+import At2Icon from '~at2@/components/At2Icon'
 import Box from './Box'
 export default {
   name: 'PartAreaMod',
   components: {
     At2Input,
+    At2Icon,
     Box,
   },
   props: [
@@ -99,6 +101,7 @@ export default {
     'readOnly',
   ],
   emits: [
+    'readMe',
     'update:selectAreaColor',
     'update:selectAreaTag',
     'update:spaceHeight',
