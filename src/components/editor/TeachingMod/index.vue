@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="show"
     id="TeachingMod"
     class="flex-center animate__animated animate__fadeIn animate__faster"
   >
@@ -16,12 +15,8 @@
       </template>
     </At2Dialog>
   </div>
-  <div v-else class="help-bn bn" @pointerup.stop="show = true">
-    <At2Icon type="help" width="24" height="24" />
-  </div>
 </template>
 <script>
-import At2Icon from '~at2@/components/At2Icon'
 import At2Dialog from '~at2@/components/At2Dialog'
 import At2Btn from '~at2@/components/At2Btn'
 import P1 from './P1'
@@ -31,12 +26,10 @@ export default {
     At2Dialog,
     At2Btn,
     P1,
-    At2Icon,
   },
   props: ['helpDefault'],
   data() {
     return {
-      show: this.helpDefault,
       page: 0,
     }
   },

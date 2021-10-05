@@ -44,6 +44,9 @@
       :readOnly="original.readOnly"
       @readMe="onReadMe"
     />
+    <div class="help-bn bn" @pointerup.stop="original.helpDefault = true">
+      <At2Icon type="help" width="24" height="24" />
+    </div>
     <AltitudeMod v-if="readMeStore.mod == 'altitude'" @readMe="onReadMe" />
     <DirectionMod
       v-else-if="readMeStore.mod == 'direction'"
@@ -297,5 +300,10 @@ export default {
   position: absolute;
   left: 50%;
   top: 20px;
+}
+.help-bn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }
 </style>
