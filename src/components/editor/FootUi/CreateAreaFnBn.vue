@@ -6,12 +6,7 @@
       @pointerup.stop="step === 1 && $emit('press', 'scope')"
     >
       <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.scope') }}</div>
-      <At2Icon
-        :type="step === 1 ? 'addO' : 'complete'"
-        width="26"
-        height="26"
-        color="#fff"
-      />
+      <AddStateBtn :state="step === 1 ? 'none' : 'ok'" />
     </div>
     <div
       class="flex-center fn-bg"
@@ -19,20 +14,15 @@
       @pointerup.stop="step === 2 && $emit('press', 'area')"
     >
       <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.area') }}</div>
-      <At2Icon
-        :type="step <= 2 ? 'addO' : 'complete'"
-        width="26"
-        height="26"
-        color="#fff"
-      />
+      <AddStateBtn />
     </div>
   </div>
 </template>
 <script>
-import At2Icon from '~at2@/components/At2Icon'
+import AddStateBtn from './AddStateBtn'
 export default {
   name: 'CreateAreaFnBn',
-  components: { At2Icon },
+  components: { AddStateBtn },
   props: ['step'],
   data() {
     return {}
