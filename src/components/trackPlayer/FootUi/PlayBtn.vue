@@ -1,5 +1,8 @@
 <template>
   <div class="play-btn flex-center">
+    <div>
+      <At2Icon type="rewind" width="16" height="16" color="#6e6d6d" />
+    </div>
     <div class="play flex-center bn" @pointerup.stop="$emit('ck-play')">
       <At2Icon
         type="pause"
@@ -15,6 +18,9 @@
         color="#000"
         v-show="!playIng"
       />
+    </div>
+    <div>
+      <At2Icon type="forward" width="16" height="16" color="#6e6d6d" />
     </div>
   </div>
 </template>
@@ -33,5 +39,6 @@ export default {
   height: 32px;
   border-radius: 50%;
   background-color: #fff;
+  margin: 0 20px;
 }
 </style>
