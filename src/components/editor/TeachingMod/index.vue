@@ -3,7 +3,7 @@
     id="TeachingMod"
     class="flex-center animate__animated animate__fadeIn animate__faster"
   >
-    <At2Dialog class="dialog" @close-dialog="show = false">
+    <At2Dialog class="dialog" @close-dialog="$emit('x')">
       <template v-slot:title>教學 ({{ page + 1 }}/2)</template>
       <div class="content">
         <div class="content-view">
@@ -11,7 +11,7 @@
         </div>
       </div>
       <template v-slot:footer>
-        <At2Btn pill size="32" @on-click="show = false">關閉</At2Btn>
+        <At2Btn pill size="32" @on-click="$emit('x')">關閉</At2Btn>
       </template>
     </At2Dialog>
   </div>

@@ -53,7 +53,10 @@
       @readMe="onReadMe"
     />
     <HeightMod v-else-if="readMeStore.mod == 'height'" @readMe="onReadMe" />
-    <TeachingMod :helpDefault="original.helpDefault" />
+    <TeachingMod
+      :helpDefault="original.helpDefault"
+      @x="original.helpDefault = false"
+    />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
     >
