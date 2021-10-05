@@ -14,7 +14,7 @@
       @pointerup.stop="step === 2 && $emit('press', 'area')"
     >
       <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.area') }}</div>
-      <AddStateBtn />
+      <AddStateBtn v-if="step === 2" />
     </div>
   </div>
 </template>
