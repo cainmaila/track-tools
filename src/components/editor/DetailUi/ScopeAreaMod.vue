@@ -68,7 +68,7 @@
       <div class="flex-between strip">
         <div class="flex">
           樓層高度：
-          <div class="bn" @pointerup.stop="$emit('readMe', 'direction')">
+          <div class="bn" @pointerup.stop="$emit('readMe', 'altitude')">
             <At2Icon
               type="information"
               color="#1a4fbe"
@@ -99,7 +99,7 @@
       <div class="flex-between strip">
         <div class="flex">
           方位度數：
-          <div class="bn" @pointerup.stop="$emit('readMe', 'altitude')">
+          <div class="bn" @pointerup.stop="$emit('readMe', 'direction')">
             <At2Icon
               type="information"
               color="#1a4fbe"
