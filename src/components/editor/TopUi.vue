@@ -5,7 +5,7 @@
       <div
         class="downT-bn bn"
         :class="{ acc: btnsShow }"
-        @pointerup.stop="btnsShow = true"
+        @pointerup.stop="btnsShow = !btnsShow"
       >
         <At2Icon type="downT" width="12" height="12" />
       </div>
@@ -64,7 +64,7 @@ export default {
   }
   & .downT-bn {
     &.acc {
-      display: none;
+      transform: rotate(180deg);
     }
   }
 }
