@@ -49,6 +49,7 @@
       v-else-if="readMeStore.mod == 'direction'"
       @readMe="onReadMe"
     />
+    <HeightMod v-else-if="readMeStore.mod == 'height'" @readMe="onReadMe" />
     <TeachingMod :helpDefault="original.helpDefault" />
     <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
       >確定離開?</ExitDialig
@@ -72,6 +73,7 @@ import TopUi from '@/components/editor/TopUi'
 import TeachingMod from '@/components/editor/TeachingMod'
 import AltitudeMod from '@/components/editor/readBd/AltitudeMod'
 import DirectionMod from '@/components/editor/readBd/DirectionMod'
+import HeightMod from '@/components/editor/readBd/HeightMod'
 import ExitDialig from '@/components/ExitDialig'
 import { numberToHex } from '@/tools/colorTools'
 import { useUrlSearchParams } from '@vueuse/core'
@@ -86,6 +88,7 @@ export default {
     TeachingMod,
     AltitudeMod,
     DirectionMod,
+    HeightMod,
   },
   setup() {
     const { lang, readOnly } = useUrlSearchParams() || {}
@@ -101,7 +104,7 @@ export default {
     })
 
     const readMeStore = reactive({
-      mod: null, //direction altitude
+      mod: null, //direction altitude height
     })
 
     const {

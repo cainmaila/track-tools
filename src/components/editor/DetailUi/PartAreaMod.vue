@@ -26,7 +26,17 @@
         <div>{{ selectAreaH.toFixed(2) }}</div>
       </div>
       <div class="flex-between strip">
-        <div>房間高度：</div>
+        <div class="flex">
+          房間高度：
+          <div class="bn" @pointerup.stop="$emit('readMe', 'height')">
+            <At2Icon
+              type="information"
+              color="#1a4fbe"
+              width="16"
+              height="16"
+            />
+          </div>
+        </div>
         <div v-if="!canEdit">{{ spaceHeight }}</div>
         <At2Input
           v-else
