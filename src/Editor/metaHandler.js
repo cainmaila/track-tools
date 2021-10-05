@@ -17,7 +17,8 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     let error = ''
     !scopeAreaMata && (error += ' 請先創建總區域')
     roomsMata.length === 0 && (error += ' 至少創建一個區域')
-    isSpaceHeightNullArr.length > 0 && (error += ' 樓板高度必須設置')
+    isSpaceHeightNullArr.length > 0 &&
+      (error += ` 樓板高度必須設置(${isSpaceHeightNullArr.length}個區域未填妥)`)
     containsErrorArr.length > 0 && (error += ' 部分區域超出範圍')
     // overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊') //非必要條件
     if (!correct) {
