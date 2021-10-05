@@ -2,7 +2,7 @@
   <div class="create-bn flex-center">
     <div
       class="flex-center fn-bg"
-      :class="{ disabled: step === 2, bn: step === 1 }"
+      :class="{ disabled: step === 2, bn: step === 1, acc: isScope }"
       @pointerup.stop="step === 1 && $emit('press', 'scope')"
     >
       <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.scope') }}</div>
@@ -10,7 +10,7 @@
     </div>
     <div
       class="flex-center fn-bg"
-      :class="{ disabled: step === 1, bn: step === 2 }"
+      :class="{ disabled: step === 1, bn: step === 2, acc: isArea }"
       @pointerup.stop="step === 2 && $emit('press', 'area')"
     >
       <div class="txt">{{ $t('Editor.FoottUi.CreateAreaFnBn.area') }}</div>
@@ -23,9 +23,17 @@ import AddStateBtn from './AddStateBtn'
 export default {
   name: 'CreateAreaFnBn',
   components: { AddStateBtn },
-  props: ['step'],
+  props: ['step', 'mode'],
   data() {
     return {}
+  },
+  computed: {
+    isScope() {
+      return this.mode == 'scope'
+    },
+    isArea() {
+      return this.mode == 'area'
+    },
   },
 }
 </script>
@@ -55,5 +63,8 @@ export default {
   margin-right: 18px;
   font-size: 12px;
   font-weight: 500;
+}
+.acc {
+  background: #5595ef;
 }
 </style>

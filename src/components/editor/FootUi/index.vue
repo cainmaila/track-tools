@@ -39,6 +39,7 @@
       <CreateAreaFnBn
         id="CreateAreaFnBn"
         :step="step"
+        :mode="mode"
         v-if="createAreaUiOff"
         @press="onPressCreatArea"
       />
