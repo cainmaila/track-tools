@@ -1,4 +1,5 @@
 import { TRACK_COMMAND } from '../DrawPathViewport'
+const LAST_PO_NUM = 5
 class DrawPathPlayHelper {
   constructor(viewport) {
     this.viewport = viewport
@@ -9,6 +10,7 @@ class DrawPathPlayHelper {
     this._time = 0
     this._timePo = null
     this._nowPo = null
+    this._poLen = 0 //本次時間點的數量
     this._floor = ''
     this._commandState = null
   }
@@ -55,8 +57,11 @@ class DrawPathPlayHelper {
     let _t_line = null
     let _floor = null
     const _date = this._startTime + this._time
+    this._poLen = 0 //每個點的流水號，0~最後，為了特效顯示...
     this._history.forEach(_po => {
       if (_po.date * 1 > _date) return
+      _po.ind = this._poLen
+      this._poLen++
       this._timePo = _po
       //依據樓層分層
       if (_po?.command === TRACK_COMMAND.suspend) {
@@ -85,7 +90,10 @@ class DrawPathPlayHelper {
     this._lineArr.forEach(line => {
       _nowPo = line[line.length - 1]
       if (line[0].z === this.floor) {
-        this.viewport.floorObj.lineLayer.heplerDrawLine(line)
+        this.viewport.floorObj.lineLayer.heplerDrawLine(
+          line,
+          this._poLen - LAST_PO_NUM,
+        ) //最後5個點前的線都變淡
       }
     })
     //目前點移動

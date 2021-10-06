@@ -173,11 +173,13 @@ class LineLayer extends PIXI.Graphics {
     this.lineTo(_point.x, _point.y)
     this._lastPoint = _point
   }
-  heplerDrawLine(line) {
+  heplerDrawLine(line, lastPoNum = 0) {
     let _point = this._scalePoint(line.shift())
     this.moveTo(_point.x, _point.y)
     while (line.length > 0) {
       _point = this._scalePoint(line.shift())
+      console.log('#heplerDrawLine', _point, lastPoNum)
+
       this.lineTo(_point.x, _point.y)
     }
   }
