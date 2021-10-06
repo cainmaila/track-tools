@@ -9,6 +9,8 @@
       <option :value="1.5">1.5x</option>
       <option :value="1.75">1.75x</option>
       <option :value="2">2x</option>
+      <option :value="4">4x</option>
+      <option :value="8">8x</option>
     </select>
   </div>
 </template>
