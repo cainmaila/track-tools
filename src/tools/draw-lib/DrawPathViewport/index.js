@@ -162,7 +162,7 @@ class LineLayer extends PIXI.Graphics {
     super()
     this._scale = scale
     this._lastPoint = null
-    this.lineStyle(3, 0x0071ff, 1, 0.5, false)
+    this.lineStyle(3, 0x0071ff, 0.5, 0.5, false)
   }
   pushPoint(_point, isNewLine) {
     _point = this._scalePoint(_point)
@@ -173,14 +173,16 @@ class LineLayer extends PIXI.Graphics {
     this.lineTo(_point.x, _point.y)
     this._lastPoint = _point
   }
-  // heplerDrawLine(line, lastPoNum = 0) {
-  heplerDrawLine(line) {
+  heplerDrawLine(line, lastPoNum = 0) {
     let _point = this._scalePoint(line.shift())
+    if (_point.ind > lastPoNum) {
+      this.lineStyle(3, 0x0071ff, 1, 0.5, false)
+    } else {
+      this.lineStyle(3, 0x0071ff, 0.5, 0.5, false)
+    }
     this.moveTo(_point.x, _point.y)
     while (line.length > 0) {
       _point = this._scalePoint(line.shift())
-      // console.log('#heplerDrawLine', _point, lastPoNum)
-
       this.lineTo(_point.x, _point.y)
     }
   }
@@ -189,6 +191,7 @@ class LineLayer extends PIXI.Graphics {
     return {
       x: _point.x * this._scale,
       y: _point.y * this._scale,
+      ind: _point.ind || 0,
     }
   }
 }
