@@ -162,7 +162,6 @@ class LineLayer extends PIXI.Graphics {
     super()
     this._scale = scale
     this._lastPoint = null
-    this.lineStyle(3, 0x0071ff, 0.5, 0.5, false)
   }
   pushPoint(_point, isNewLine) {
     _point = this._scalePoint(_point)
@@ -175,14 +174,10 @@ class LineLayer extends PIXI.Graphics {
   }
   heplerDrawLine(line, lastPoNum = 0) {
     let _point = this._scalePoint(line.shift())
-    if (_point.ind > lastPoNum) {
-      this.lineStyle(3, 0x0071ff, 1, 0.5, false)
-    } else {
-      this.lineStyle(3, 0x0071ff, 0.5, 0.5, false)
-    }
     this.moveTo(_point.x, _point.y)
     while (line.length > 0) {
       _point = this._scalePoint(line.shift())
+      this.lineStyle(3, 0x0071ff, _point.ind > lastPoNum ? 1 : 0.4, 0.5, false) //決定舊的點變淡
       this.lineTo(_point.x, _point.y)
     }
   }
