@@ -57,7 +57,7 @@
 範例
 
 ```javasctiopt
-window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10}]}')
+window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":100}]}')
 ```
 
 #### pushPoint

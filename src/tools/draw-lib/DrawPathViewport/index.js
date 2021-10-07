@@ -158,8 +158,9 @@ class DrawPathViewport extends BaseViewport {
 }
 
 class LineLayer extends PIXI.Graphics {
-  constructor(scale = 1) {
+  constructor(scale = 1, lineColor = 0x0071ff) {
     super()
+    this._lineColor = lineColor
     this._scale = scale
     this._lastPoint = null
   }
@@ -169,6 +170,7 @@ class LineLayer extends PIXI.Graphics {
     this._lastPoint
       ? this.moveTo(this._lastPoint.x, this._lastPoint.y)
       : this.moveTo(_point.x, _point.y)
+    this.lineStyle(3, this._lineColor, 1, 0.5, false)
     this.lineTo(_point.x, _point.y)
     this._lastPoint = _point
   }
@@ -177,7 +179,13 @@ class LineLayer extends PIXI.Graphics {
     this.moveTo(_point.x, _point.y)
     while (line.length > 0) {
       _point = this._scalePoint(line.shift())
-      this.lineStyle(3, 0x0071ff, _point.ind > lastPoNum ? 1 : 0.4, 0.5, false) //決定舊的點變淡
+      this.lineStyle(
+        3,
+        this._lineColor,
+        _point.ind > lastPoNum ? 1 : 0.4,
+        0.5,
+        false,
+      ) //決定舊的點變淡
       this.lineTo(_point.x, _point.y)
     }
   }
@@ -193,13 +201,14 @@ class LineLayer extends PIXI.Graphics {
 
 class PointTag extends PIXI.Graphics {
   //TODO:人的相對大小
-  constructor(r = 10) {
+  constructor(r = 10, color = 0x0071ff) {
     super()
+    this._color = color
     this.resize(r)
   }
   resize(r) {
     this.clear()
-    this.beginFill(0x0071ff, 1)
+    this.beginFill(this._color, 1)
     this.drawTorus(0, 0, r * 0.8, r)
     this.drawCircle(0, 0, r >> 1)
   }
