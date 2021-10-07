@@ -8,13 +8,13 @@
     <template v-slot:foot>
       <div class="til">{{ $t('readMe.DirectionMod.til') }}</div>
       <div>
-        {{ $t('readMe.DirectionMod.txt')[0] }}
+        {{ $t('readMe.DirectionMod.txt1') }}
       </div>
       <div>
-        {{ $t('readMe.DirectionMod.txt')[1] }}
+        {{ $t('readMe.DirectionMod.txt2') }}
       </div>
       <div>
-        {{ $t('readMe.DirectionMod.txt')[2] }}
+        {{ $t('readMe.DirectionMod.txt3') }}
       </div>
     </template>
   </ReadMeMod>
