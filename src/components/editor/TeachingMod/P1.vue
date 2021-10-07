@@ -5,14 +5,14 @@
         <img src="img/teachingMod/p1.png" alt="" />
       </div>
       <div class="txt">
-        <div>1. A為「總識別區域」請先點擊A按鈕 “添加 總識別區域”。</div>
-        <div>2. 圖面上繪製總識別區域。</div>
-        <div>3. 填寫左側面板中相關欄位資料。</div>
-        <div>4. A完成設置後，點擊B按鈕可添加個別“識別區域”。</div>
-        <div class="t2">提示：總識別區域只需繪製一個。</div>
+        <div>{{ $t('readMe.TeachingMod.txt1') }}</div>
+        <div>{{ $t('readMe.TeachingMod.txt2') }}</div>
+        <div>{{ $t('readMe.TeachingMod.txt3') }}</div>
+        <div>{{ $t('readMe.TeachingMod.txt4') }}</div>
+        <div class="t2">{{ $t('readMe.TeachingMod.txt5') }}</div>
       </div>
       <div class="next flex-center bn" @pointerup.stop="$emit('next')">
-        下一頁
+        {{ $t('common.next') }}
       </div>
     </div>
     <div class="p1" v-else>
@@ -20,15 +20,15 @@
         <img src="img/teachingMod/setp2.png" alt="" />
       </div>
       <div class="txt">
-        <div>1. B為「識別區域」請點擊B按鈕 “添加 識別區域”。</div>
-        <div>2. 圖面上繪製識別區域。</div>
-        <div>3. 填寫左側面板中相關欄位資料。</div>
+        <div>{{ $t('readMe.TeachingMod.p2Txt1') }}</div>
+        <div>{{ $t('readMe.TeachingMod.p2Txt2') }}</div>
+        <div>{{ $t('readMe.TeachingMod.p2Txt3') }}</div>
         <div class="t2">
-          提示：識別區域設置與定位精準度有關，建議設置多個識別區域
+          {{ $t('readMe.TeachingMod.p2Txt4') }}
         </div>
       </div>
       <div class="next flex-center bn" @pointerup.stop="$emit('next')">
-        上一頁
+        {{ $t('common.back') }}
       </div>
     </div>
   </div>

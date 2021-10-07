@@ -4,14 +4,18 @@
     class="flex-center animate__animated animate__fadeIn animate__faster"
   >
     <At2Dialog class="dialog" @close-dialog="$emit('x')">
-      <template v-slot:title>教學 ({{ page + 1 }}/2)</template>
+      <template v-slot:title
+        >{{ $t('readMe.TeachingMod.til') }} ({{ page + 1 }}/2)</template
+      >
       <div class="content">
         <div class="content-view">
           <P1 :pav="page" @next="page = page == 0 ? 1 : 0" />
         </div>
       </div>
       <template v-slot:footer>
-        <At2Btn pill size="32" @on-click="$emit('x')">關閉</At2Btn>
+        <At2Btn pill size="32" @on-click="$emit('x')">{{
+          $t('common.close')
+        }}</At2Btn>
       </template>
     </At2Dialog>
   </div>

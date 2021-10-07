@@ -2,7 +2,9 @@ import { numberToHex } from '@/tools/colorTools'
 import verifyAreaHandler from './verifyAreaHandler'
 import { postEvent } from './sdkMessageHandler'
 import { unitToKey, unitToM, pxToM, toMsc } from '@/tools/unitTools'
+import { useI18n } from 'vue-i18n'
 function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
+  const { t } = useI18n()
   const verifyAreaData = verifyAreaHandler(viewportRef, scopeArea)
   const getAreaMeta = () => {
     const {
@@ -15,11 +17,13 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     } = verifyAreaData()
 
     let error = ''
-    !scopeAreaMata && (error += ' 請先創建總區域')
-    roomsMata.length === 0 && (error += ' 至少創建一個區域')
+    !scopeAreaMata && (error += ` ${t('errorMessage.area')}`)
+    roomsMata.length === 0 && (error += ` ${t('errorMessage.part')}`)
     isSpaceHeightNullArr.length > 0 &&
-      (error += ` 樓板高度必須設置(${isSpaceHeightNullArr.length}個區域未填妥)`)
-    containsErrorArr.length > 0 && (error += ' 部分區域超出範圍')
+      (error += ` ${t('errorMessage.hight')}(${
+        isSpaceHeightNullArr.length
+      }${'errorMessage.num'})`)
+    containsErrorArr.length > 0 && (error += ` ${t('errorMessage.max')}`)
     // overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊') //非必要條件
     if (!correct) {
       postEvent('areaData', { error })
@@ -67,7 +71,6 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     })
     postEvent('areaData', JSON.parse(JSON.stringify(outPut)))
   }
-
   return {
     getAreaMeta,
   }

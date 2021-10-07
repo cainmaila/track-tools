@@ -6,9 +6,9 @@
       </div>
     </template>
     <template v-slot:foot>
-      <div class="til">房間高度</div>
+      <div class="til">{{ $t('readMe.DirectionMod.til') }}</div>
       <div>
-        當前區域的高度 (上圖橘色區域高度)
+        {{ $t('readMe.DirectionMod.txt') }}
       </div>
     </template>
   </ReadMeMod>
