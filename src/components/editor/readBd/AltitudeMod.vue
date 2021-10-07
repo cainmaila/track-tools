@@ -6,9 +6,9 @@
       </div>
     </template>
     <template v-slot:foot>
-      <div class="til">樓層高度</div>
+      <div class="til">{{ $t('readMe.AltitudeMod.til') }}</div>
       <div>
-        平面圖樓地板與建築模型1樓樓地板的距離
+        {{ $t('readMe.AltitudeMod.txt') }}
       </div>
     </template>
   </ReadMeMod>

@@ -6,12 +6,10 @@
       </div>
     </template>
     <template v-slot:foot>
-      <div class="til">方位度數</div>
-      <div>
-        1. 指定平面圖上方方位
+      <div class="til">{{ $t('readMe.DirectionMod.til') }}</div>
+      <div v-for="(txt, ind) in $t('readMe.DirectionMod.txt') || []" :key="ind">
+        {{ txt }}
       </div>
-      <div>2. 查看指北針角度</div>
-      <div>3. 將指北針角度填入 「方位度數」</div>
     </template>
   </ReadMeMod>
 </template>
