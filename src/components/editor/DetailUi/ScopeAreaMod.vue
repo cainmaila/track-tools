@@ -1,8 +1,11 @@
 <template>
   <div id="ScopeAreaMod">
-    <h3>總識別區域</h3>
+    <h3>{{ $t('Editor.ScopeAreaMod.til') }}</h3>
     <Box>
-      <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
+      <template v-slot:til
+        >1. {{ $t('Editor.ScopeAreaMod.name') }}
+        <span class="red">*</span></template
+      >
       <div v-if="!canEdit">
         {{ tag }}
       </div>
@@ -11,9 +14,12 @@
       </div>
     </Box>
     <Box>
-      <template v-slot:til>2. 總面積 <span class="red">*</span></template>
+      <template v-slot:til
+        >2. {{ $t('Editor.ScopeAreaMod.area') }}
+        <span class="red">*</span></template
+      >
       <div class="flex-between strip">
-        <div>單位:</div>
+        <div>{{ $t('common.unit') }}:</div>
         <div v-if="!canEdit">
           {{ unit }}
         </div>
@@ -31,7 +37,7 @@
         </select>
       </div>
       <div class="flex-between strip">
-        <div>長度：</div>
+        <div>{{ $t('common.leng') }}：</div>
         <div v-if="!canEdit">
           {{ realWidth }}
         </div>
@@ -43,11 +49,11 @@
           step="0.01"
           :value="realWidth"
           @input="val => $emit('update:realWidth', val)"
-          :error="realWidth > 0 ? '' : '長度必須大於0'"
+          :error="realWidth > 0 ? '' : $t('Editor.ScopeAreaMod.lengError')"
         />
       </div>
       <div class="flex-between strip">
-        <div>寬度：</div>
+        <div>{{ $t('common.width') }}：</div>
         <div v-if="!canEdit">
           {{ realHeight.toFixed(2) }}
         </div>
@@ -67,7 +73,7 @@
       </div> -->
       <div class="flex-between strip">
         <div class="flex">
-          樓層高度：
+          {{ $t('Editor.ScopeAreaMod.buildHight') }}：
           <div class="bn" @pointerup.stop="$emit('readMe', 'altitude')">
             <At2Icon
               type="information"
@@ -94,11 +100,12 @@
 
     <Box>
       <template v-slot:til>
-        3. 平面圖上方方位 <span class="red">*</span></template
+        3. {{ $t('Editor.ScopeAreaMod.top') }}
+        <span class="red">*</span></template
       >
       <div class="flex-between strip">
         <div class="flex">
-          方位度數：
+          {{ $t('Editor.ScopeAreaMod.degree') }}：
           <div class="bn" @pointerup.stop="$emit('readMe', 'direction')">
             <At2Icon
               type="information"
@@ -123,11 +130,9 @@
       </div>
     </Box>
     <Box v-if="canEdit">
-      <template v-slot:til> 4. 其他</template>
+      <template v-slot:til> 4. {{ $t('common.other') }}</template>
       <div class="flex-between strip">
-        <div>
-          區域顏色：
-        </div>
+        <div>{{ $t('Editor.ScopeAreaMod.color') }}：</div>
         <At2Input class="inp" type="color" :value="color" @input="emitColor" />
       </div>
     </Box>
