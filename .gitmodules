@@ -1,3 +1,6 @@
 [submodule "story-book"]
 	path = story-book
 	url = ../../../bimcloud-web/web-servers/story-book.git
+[submodule "src/track-tools-locale"]
+	path = src/track-tools-locale
+	url = ../track-tools-locale.git
