@@ -7,8 +7,14 @@
     </template>
     <template v-slot:foot>
       <div class="til">{{ $t('readMe.DirectionMod.til') }}</div>
-      <div v-for="(txt, ind) in $t('readMe.DirectionMod.txt') || []" :key="ind">
-        {{ txt }}
+      <div>
+        {{ $t('readMe.DirectionMod.txt')[0] }}
+      </div>
+      <div>
+        {{ $t('readMe.DirectionMod.txt')[1] }}
+      </div>
+      <div>
+        {{ $t('readMe.DirectionMod.txt')[2] }}
       </div>
     </template>
   </ReadMeMod>
