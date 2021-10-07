@@ -58,9 +58,9 @@
       @x="original.helpDefault = false"
       v-if="original.helpDefault"
     />
-    <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler"
-      >確定離開?</ExitDialig
-    >
+    <ExitDialig v-if="original.exitxitDialigShow" @event="exitDialigHandler">{{
+      $t('common.isExit')
+    }}</ExitDialig>
   </div>
 </template>
 

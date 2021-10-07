@@ -19,7 +19,7 @@
         pill
         size="26"
       >
-        離開
+        {{ $t('common.exit') }}
       </At2Btn>
       <At2Btn
         v-if="save"
@@ -30,7 +30,7 @@
         pill
         size="26"
       >
-        儲存
+        {{ $t('common.save') }}
       </At2Btn>
     </div>
   </div>

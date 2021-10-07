@@ -1,11 +1,15 @@
 <template>
   <div class="file-info-mod">
-    <h3>詳情</h3>
+    <h3>{{ $t('Editor.FileInfoMode.til') }}</h3>
     <Box>
-      <LabText lab="定位文件名稱">{{ info.name }}</LabText>
-      <LabText lab="執行圖紙">{{ info.file }}</LabText>
-      <LabText lab="文件大小">{{ info.size }}</LabText>
-      <LabText lab="擁有者">{{ info.onwer }}</LabText>
+      <LabText :lab="$t('Editor.FileInfoMode.docName')">{{
+        info.name
+      }}</LabText>
+      <LabText :lab="$t('Editor.FileInfoMode.fileName')">{{
+        info.file
+      }}</LabText>
+      <LabText :lab="$t('Editor.FileInfoMode.size')">{{ info.size }}</LabText>
+      <LabText :lab="$t('Editor.FileInfoMode.onwer')">{{ info.onwer }}</LabText>
     </Box>
   </div>
 </template>

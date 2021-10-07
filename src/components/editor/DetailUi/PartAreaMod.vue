@@ -1,8 +1,11 @@
 <template>
   <div id="PartAreaMod">
-    <h3>識別區域</h3>
+    <h3>{{ $t('Editor.PartAreaMod.til') }}</h3>
     <Box>
-      <template v-slot:til>1. 區域名稱 <span class="red">*</span></template>
+      <template v-slot:til
+        >1. {{ $t('Editor.PartAreaMod.name') }}
+        <span class="red">*</span></template
+      >
       <div v-if="!canEdit">{{ selectAreaTag }}</div>
       <div v-else>
         <At2Input
@@ -12,22 +15,25 @@
       </div>
     </Box>
     <Box>
-      <template v-slot:til>2. 區域大小 <span class="red">*</span></template>
+      <template v-slot:til
+        >2. {{ $t('Editor.PartAreaMod.size') }}
+        <span class="red">*</span></template
+      >
       <div class="flex-between strip">
-        <div>單位:</div>
+        <div>{{ $t('common.unit') }}:</div>
         <div>{{ unit }}</div>
       </div>
       <div class="flex-between strip">
-        <div>長度：</div>
+        <div>{{ $t('common.leng') }}：</div>
         <div>{{ selectAreaW.toFixed(2) }}</div>
       </div>
       <div class="flex-between strip">
-        <div>寬度：</div>
+        <div>{{ $t('common.width') }}：</div>
         <div>{{ selectAreaH.toFixed(2) }}</div>
       </div>
       <div class="flex-between strip">
         <div class="flex">
-          房間高度：
+          {{ $t('Editor.PartAreaMod.roomHight') }}：
           <div class="bn" @pointerup.stop="$emit('readMe', 'height')">
             <At2Icon
               type="information"
@@ -46,27 +52,27 @@
           max="99999999999999"
           :value="spaceHeight"
           @input="val => $emit('update:spaceHeight', val)"
-          :error="spaceHeight == 0 ? '隔間高度必須大於0' : ''"
+          :error="
+            spaceHeight == 0 ? $t('Editor.PartAreaMod.roomHightError') : ''
+          "
         />
       </div>
     </Box>
     <Box>
-      <template v-slot:til>3. 邊距</template>
+      <template v-slot:til>3. {{ $t('Editor.PartAreaMod.roomD') }}</template>
       <div class="flex-between strip">
-        <div>到平面圖左上角的垂直 距離：</div>
+        <div>{{ $t('Editor.PartAreaMod.offsetX') }}：</div>
         <div>{{ selectRealOffsetX.toFixed(2) }}</div>
       </div>
       <div class="flex-between strip">
-        <div>到平面圖左上角的水平 距離：</div>
+        <div>{{ $t('Editor.PartAreaMod.offsetY') }}：</div>
         <div>{{ selectRealOffsetY.toFixed(2) }}</div>
       </div>
     </Box>
     <Box v-if="canEdit">
-      <template v-slot:til> 4. 其他</template>
+      <template v-slot:til> 4. {{ $t('common.other') }}</template>
       <div class="flex-between strip">
-        <div>
-          區域顏色：
-        </div>
+        <div>{{ $t('Editor.PartAreaMod.color') }}：</div>
         <At2Input
           class="inp"
           type="color"
