@@ -11,7 +11,7 @@
     "sdk-editor": "rollup -c rollup.editor.config.js",
     "sdk-player": "rollup -c rollup.player.config.js",
     "sdk": "yarn sdk-editor && yarn sdk-player",
-    "i18n-sync": "sync-i18n --files **/src/locale/*.json --primary en --createResources zh-TW"
+    "i18n-sync": "sync-i18n --files **/src/track-tools-locale/*.json --primary en --createResources zh-TW  ja cn"
   },
   "dependencies": {
     "@pixi/graphics-extras": "^6.1.2",
