@@ -16,7 +16,7 @@
     <At2Alert
       id="SuspendAlert"
       class="animate__animated animate__flipInX"
-      text="使用者中斷"
+      :text="$t('Player.userSuspend')"
       v-if="store.suspendAlertShow"
     />
   </div>

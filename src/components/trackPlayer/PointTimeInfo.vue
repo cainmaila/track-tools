@@ -1,6 +1,6 @@
 <template>
   <div class="point-time-info flex-center" v-show="time">
-    <img src="img/po.png" width="14" height="14" /> 當前位置
+    <img src="img/po.png" width="14" height="14" /> {{ $t('Player.nowPoint') }}
     {{ dateStr }}
   </div>
 </template>
