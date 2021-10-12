@@ -20,9 +20,9 @@ function areaLayerHandler(viewportRef, scopeArea, scopeAreaData) {
     !scopeAreaMata && (error += ` ${t('errorMessage.area')}`)
     roomsMata.length === 0 && (error += ` ${t('errorMessage.part')}`)
     isSpaceHeightNullArr.length > 0 &&
-      (error += ` ${t('errorMessage.hight')}(${
-        isSpaceHeightNullArr.length
-      }${'errorMessage.num'})`)
+      (error += ` ${t('errorMessage.hight')}(${isSpaceHeightNullArr.length}${t(
+        'errorMessage.num',
+      )})`)
     containsErrorArr.length > 0 && (error += ` ${t('errorMessage.max')}`)
     // overlappingErrorArr.length > 0 && (error += ' 區域範圍不可重疊') //非必要條件
     if (!correct) {
