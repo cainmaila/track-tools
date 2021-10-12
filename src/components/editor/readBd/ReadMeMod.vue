@@ -52,6 +52,7 @@ export default {
       color: black;
       font-size: 13px;
       line-height: 20px;
+      box-sizing: border-box;
     }
     & .close-bn {
       position: absolute;
