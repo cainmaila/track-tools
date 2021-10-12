@@ -9,8 +9,11 @@
         <At2Btn border pill size="32" @on-click="$emit('event', 'x')">{{
           $t('common.cancel')
         }}</At2Btn>
-        <At2Btn pill size="32" @on-click="$emit('event', 'exit')"
-          >$t('common.confirm')</At2Btn
+        <At2Btn
+          pill
+          size="32"
+          @on-click="$emit('event', 'exit')"
+          >{{$t('common.confirm'}}</At2Btn
         >
       </template>
     </At2Dialog>
