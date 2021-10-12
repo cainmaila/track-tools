@@ -6,9 +6,9 @@
       </div>
     </template>
     <template v-slot:foot>
-      <div class="til">{{ $t('readMe.DirectionMod.til') }}</div>
+      <div class="til">{{ $t('readMe.HeightMod.til') }}</div>
       <div>
-        {{ $t('readMe.DirectionMod.txt') }}
+        {{ $t('readMe.HeightMod.txt') }}
       </div>
     </template>
   </ReadMeMod>
