@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import pixiInitHandler from '@/commonHandlers/pixi-init-handler.js'
 import viewPortInitHandler from '@/commonHandlers/drawPathViewport-init-handler.js'
 import {
@@ -31,6 +31,19 @@ export default {
       onViewResize()
       viewPortRef.value && viewPortRef.value.resize()
     }
+
+    watch(
+      () => store.state,
+      val => {
+        if (val === 'loaded') {
+          viewPortRef.value.zoomToArea({
+            pos_left_up: { x: 0, y: 0 },
+            width: 100,
+            height: 100,
+          })
+        }
+      },
+    )
 
     return { store, viewRef }
   },
