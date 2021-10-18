@@ -17,6 +17,9 @@
       <li>
         <a href="./app-player.html">Track Player Tool DEMO</a>
       </li>
+      <li>
+        <a href="./location.html">Location Viewer</a>
+      </li>
     </ol>
   </div>
 </template>

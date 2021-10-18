@@ -18,6 +18,8 @@ function viewPortInitHandler(store, appRef) {
         store.suspendAlertShow = false
       }, 2000)
     })
+    console.log('2222', viewport)
+
     viewPortRef.value = viewport
   }
 
