@@ -11,6 +11,19 @@ const TO_IOS_EVENT = {
 
 let _ios_message_handler = {
   viewerSetting: () => {}, //viewer 初始化
+  // {
+  //   floor: {
+  //     id: '1f',
+  //     img: './img/aaa.jpg',
+  //     offset: { x: 200, y: 90 },
+  //     scale: 10, //比例尺 px/m
+  //   },
+  //   area: {
+  //     pos_left_up: { x: 0, y: 0 },
+  //     width: 10,
+  //     height: 10,
+  //   },
+  // }
   setLocation: () => {}, //設定位置
   restPosition: () => {}, //重至畫面
 }
@@ -46,10 +59,14 @@ window.viewerSetting = setting => {
   log('#viewerSetting', setting)
   try {
     const _setting = typeof setting === 'object' ? setting : JSON.parse(setting)
-    if (!_setting.floors || _setting.floors.length === 0) {
-      throw new Error({ message: '沒有 floors' })
+    if (!_setting.floor) {
+      throw new Error({ message: '沒有 floor' })
+    } else if (!_setting.area) {
+      throw new Error({ message: '沒有 area' })
     }
-    _ios_message_handler.viewerSetting(_setting)
+    _ios_message_handler.viewerSetting({
+      floors: [_setting.floor],
+    })
   } catch (error) {
     postIOSEvent(TO_IOS_EVENT.error, error.message)
   }
