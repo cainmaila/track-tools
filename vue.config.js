@@ -66,6 +66,11 @@ module.exports = {
       template: 'public/index.html',
       title: 'Track Player' + ' v' + json.version,
     },
+    location: {
+      entry: 'src/main-location-viewer.js',
+      template: 'public/index.html',
+      title: 'Location Viewer' + ' v' + json.version,
+    },
     iospoc: {
       entry: 'src/main-player-poc.js',
       template: 'public/index.html',
