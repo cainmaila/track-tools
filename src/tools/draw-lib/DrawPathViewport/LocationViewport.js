@@ -62,7 +62,6 @@ class PointTag extends PIXI.Graphics {
     this._ticker.add(time => {
       this._timer += time
       this.alpha = this._timer % 50 > 25 ? 0.3 : 1
-      console.log(this._timer, this._timer % 1000)
     })
   }
   set mode(value) {
