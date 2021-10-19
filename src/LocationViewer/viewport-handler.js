@@ -1,9 +1,9 @@
 import { ref } from 'vue'
-import DrawPathViewport from '@/tools/draw-lib/DrawPathViewport'
+import LocationViewport from '@/tools/draw-lib/DrawPathViewport/LocationViewport'
 function viewPortInitHandler(store, appRef) {
   const viewPortRef = ref()
   const viewerSetting = setting => {
-    const viewport = new DrawPathViewport(appRef.value, {
+    const viewport = new LocationViewport(appRef.value, {
       floors: [setting.floor],
     })
     viewport.on('resources-ready', () => {
@@ -15,9 +15,14 @@ function viewPortInitHandler(store, appRef) {
     viewPortRef.value = viewport
   }
 
+  const addLocation = point => {
+    viewPortRef.value.addLocation(point)
+  }
+
   return {
     viewPortRef,
     viewerSetting, //設定viewer
+    addLocation, //新增其他定位點
   }
 }
 

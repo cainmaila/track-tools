@@ -76,11 +76,11 @@ window.viewerSetting = setting => {
 }
 
 /* 傳入點 */
-window.setLocation = points => {
-  log('#setLocation', points)
+window.addLocation = point => {
+  log('#addLocation', point)
   try {
-    _ios_message_handler.setLocation(
-      typeof points === 'object' ? points : JSON.parse(points),
+    _ios_message_handler.addLocation(
+      typeof point === 'object' ? point : JSON.parse(point),
     )
   } catch (error) {
     postIOSEvent(TO_IOS_EVENT.error, error.message)

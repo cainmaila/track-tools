@@ -19,11 +19,14 @@ export default {
       state: 'init', //init -> ready -> loaded -> location
     })
     const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
-    const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
+    const { viewPortRef, viewerSetting, addLocation } = viewPortInitHandler(
+      store,
+      appRef,
+    ) //創建viewport 實體
     //設定ios事件處理方法
     settingIosMessageHandler({
       viewerSetting,
-      // setLocation,
+      addLocation,
       // restPosition,
     })
     iosInterfaceHandler(store) /* viewer 狀態通知 IOS */
