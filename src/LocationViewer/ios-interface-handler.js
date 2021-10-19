@@ -24,7 +24,12 @@ let _ios_message_handler = {
   //     height: 10,
   //   },
   // }
-  setLocation: () => {}, //設定位置
+  addLocation: () => {}, //設定位置
+  // {
+  //   x:0,
+  //   y:0,
+  //   id:'id'
+  // }
   restPosition: () => {}, //重至畫面
 }
 
