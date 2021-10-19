@@ -87,6 +87,8 @@ window.addLocation = point => {
   }
 }
 
+window.restPosition = () => _ios_message_handler.restPosition() //設定顯示範圍
+
 export {
   log,
   iosInterfaceHandler /* viewer 狀態通知 */,
