@@ -1,5 +1,9 @@
 import * as PIXI from 'pixi.js'
 import DrawPathViewport from './index'
+
+/**
+ * event select-location 選取定位點
+ */
 class LocationViewport extends DrawPathViewport {
   constructor(app, setting) {
     super(app, setting)
@@ -28,6 +32,9 @@ class LocationViewport extends DrawPathViewport {
     _pointTag.x = point.x * scale
     _pointTag.y = point.y * scale
     this._floorObj.lineLayer.addChild(_pointTag)
+    _pointTag.on('pointertap', () => {
+      this.emit('select-location', point.id)
+    })
   }
 }
 export default LocationViewport
@@ -38,6 +45,7 @@ class PointTag extends PIXI.Graphics {
     super()
     this._color = color
     this.resize(r)
+    this.interactive = true
   }
   resize(r) {
     this.clear()

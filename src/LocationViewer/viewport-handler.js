@@ -1,5 +1,7 @@
 import { ref } from 'vue'
 import LocationViewport from '@/tools/draw-lib/DrawPathViewport/LocationViewport'
+import { log, postIOSEvent } from '@/commonHandlers/ios-interface'
+import { TO_IOS_EVENT } from './ios-interface-handler'
 function viewPortInitHandler(store, appRef) {
   const viewPortRef = ref()
   const viewerSetting = setting => {
@@ -13,6 +15,10 @@ function viewPortInitHandler(store, appRef) {
       store.state = 'loaded' /* 狀態機 */
     })
     viewPortRef.value = viewport
+    viewPortRef.value.on('select-location', id => {
+      log('#select-location ' + id)
+      postIOSEvent(TO_IOS_EVENT.selectLocation, id)
+    })
   }
 
   const addLocation = point => {
