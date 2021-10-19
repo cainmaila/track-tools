@@ -64,9 +64,7 @@ window.viewerSetting = setting => {
     } else if (!_setting.area) {
       throw new Error({ message: '沒有 area' })
     }
-    _ios_message_handler.viewerSetting({
-      floors: [_setting.floor],
-    })
+    _ios_message_handler.viewerSetting(_setting)
   } catch (error) {
     postIOSEvent(TO_IOS_EVENT.error, error.message)
   }
