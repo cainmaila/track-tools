@@ -8,6 +8,7 @@ export default createI18n({
   // legacy: false,
   locale: urlParams.get('lang') || 'en', // set locale
   fallbackLocale: 'en', // set fallback locale
+  globalInjection: true,
   messages: {
     'zh-TW': zhTW,
     en,
