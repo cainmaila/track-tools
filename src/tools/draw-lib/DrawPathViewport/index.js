@@ -200,7 +200,6 @@ class LineLayer extends PIXI.Graphics {
 }
 
 class PointTag extends PIXI.Graphics {
-  //TODO:人的相對大小
   constructor(r = 10, color = 0x0071ff) {
     super()
     this._color = color
