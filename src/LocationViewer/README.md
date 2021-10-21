@@ -55,8 +55,8 @@
     },
     area:{
         pos_left_up: { x: 0, y: 0 }, //區域與offset的距離，單位m，基本上就是api回來的數值
-        width: 10, //長寬一樣是單位m
-        height: 10,
+        length: 10, //長寬一樣是單位m
+        width: 10,
     }
   }
 ```
@@ -64,7 +64,7 @@
 範例
 
 ```javasctiopt
-window.viewerSetting('{"floor":{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10},"area":{"pos_left_up":{"x":10,"y":10},"width":10,"height":10}}')
+window.viewerSetting('{"floor":{"id":"1f","img":"./img/aaa.jpg","offset":{"x":200,"y":90},"scale":10},"area":{"pos_left_up":{"x":10,"y":10},"length":10,"width":10}}')
 ```
 
 #### addLocation

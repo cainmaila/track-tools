@@ -10,19 +10,17 @@ class LocationViewport extends DrawPathViewport {
     this._locationPoints = []
   }
   /* 縮放到區域 */
-  zoomToArea(areaSetting, padding = 10) {
-    // area: {
-    //   pos_left_up: { x: 0, y: 0 },
-    //   width: 10,
-    //   height: 10,
-    // }
+  zoomToArea({ x, y, width, height }, padding = 10) {
     const { offset, scale } = this._floorObj
-    const _areaWidth = areaSetting.width * scale
-    const _areaHeight = areaSetting.height * scale
-    this.scaled = this.findFit(_areaWidth + padding, _areaHeight + padding)
+    const _areaWidth = width * scale
+    const _areaHeight = height * scale
+    this.scaled = this.findFit(
+      _areaWidth + padding * 2,
+      _areaHeight + padding * 2,
+    )
     this.center = {
-      x: offset.x + areaSetting.pos_left_up.x * scale + (_areaWidth >> 1),
-      y: offset.y + areaSetting.pos_left_up.y * scale + (_areaHeight >> 1),
+      x: offset.x + x * scale + (_areaWidth >> 1),
+      y: offset.y + y * scale + (_areaHeight >> 1),
     }
   }
   /* 新增特殊定位點 */

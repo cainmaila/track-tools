@@ -20,8 +20,9 @@ let _ios_message_handler = {
   //   },
   //   area: {
   //     pos_left_up: { x: 0, y: 0 },
+  //     length: 10,
   //     width: 10,
-  //     height: 10,
+  //
   //   },
   // }
   addLocation: () => {}, //設定位置

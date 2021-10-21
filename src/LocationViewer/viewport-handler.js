@@ -28,7 +28,13 @@ function viewPortInitHandler(store, appRef) {
   }
 
   const restPosition = () => {
-    viewPortRef.value.zoomToArea(_setting.area) //設定顯示範圍
+    const { pos_left_up, length, width } = _setting.area
+    viewPortRef.value.zoomToArea({
+      x: pos_left_up.x,
+      y: pos_left_up.y,
+      width: length,
+      height: width,
+    }) //設定顯示範圍
   }
 
   return {
