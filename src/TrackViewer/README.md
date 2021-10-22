@@ -67,7 +67,7 @@ window.viewerSetting('{"floors":[{"id":"1f","img":"./img/aaa.jpg","offset":{"x":
 範例
 
 ```javasctiopt
-window.pushPoint("x,y,fileId") //fileId目前可省略
+window.pushPoint("x,y,fileId,date") //fileId目前可省略 date也可省略(自動產生)，date格式為 距離時間零點（1970年1月1日00:00:00 UTC）對應的毫秒數
 ```
 
 ### suspend

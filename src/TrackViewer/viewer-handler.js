@@ -16,7 +16,10 @@ export default function(viewerStore, viewPortRef) {
     },
   )
   const pushPoint = point => {
-    viewPortRef.value.pushPoint({ x: point[0] * 1, y: point[1] * 1 })
+    const _po = { x: point[0] * 1, y: point[1] * 1 }
+    point.length > 2 && (_po.z = point[2])
+    point.length > 3 && (_po.data = point[3] * 1)
+    viewPortRef.value.pushPoint(_po)
     viewerStore.mode === 'lock' && viewPortRef.value.lockCenter()
   }
   const suspend = () => {
