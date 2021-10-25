@@ -6,7 +6,11 @@
 
 請直接放入服務頁面網址，如下 dev 環境
 
-> <https://dev.anchortools.anchortech.io/track/player.html>
+> <https://dev.anchortools.anchortech.io/track/player.html?lang=en>
+
+lang 參數為語系
+
+目前僅有 en(預設)，cn，ja，zh-TW
 
 ### 初始化生命週期說明
 
