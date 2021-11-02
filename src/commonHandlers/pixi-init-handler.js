@@ -18,6 +18,7 @@ function pixiInitHandler(store) {
       autoDensity: true,
       resolution: window.devicePixelRatio || 1,
       backgroundColor: 0xffffff,
+      backgroundAlpha: 0, //背景透明
     })
     appRef.value = app
     onViewResize()
