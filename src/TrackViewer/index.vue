@@ -30,7 +30,7 @@ export default {
     const viewerStore = reactive({
       mode: 'mono', //mone lock
     })
-    const { viewRef, appRef, onViewResize } = pixiInitHandler(store) //創建PIXI實體
+    const { viewRef, appRef, onViewResize } = pixiInitHandler(store, true) //創建PIXI實體
     const { viewPortRef, viewerSetting } = viewPortInitHandler(store, appRef) //創建viewport 實體
     const { pushPoint, suspend, generateHistory } = viewerHandler(
       viewerStore,
