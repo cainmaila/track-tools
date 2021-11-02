@@ -16,7 +16,8 @@ export default {
       antialias: true,
       autoDensity: true,
       resolution: window.devicePixelRatio || 1,
-      backgroundColor: 0x000000,
+      // backgroundColor: 0x000000,
+      backgroundAlpha: 0,
     })
 
     onMounted(() => {
